@@ -672,22 +672,37 @@ a {
     display: none;
 }
 
+.docs-grid-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 36px;
+    width: 100%;
+}
+
+.docs-sidebar-card {
+    padding: 24px;
+    align-self: start;
+    position: sticky;
+    top: 100px;
+}
+
 /* ─── Responsive Adjustments for Docs, Merchant Portal & Footer ─────────── */
 
 @media (max-width: 992px) {
-    /* Docs 2-column grid to 1-column on tablet/mobile */
-    div[style*="grid-template-columns: 280px 1fr"] {
+    .docs-grid-layout {
         grid-template-columns: 1fr !important;
         gap: 24px !important;
+        width: 100% !important;
     }
 
-    /* Docs sticky sidebar relative on smaller screens */
-    .glass-card[style*="position: sticky"] {
+    .docs-sidebar-card {
         position: relative !important;
         top: 0 !important;
-        margin-bottom: 24px;
+        margin-bottom: 24px !important;
+        width: 100% !important;
     }
 }
+
 
 @media (max-width: 768px) {
     .container {
