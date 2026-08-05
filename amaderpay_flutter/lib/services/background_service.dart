@@ -23,7 +23,7 @@ Future<void> initBackgroundService() async {
   const AndroidNotificationChannel foregroundChannel = AndroidNotificationChannel(
     kForegroundChannelId,
     'Gateway Service',
-    description: 'AmaderPay SMS Gateway is actively listening',
+    description: 'NexoraPay SMS Gateway is actively listening',
     importance: Importance.low,
   );
   const AndroidNotificationChannel paymentChannel = AndroidNotificationChannel(
