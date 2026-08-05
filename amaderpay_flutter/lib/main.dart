@@ -47,19 +47,20 @@ class _PermissionGatePageState extends State<PermissionGatePage> {
   }
 
   Future<void> _checkPermissions() async {
-    final statuses = await [
-      Permission.sms,
-      Permission.phone,
-      Permission.notification,
-      Permission.ignoreBatteryOptimizations,
-    ].request();
+    // Request primary permissions first
+    final smsStatus = await Permission.sms.request();
+    final phoneStatus = await Permission.phone.request();
+    final notifStatus = await Permission.notification.request();
 
-    final allGranted = statuses.values.every(
-      (s) => s.isGranted || s.isLimited,
-    );
+    // Request battery optimization ignore (optional for background longevity)
+    try {
+      await Permission.ignoreBatteryOptimizations.request();
+    } catch (_) {}
+
+    final smsGranted = smsStatus.isGranted || smsStatus.isLimited;
 
     if (!mounted) return;
-    if (allGranted) {
+    if (smsGranted) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => const HomeScreen()),
       );
