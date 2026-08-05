@@ -62,7 +62,35 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+    // ─── 4. Mobile Navigation Hamburger Menu Toggle ─────────────────────────
+    const menuBtn = document.getElementById('menu-toggle-btn');
+    const navLinks = document.getElementById('mobile-nav-links');
+    if (menuBtn && navLinks) {
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navLinks.classList.toggle('active');
+            const icon = menuBtn.querySelector('i');
+            if (icon) {
+                if (navLinks.classList.contains('active')) {
+                    icon.className = 'fa-solid fa-xmark';
+                } else {
+                    icon.className = 'fa-solid fa-bars';
+                }
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !menuBtn.contains(e.target)) {
+                navLinks.classList.remove('active');
+                const icon = menuBtn.querySelector('i');
+                if (icon) icon.className = 'fa-solid fa-bars';
+            }
+        });
+    }
 });
+
 
 // ─── Toast Notification Engine ──────────────────────────────────────────────
 function showToast(message, type = 'info') {
