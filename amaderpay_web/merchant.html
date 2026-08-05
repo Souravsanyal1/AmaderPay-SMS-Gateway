@@ -41,10 +41,44 @@
         <!-- Dynamic Dashboard Container -->
         <div id="merchant-dashboard-view" style="display: none;">
             
+            <!-- Header Card Matching Screenshot -->
+            <div class="glass-card" style="padding: 20px 24px; border-radius: 20px; background: rgba(10, 15, 30, 0.95); margin-bottom: 24px; border: 1px solid rgba(255, 255, 255, 0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(226, 19, 110, 0.15); border: 1px solid rgba(226, 19, 110, 0.4); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: #ec4899; box-shadow: 0 0 15px rgba(236, 72, 153, 0.2);">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <h2 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 900; margin-bottom: 2px; color: white;">AmaderPay Merchant Portal</h2>
+                        <p style="color: var(--text-muted); font-size: 0.88rem; margin: 0;">আপনার ওয়েবসাইটগুলোতে bKash/Nagad পেমেন্ট গেটওয়ে যুক্ত করুন</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                    <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 6px 14px; display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: rgba(236, 72, 153, 0.2); color: #ec4899; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700;">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div style="line-height: 1.2;">
+                            <div style="font-size: 0.82rem; font-weight: 700; color: white;" id="header-merchant-short">a</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);" id="header-merchant-email">joysanya11999@gmail.com</div>
+                        </div>
+                    </div>
+                    <button class="copy-btn" style="width: 38px; height: 38px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); color: var(--text-muted); cursor: pointer;" title="Shield Status">
+                        <i class="fa-solid fa-shield"></i>
+                    </button>
+                    <button onclick="renderTransactions()" class="copy-btn" style="width: 38px; height: 38px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); color: var(--text-muted); cursor: pointer;" title="Refresh">
+                        <i class="fa-solid fa-rotate"></i>
+                    </button>
+                    <button onclick="logoutMerchant()" style="padding: 8px 16px; border-radius: 10px; background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.3); color: #f87171; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-right-from-bracket"></i> লগআউট
+                    </button>
+                </div>
+            </div>
+
             <!-- Dashboard Top Tab Navigation Bar -->
             <div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 28px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); -webkit-overflow-scrolling: touch; scrollbar-width: none;">
                 <button class="dash-tab-pill active" style="padding: 10px 18px; border-radius: 12px; background: rgba(236, 72, 153, 0.15); border: 1px solid rgba(236, 72, 153, 0.4); color: #f472b6; font-weight: 700; font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">
-                    <i class="fa-solid fa-store"></i> ওভারভিউ
+                    <i class="fa-solid fa-house"></i> ওভারভিউ
                 </button>
                 <button class="dash-tab-pill" style="padding: 10px 18px; border-radius: 12px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); color: var(--text-muted); font-weight: 600; font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">
                     <i class="fa-solid fa-table-list"></i> ট্রানজেকশন তালিকা
@@ -64,9 +98,6 @@
                 <a href="docs.html" class="dash-tab-pill" style="padding: 10px 18px; border-radius: 12px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); color: var(--text-muted); font-weight: 600; font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">
                     <i class="fa-solid fa-code"></i> API Docs
                 </a>
-                <button onclick="logoutMerchant()" class="dash-tab-pill" style="padding: 10px 18px; border-radius: 12px; background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.3); color: #f87171; font-weight: 600; font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; margin-left: auto;">
-                    <i class="fa-solid fa-right-from-bracket"></i> লগআউট
-                </button>
             </div>
 
             <!-- Stats Metric Grid Matching Image 2 -->
@@ -316,6 +347,12 @@
                     document.getElementById('dash-merchant-name').innerText = 'স্বাগতম, ' + data.name + '!';
                 }
                 
+                if (document.getElementById('header-merchant-short')) {
+                    const emailStr = data.email || 'joysanya11999@gmail.com';
+                    document.getElementById('header-merchant-short').innerText = emailStr.charAt(0).toLowerCase();
+                    document.getElementById('header-merchant-email').innerText = emailStr;
+                }
+
                 if (data.api_key && document.getElementById('merchant-api-key')) document.getElementById('merchant-api-key').value = data.api_key;
                 if (data.device_key && document.getElementById('merchant-device-key')) document.getElementById('merchant-device-key').value = data.device_key;
 
