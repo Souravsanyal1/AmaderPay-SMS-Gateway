@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: amaderpay-backend
+    runtime: docker
+    plan: free
+    region: singapore
+    rootDir: amaderpay_flutter/backend
+    dockerfilePath: Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: API_KEY
+        sync: false

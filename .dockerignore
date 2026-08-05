@@ -1,0 +1,15 @@
+node_modules
+**/node_modules
+npm-debug.log
+.env
+**/.env
+.git
+.gitignore
+.idea
+.vscode
+amaderpay_flutter/build
+amaderpay_flutter/android
+amaderpay_flutter/ios
+amaderpay_flutter/web
+amaderpay_flutter/lib
+amaderpay_flutter/test
