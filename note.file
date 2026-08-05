@@ -1,0 +1,288 @@
+[stay in caveman mode — FULL]| **C. Rebuild from Scratch** | আপনার দেওয়া ডকুমেন্টেশন থেকে নতুন Flutter app বানান | ★★☆☆☆ |
+
+**সুপারিশ:** **Option C**—কারণ:
+- Smali ফিক্স করা টেকনিক্যালি কঠিন
+- ভবিষ্যতে Android 15-এ আবার ভাঙতে পারে
+- নতুন ফিচার যোগ করা সহজ হবে
+
+---
+
+### Option C-এর জন্য Quick Start Template:
+
+```dart
+// lib/main.dart (ন্যূনতম ভার্সন)
+import 'package:flutter/material.dart';
+import 'package:sms_receiver/sms_receiver.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => MaterialApp(
+    home: SmsGatewayPage(),
+  );
+}
+
+class SmsGatewayPage extends StatefulWidget {
+  @override
+  _SmsGatewayPageState createState() => _SmsGatewayPageState();
+}
+
+class _SmsGatewayPageState extends State<SmsGatewayPage> {
+  final SmsReceiver _receiver = SmsReceiver();
+  
+  @override
+  void initState() {
+    super.initState();
+    _receiver.onSmsReceived.listen((SmsMessage msg) {
+      // bKash/Nagad/Rocket Parsing
+      Map<String, String> parsed = _parseTransaction(msg.body);
+      if (parsed.isNotEmpty) {
+        _sendToServer(parsed);
+      }
+    });
+  }
+  
+  Map<String, String> _parseTransaction(String sms) {
+    // Regex patterns (আপনার বিশ্লেষণ থেকে)
+    final bKashRegex = RegExp(r'TrxID: ([A-Z0-9]+).*?(\d+\.?\d*) Tk');
+    // ... implement
+  }
+}
+```
+
+---
+
+## 📋 Executive Summary (কী করবেন, কী করবেন না)
+
+| ✅ করবেন | ❌ করবেন না |
+|----------|------------|
+| Smali ফিক্স করে Android 14-এ চালান | Flutter binary (`libapp.so`) পরিবর্তন করার চেষ্টা |
+| `SYSTEM_ALERT_WINDOW` Permission সরান | Play Store publish করার চেষ্টা (Policy Violation) |
+| SmsReceiver `exported="false"` করুন | Original ডেভেলপারের server এ request পাঠান (যদি বন্ধ থাকে) |
+| আপনার নিজের backend তৈরি করুন | Legal trouble নিন (SMS reading is against bKash ToS) |
+
+---
+
+## 🚀 Next Steps (আমার থেকে সাহায্য)
+
+**আপনি যদি চান, আমি করতে পারি:**
+
+1. ✅ পুরো ফিক্সড Smali কোড জেনারেট করে দিতে (Direct replace-ready)
+2. ✅ Patched APK rebuild করার জন্য সম্পূর্ণ Bash/PowerShell স্ক্রিপ্ট
+3. ✅ Flutter পুনর্লিখনের জন্য সম্পূর্ণ প্রজেক্ট ফাইল (UI + SMS Receiver + API Client)
+4. ✅ আপনার নিজের Backend (Node.js + MongoDB) API ডিজাইন
+
+**আপনি এখন কোন পথে যেতে চান?**
+- **A:** "শুধু APK ফিক্স করে চালাতে চাই" → Smali Patch দিচ্ছি
+- **B:** "Flutter পুনর্লিখন করতে চাই" → পুরো Source Code দিচ্ছি
+- **C:** "ব্যাকএন্ড বানাতে চাই" → API ডিজাইন ডকুমেন্টেশন দিচ্ছি
+
+Based on my analysis of the site, here is a reverse engineering summary of AmaderPay – a payment gateway service for bKash, Nagad, and Rocket in Bangladesh.
+
+🔍 Overview
+
+AmaderPay provides a SMS-based auto-payment gateway. It uses an Android app to read SMS notifications from mobile financial services (bKash/Nagad/Rocket) and automatically verifies transactions via API.
+
+🧱 Technology Stack
+
+Component Technology
+
+Frontend SvelteKit (static site generation)
+
+Hosting Vercel (amaderpay.vercel.app)
+
+Routing Client-side routing with SvelteKit
+
+Styling Tailwind CSS (inferred from class names)
+
+Icons Lucide icons
+
+Mobile App Native Android APK (SMS reader)
+
+🗺️ Site Structure & Routes
+
+Route Purpose
+
+/ Landing page with feature highlights
+
+/docs API documentation & live testing playground
+
+/merchant Merchant login / registration portal
+
+/login Redirects to /merchant
+
+(others) No /payment, /register, etc. found
+
+🔌 API Endpoints (from /docs)
+
+Method Endpoint Auth Description
+
+POST /api/v1/checkout/create Bearer Token Creates a payment session, returns checkout_url
+
+GET /api/v1/checkout/verify/:id Public Checks payment status & returns TrxID
+
+POST /api/v1/webhook/trigger Internal Sends webhook notification to merchant on payment confirmation
+
+The actual backend API is likely hosted separately (not on Vercel), as these are under /api/v1/ and may be proxied or served via serverless functions.
+
+📱 Mobile App (SMS Gateway)
+
+APK Download: https://github.com/apon133/safeCalc/releases/download/v1.2.0/sms.apk
+
+Function: Reads SMS from the merchant’s phone, extracts TrxID, and syncs with the server.
+
+Pairing: Uses a Device Key (format: pg_dev_...) to isolate SMS data to the merchant’s account.
+
+Auto-verification: Claims to verify payments within 20 seconds.
+
+🧑‍💻 Merchant Workflow
+
+Sign up at /merchant with bKash/Nagad number.
+
+Install the Android SMS app and pair with the Device Key.
+
+Generate payment links from the merchant portal.
+
+Share links with customers via Facebook/WhatsApp.
+
+Receive webhook notifications on payment confirmation.
+
+🧩 Observations & Notes
+
+Frontend is static: All pages are pre-rendered SvelteKit outputs – no server-side rendering detected.
+
+No exposed secrets: No API keys or environment variables found in the client-side code.
+
+Limited client-side logic: Most business logic is handled server-side or via the Android app.
+
+Potential security considerations: The system relies on SMS reading, which could be vulnerable to spoofing if not properly validated. The Device Key mechanism aims to mitigate this.
+
+📌 Summary
+
+AmaderPay is a SvelteKit frontend acting as a dashboard and documentation portal for a SMS-based payment verification service. The core logic lives in the Android app and a separate backend API. Merchants integrate via REST APIs and receive real-time webhook callbacks.
+
+If you need deeper analysis (e.g., API request/response structures, Android app decompilation, or backend fingerprinting), let me know and I can dig further.
+
+
+
+
+
+
+
+
+
+
+Based on my analysis, here is a reverse engineering summary of the **AmaderPay Merchant Portal** (`/merchant`).
+
+---
+
+## 🔍 Page Overview
+
+The `/merchant` page serves as the **login and registration gateway** for merchants. It is a **static SvelteKit** page with client-side JavaScript handling form interactions.
+
+---
+
+## 🧱 Technology Stack (Confirmed)
+
+| Component | Technology |
+
+|-----------|------------|
+
+| **Framework** | SvelteKit (static site generation) |
+
+| **Hosting** | Vercel |
+
+| **Styling** | Tailwind CSS (inferred from class names) |
+
+| **Icons** | Lucide icons |
+
+| **Client-side Logic** | SvelteKit client-side routing & form handling |
+
+---
+
+## 🗺️ Page Structure
+
+| Element | Description |
+
+|---------|-------------|
+
+| **Header** | "Merchant Portal" title with login/register toggle buttons |
+
+| **Login Form** | Email + Password fields + Privacy Policy checkbox |
+
+| **Register Tab** | Toggle button for new merchant account (likely opens registration form) |
+
+| **Footer Links** | "মূল ওয়েবসাইটে ফিরুন" (Back to main site) + "Privacy Policy" |
+
+---
+
+## 📝 Form Fields (Login)
+
+| Field | Type | Placeholder | Required |
+
+|-------|------|-------------|----------|
+
+| Email | `email` | `merchant@example.com` | Yes |
+
+| Password | `password` | `••••••••` | Yes |
+
+| Privacy Policy | `checkbox` | Agree to terms | Yes |
+
+> The submit button is **initially disabled** and only becomes active when all fields are valid (client-side validation).
+
+---
+
+## 🔌 API & Backend Interaction
+
+- **No explicit `action` attribute** is present on the form – submission is handled by **SvelteKit's client-side JavaScript**.
+
+- The form likely submits to an internal API endpoint (e.g., `/api/merchant/login`) via `fetch()` or SvelteKit's `enhance` action.
+
+- The backend API is **not hosted on Vercel** – it is likely a separate server that the frontend communicates with.
+
+---
+
+## 📦 Client-side JavaScript
+
+- **Entry files**: `start.DuE34a7y.js` and `app.DSpKP3ZX.js` (minified, production builds)
+
+- **Dependencies**: Imports chunks for routing, state management, and UI components
+
+- **No hardcoded API keys** or sensitive data found in the client-side code
+
+---
+
+## 🔐 Security Observations
+
+- **Password field**: Standard `type="password"` with no visible client-side encryption
+
+- **Privacy Policy**: Linked to `/privacy` (opens in new tab)
+
+- **No CSRF tokens** or additional security headers observed in the static HTML
+
+---
+
+## 🧩 Missing / Inferred Pieces
+
+| Element | Status |
+
+|---------|--------|
+
+| Registration form | Not visible by default – toggled via "নতুন মার্চেন্ট একাউন্ট" button |
+
+| Password reset | Not present on this page |
+
+| API documentation | Not linked from this page |
+
+| Backend server | Separate from Vercel frontend (likely hosted elsewhere) |
+
+---
+
+## 📌 Summary
+
+The `/merchant` page is a **static SvelteKit login/registration portal** that relies on client-side JavaScript to handle form submission. The actual authentication logic is handled by a **separate backend API** (not hosted on Vercel). No sensitive data or API endpoints are exposed in the client-side code.
+
+---
+
+If you need deeper analysis (e.g., intercepting the actual API call, decompiling the JavaScript bundles, or testing the registration flow), let me know and I can dig further.

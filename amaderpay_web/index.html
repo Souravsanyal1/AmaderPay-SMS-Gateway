@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AmaderPay - bKash, Nagad & Rocket Automated SMS Payment Gateway</title>
+    <meta name="description" content="স্বয়ংক্রিয় পেমেন্ট গেটওয়ে সেবা - bKash, Nagad এবং Rocket SMS অটো-ভেরিফিকেশন গেটওয়ে। 20 সেকেন্ডে ভেরিফিকেশন।">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                AmaderPay <span class="logo-badge">SMS GATEWAY</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link active">হোম</a></li>
+                <li><a href="docs.html" class="nav-link">API Docs</a></li>
+                <li><a href="merchant.html" class="nav-link">মার্চেন্ট পোর্টাল</a></li>
+                <li><a href="privacy.html" class="nav-link">প্রাইভেসি পলিসি</a></li>
+            </ul>
+            <div>
+                <a href="merchant.html" class="btn-primary"><i class="fa-solid fa-user-plus"></i> সাইন ইন / রেজিস্ট্রেশন</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-pill">
+                <i class="fa-solid fa-bolt" style="color: #f59e0b;"></i> ২০ সেকেন্ডে ইনস্ট্যান্ট পেমেন্ট ভেরিফিকেশন
+            </div>
+            <h1 class="hero-title">
+                বাংলাদেশের সবচেয়ে সহজ <span>অটো পেমেন্ট গেটওয়ে</span>
+            </h1>
+            <p class="hero-desc">
+                bKash, Nagad ও Rocket কাস্টমার পেমেন্ট সরাসরি আপনার অ্যান্ড্রয়েড ডিভাইসের SMS এর মাধ্যমে মাত্র ২০ সেকেন্ডে অটোমেটিক ভেরিফাই করুন। কোনো প্রসেসিং ফি ছাড়াই!
+            </p>
+
+            <div class="mfs-badges">
+                <span class="mfs-pill mfs-bkash"><i class="fa-solid fa-wallet"></i> bKash</span>
+                <span class="mfs-pill mfs-nagad"><i class="fa-solid fa-mobile-screen"></i> Nagad</span>
+                <span class="mfs-pill mfs-rocket"><i class="fa-solid fa-rocket"></i> Rocket</span>
+            </div>
+
+            <div class="hero-buttons">
+                <a href="merchant.html" class="btn-primary"><i class="fa-solid fa-rocket"></i> ফ্রি মার্চেন্ট অ্যাকাউন্ট খুলুন</a>
+                <a href="docs.html" class="btn-secondary"><i class="fa-solid fa-code"></i> API ডকুমেন্টেশন দেখুন</a>
+                <a href="../amaderpay-release.apk" class="btn-secondary" download><i class="fa-brands fa-android"></i> APK ডাউনলোড করুন</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="container" style="margin-bottom: 60px;">
+        <h2 style="font-family: var(--font-heading); text-align: center; font-size: 2.2rem; margin-bottom: 12px;">
+            AmaderPay কেন ব্যবহার করবেন?
+        </h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 40px;">
+            আমাদের স্মার্ট SMS গেটওয়ে ব্যবহারের সুবিধাগুলো নিচে দেখুন
+        </p>
+
+        <div class="grid-3">
+            <div class="glass-card">
+                <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
+                <h3 class="card-title">ইনস্ট্যান্ট SMS ভেরিফিকেশন</h3>
+                <p class="card-desc">
+                    পেমেন্ট সম্পন্ন হওয়ার সাথে সাথেই অ্যান্ড্রয়েড মোবাইল অ্যাপের মাধ্যমে TrxID অটোমেটিক সার্ভারে সিঙ্ক হয়।
+                </p>
+            </div>
+
+            <div class="glass-card">
+                <div class="card-icon"><i class="fa-solid fa-lock"></i></div>
+                <h3 class="card-title">Device Key মেকানিজম</h3>
+                <p class="card-desc">
+                    আপনার নিজস্ব ইউনিক Device Key দিয়ে আপনার ফোন সার্ভারের সাথে কানেক্ট থাকে, যা ১০০% সিকিউর।
+                </p>
+            </div>
+
+            <div class="glass-card">
+                <div class="card-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
+                <h3 class="card-title">রিয়েল-টাইম Webhook</h3>
+                <p class="card-desc">
+                    পেমেন্ট সম্পন্ন হওয়া মাত্রই আপনার সার্ভারে অটোমেটিক Webhook Callback নোটিফিকেশন পৌঁছে যাবে।
+                </p>
+            </div>
+
+            <div class="glass-card">
+                <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+                <h3 class="card-title">সহজ API ইন্টিগ্রেশন</h3>
+                <p class="card-desc">
+                    PHP, JavaScript, Python বা যেকোনো ভাষায় মাত্র কয়েক লাইনের কোডে আপনার ওয়েবসাইটে যুক্ত করুন।
+                </p>
+            </div>
+
+            <div class="glass-card">
+                <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
+                <h3 class="card-title">মার্চেন্ট ড্যাশবোর্ড</h3>
+                <p class="card-desc">
+                    একটি সুসজ্জিত ড্যাশবোর্ড থেকে মোট লেনদেন, দৈনিক ভলিউম এবং API Key নিয়ন্ত্রণ করুন।
+                </p>
+            </div>
+
+            <div class="glass-card">
+                <div class="card-icon"><i class="fa-brands fa-android"></i></div>
+                <h3 class="card-title">Android 14+ সাপোর্টেড</h3>
+                <p class="card-desc">
+                    আধুনিক Android ভার্সনে ব্যাকগ্রাউন্ডে নিরবচ্ছিন্নভাবে সার্ভিস চালুর নিশ্চয়তা।
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section class="container" style="margin-bottom: 80px;">
+        <div class="glass-card" style="padding: 40px; text-align: center; border-color: var(--border-glow);">
+            <h2 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 24px;">
+                কীভাবে কাজ করে? (Step by Step)
+            </h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; text-align: left;">
+                <div>
+                    <span class="badge badge-info" style="margin-bottom: 12px;">Step 1</span>
+                    <h4 style="font-size: 1.1rem; margin-bottom: 8px;">অ্যাকাউন্ট খুলুন</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">মার্চেন্ট পোর্টালে সাইন আপ করে API Key ও Device Key পান।</p>
+                </div>
+                <div>
+                    <span class="badge badge-info" style="margin-bottom: 12px;">Step 2</span>
+                    <h4 style="font-size: 1.1rem; margin-bottom: 8px;">APK ইনস্টল করুন</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">আমাদের Android অ্যাপটি ফোনে ইনস্টল করে Device Key সেট করুন।</p>
+                </div>
+                <div>
+                    <span class="badge badge-info" style="margin-bottom: 12px;">Step 3</span>
+                    <h4 style="font-size: 1.1rem; margin-bottom: 8px;">API ইন্টিগ্রেট করুন</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">আপনার ওয়েবসাইটে /checkout/create API দিয়ে পেমেন্ট লিঙ্ক তৈরি করুন।</p>
+                </div>
+                <div>
+                    <span class="badge badge-info" style="margin-bottom: 12px;">Step 4</span>
+                    <h4 style="font-size: 1.1rem; margin-bottom: 8px;">অটো ভেরিফিকেশন</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">কাস্টমার পেমেন্ট করা মাত্রই SMS রিড করে সার্ভার অটো ভেরিফাই করবে।</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col" style="max-width: 360px;">
+                    <div class="logo" style="margin-bottom: 16px;">AmaderPay</div>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                        bKash, Nagad এবং Rocket SMS অটো-ভেরিফিকেশন এর মাধ্যমে বাংলাদেশের মার্চেন্টদের পেমেন্ট সংগ্রহ করার বিশ্বস্ত সমাধান।
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>দ্রুত লিংক</h4>
+                    <ul>
+                        <li><a href="index.html">হোম</a></li>
+                        <li><a href="merchant.html">মার্চেন্ট লগইন</a></li>
+                        <li><a href="merchant.html">নতুন একাউন্ট</a></li>
+                        <li><a href="docs.html">API ডকুমেন্টেশন</a></li>
+                        <li><a href="privacy.html">প্রাইভেসি পলিসি</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>এন্ডপয়েন্ট</h4>
+                    <ul>
+                        <li><code style="color:#a78bfa;">POST /checkout/create</code></li>
+                        <li><code style="color:#a78bfa;">GET /checkout/verify</code></li>
+                        <li><code style="color:#a78bfa;">POST /webhook/trigger</code></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                &copy; 2026 AmaderPay Gateway. All rights reserved. Built with HTML5, CSS3, JS & PHP.
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

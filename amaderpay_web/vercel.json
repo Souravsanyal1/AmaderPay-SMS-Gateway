@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "name": "amader-pay-sms-gateway",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/", "destination": "/index.php" },
+    { "source": "/docs", "destination": "/docs.php" },
+    { "source": "/merchant", "destination": "/merchant.php" },
+    { "source": "/login", "destination": "/merchant.php" },
+    { "source": "/privacy", "destination": "/privacy.php" },
+    { "source": "/checkout", "destination": "/checkout.php" },
+    { "source": "/api/v1/checkout/create", "destination": "/api/checkout.php?action=create" },
+    { "source": "/api/v1/checkout/verify/:id", "destination": "/api/checkout.php?action=verify&id=:id" },
+    { "source": "/api/v1/webhook/trigger", "destination": "/api/webhook.php" }
+  ]
+}
