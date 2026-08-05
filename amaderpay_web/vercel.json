@@ -3,6 +3,11 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
+    { "source": "/api/v1/checkout/create", "destination": "/api/checkout.php" },
+    { "source": "/api/v1/checkout/verify/(.*)", "destination": "/api/checkout.php?session_id=$1" },
+    { "source": "/api/v1/webhook/(.*)", "destination": "/api/webhook.php?action=$1" },
+    { "source": "/api/v1/auth/(.*)", "destination": "/api/auth.php?action=$1" },
+    { "source": "/api/v1/(.*)", "destination": "/api/$1.php" },
     { "source": "/", "destination": "/index.html" },
     { "source": "/docs", "destination": "/docs.html" },
     { "source": "/merchant", "destination": "/merchant.html" },
