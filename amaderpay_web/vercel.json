@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "cleanUrls": false,
+  "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
     { "source": "/api/v1/checkout/create", "destination": "/api/checkout.php" },
@@ -9,11 +9,17 @@
     { "source": "/api/v1/auth/(.*)", "destination": "/api/auth.php?action=$1" },
     { "source": "/api/v1/(.*)", "destination": "/api/$1.php" },
     { "source": "/docs", "destination": "/docs.html" },
+    { "source": "/docs.html", "destination": "/docs.html" },
     { "source": "/merchant", "destination": "/merchant.html" },
+    { "source": "/merchant.html", "destination": "/merchant.html" },
     { "source": "/login", "destination": "/merchant.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
+    { "source": "/privacy.html", "destination": "/privacy.html" },
     { "source": "/checkout", "destination": "/checkout.html" },
-    { "source": "/download", "destination": "/index.html#download" }
+    { "source": "/checkout.html", "destination": "/checkout.html" },
+    { "source": "/index.html", "destination": "/index.html" },
+    { "source": "/download", "destination": "/index.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
     {
