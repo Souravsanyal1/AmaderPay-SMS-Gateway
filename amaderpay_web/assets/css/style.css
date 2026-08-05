@@ -652,8 +652,132 @@ a {
 }
 
 @media (max-width: 768px) {
-    .hero-title { font-size: 2.6rem; }
-    .nav-links { display: none; }
-    .footer-content { flex-direction: column; }
-    .hero-buttons { flex-direction: column; }
+    .container {
+        padding: 0 16px;
+    }
+    
+    .nav-container {
+        padding: 12px 16px;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .nav-links {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        order: 3;
+        padding-top: 10px;
+        border-top: 1px solid var(--border-glass);
+    }
+
+    .nav-link {
+        font-size: 0.85rem;
+        padding: 6px 8px;
+    }
+
+    .hero {
+        padding: 40px 0 30px;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+        line-height: 1.2;
+    }
+
+    .hero-desc {
+        font-size: 0.95rem;
+        padding: 0 10px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .hero-buttons .btn-primary,
+    .hero-buttons .btn-secondary {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+        font-size: 1rem;
+    }
+
+    .mfs-badges {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .mfs-pill {
+        font-size: 0.85rem;
+        padding: 6px 14px;
+    }
+
+    .grid-3 {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin: 24px 0;
+    }
+
+    .glass-card {
+        padding: 24px 18px;
+    }
+
+    #download {
+        padding: 40px 0 !important;
+    }
+
+    #download .container > div:nth-child(3) {
+        padding: 24px 18px !important;
+        width: 100% !important;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 28px;
+    }
+
+    .code-box {
+        font-size: 0.8rem;
+    }
+
+    pre {
+        word-break: break-all;
+        white-space: pre-wrap;
+    }
 }
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.85rem;
+    }
+
+    .logo {
+        font-size: 1.25rem;
+    }
+
+    .logo-badge {
+        font-size: 0.65rem;
+        padding: 2px 6px;
+    }
+
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        text-align: center;
+    }
+
+    .code-tab-nav {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .code-tab-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+}
+
