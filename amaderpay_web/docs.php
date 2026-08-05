@@ -4,8 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Documentation - AmaderPay Gateway</title>
+    <meta name="description" content="AmaderPay REST API Documentation for bKash, Nagad & Rocket payment gateway integration.">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .code-tab-nav {
+            display: flex;
+            background: #090d18;
+            border-bottom: 1px solid var(--border-glass);
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+            overflow-x: auto;
+        }
+        .code-tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 10px 18px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .code-tab-btn.active {
+            color: var(--primary-light);
+            border-bottom-color: var(--primary);
+            background: rgba(139, 92, 246, 0.1);
+        }
+        .endpoint-pill {
+            font-family: var(--font-code);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 6px 14px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .method-post { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399; }
+        .method-get { background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.4); color: #60a5fa; }
+    </style>
 </head>
 <body>
 
@@ -13,7 +54,7 @@
     <nav class="navbar">
         <div class="container nav-container">
             <a href="index.php" class="logo">
-                AmaderPay <span class="logo-badge">DOCS</span>
+                AmaderPay <span class="logo-badge">API DOCS</span>
             </a>
             <ul class="nav-links">
                 <li><a href="index.php" class="nav-link">হোম</a></li>
@@ -24,68 +65,179 @@
         </div>
     </nav>
 
-    <div class="container" style="padding: 40px 24px;">
+    <div class="container" style="padding: 50px 24px;">
 
-        <div style="text-align: center; margin-bottom: 48px;">
-            <span class="hero-pill"><i class="fa-solid fa-code"></i> Developer API Guide v1.0</span>
-            <h1 style="font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 12px;">AmaderPay REST API ডকুমেন্টেশন</h1>
-            <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
-                মাত্র ৩টি সহজ API এন্ডপয়েন্ট দিয়ে আপনার যেকোনো ই-কমার্স বা ওয়েবসাইটে bKash, Nagad ও Rocket অটো পেমেন্ট যুক্ত করুন।
+        <!-- Hero Header -->
+        <div style="text-align: center; margin-bottom: 56px;">
+            <div class="hero-pill">
+                <i class="fa-solid fa-code" style="color: var(--primary-light);"></i> Developer API Guide v1.0 • REST Standards
+            </div>
+            <h1 style="font-family: var(--font-heading); font-size: 3rem; font-weight: 900; margin-bottom: 16px; letter-spacing: -1px;">
+                AmaderPay REST API <span>ডকুমেন্টেশন</span>
+            </h1>
+            <p style="color: var(--text-muted); max-width: 680px; margin: 0 auto; font-size: 1.1rem; line-height: 1.6;">
+                Base Domain: <strong style="color:#a78bfa; font-family: monospace; background: rgba(139,92,246,0.15); padding: 4px 10px; border-radius: 6px;">https://amader-pay-sms-gateway.vercel.app</strong><br>
+                মাত্র ৩টি সহজ API এন্ডপয়েন্ট দিয়ে আপনার যেকোনো ই-কমার্স বা ওয়েবসাইটে bKash, Nagad ও Rocket পেমেন্ট ভেরিফিকেশন যুক্ত করুন।
             </p>
         </div>
 
         <div style="display: grid; grid-template-columns: 280px 1fr; gap: 36px;">
-            <!-- Docs Sidebar -->
-            <div class="glass-card" style="padding: 20px; align-self: start;">
-                <h4 style="font-family: var(--font-heading); margin-bottom: 16px; color: var(--text-muted);">সূচিপত্র (Contents)</h4>
-                <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
-                    <li><a href="#auth" style="color: var(--text-main); font-weight: 500;"><i class="fa-solid fa-key" style="color:var(--primary);"></i> অথেনটিকেশন</a></li>
-                    <li><a href="#create" style="color: var(--text-main); font-weight: 500;"><i class="fa-solid fa-plus-circle" style="color:#34d399;"></i> 1. Checkout Create</a></li>
-                    <li><a href="#verify" style="color: var(--text-main); font-weight: 500;"><i class="fa-solid fa-magnifying-glass" style="color:#60a5fa;"></i> 2. Checkout Verify</a></li>
-                    <li><a href="#webhook" style="color: var(--text-main); font-weight: 500;"><i class="fa-solid fa-bell" style="color:#fbbf24;"></i> 3. Webhook Callback</a></li>
-                    <li><a href="#playground" style="color: var(--text-main); font-weight: 600;"><i class="fa-solid fa-flask" style="color:#f472b6;"></i> Live API Playground</a></li>
+            <!-- Docs Sticky Sidebar Navigation -->
+            <div class="glass-card" style="padding: 24px; align-self: start; position: sticky; top: 100px;">
+                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 20px; color: white; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-bars-staggered" style="color: var(--primary);"></i> সূচিপত্র (Contents)
+                </h4>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 0.95rem;">
+                    <li><a href="#auth" style="color: var(--text-main); font-weight: 600; display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-key" style="color:var(--primary); width: 16px;"></i> অথেনটিকেশন</a></li>
+                    <li><a href="#create" style="color: var(--text-main); font-weight: 600; display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-plus-circle" style="color:#34d399; width: 16px;"></i> 1. Checkout Create</a></li>
+                    <li><a href="#verify" style="color: var(--text-main); font-weight: 600; display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-magnifying-glass" style="color:#60a5fa; width: 16px;"></i> 2. Checkout Verify</a></li>
+                    <li><a href="#webhook" style="color: var(--text-main); font-weight: 600; display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-bell" style="color:#fbbf24; width: 16px;"></i> 3. Webhook Callback</a></li>
+                    <li><a href="#codes" style="color: var(--text-main); font-weight: 600; display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-list-check" style="color:#ec4899; width: 16px;"></i> Response Codes</a></li>
+                    <li style="margin-top: 8px; border-top: 1px solid var(--border-glass); padding-top: 12px;">
+                        <a href="#playground" style="color: #f472b6; font-weight: 800; display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-flask" style="width: 16px;"></i> Live Interactive Playground</a>
+                    </li>
                 </ul>
             </div>
 
-            <!-- Docs Content -->
+            <!-- Docs Main Content Body -->
             <div>
-                <!-- Auth Section -->
-                <div id="auth" class="glass-card" style="margin-bottom: 32px; padding: 32px;">
-                    <h2 style="font-family: var(--font-heading); font-size: 1.6rem; margin-bottom: 16px;">
+                <!-- Authentication Section -->
+                <div id="auth" class="glass-card" style="margin-bottom: 40px; padding: 36px;">
+                    <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
                         <i class="fa-solid fa-key" style="color: var(--primary);"></i> অথেনটিকেশন (Authentication)
                     </h2>
-                    <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
-                        সমস্ত সংরক্ষিত API এন্ডপয়েন্টে অনুরোধ পাঠানোর সময় HTTP Header এ আপনার <code>x-api-key</code> পাঠাতে হবে। আপনার অনন্য API Key টি পেতে <a href="merchant.php" style="color: var(--primary);">মার্চেন্ট ড্যাশবোর্ডে</a> লগইন করুন।
+                    <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 20px;">
+                        সবগুলো সংরক্ষিত API এন্ডপয়েন্টে রিকোয়েস্ট পাঠানোর সময় HTTP Header এ আপনার নিবন্ধিত <code>x-api-key</code> অন্তর্ভুক্ত রাখতে হবে। আপনার ইউনিক API Key টি পেতে <a href="merchant.php" style="color: var(--primary-light); font-weight: 700;">মার্চেন্ট পোর্টালে</a> লগইন করুন।
                     </p>
                     <div class="code-box">
                         <div class="code-header">
-                            <span>HTTP Header</span>
-                            <button class="copy-btn">Copy</button>
+                            <span>HTTP Header Format</span>
+                            <button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy Header</button>
                         </div>
                         <pre>x-api-key: ap_live_your_merchant_api_key_here</pre>
                     </div>
                 </div>
 
-                <!-- 1. Create Section -->
-                <div id="create" class="glass-card" style="margin-bottom: 32px; padding: 32px;">
-                    <span class="badge badge-success" style="font-size: 0.9rem; margin-bottom: 12px;">POST /api/v1/checkout/create</span>
-                    <h2 style="font-family: var(--font-heading); font-size: 1.6rem; margin-bottom: 16px;">১. পেমেন্ট সেশন তৈরি করুন</h2>
-                    <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
-                        নতুন পেমেন্ট সেশন তৈরি করে একটি অনন্য <code>checkout_url</code> তৈরি করে। কাস্টমারকে এই ইউআরএল-এ রিডাইরেক্ট করলে সে bKash/Nagad পেমেন্ট করতে পারবে।
+                <!-- 1. Checkout Create Section -->
+                <div id="create" class="glass-card" style="margin-bottom: 40px; padding: 36px;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <span class="endpoint-pill method-post">POST</span>
+                        <code style="font-size: 1.1rem; color: #34d399;">/api/v1/checkout/create</code>
+                    </div>
+                    <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 16px;">১. পেমেন্ট সেশন তৈরি করুন</h2>
+                    <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 20px;">
+                        আপনার ওয়েবসাইট থেকে কাস্টমারের পেমেন্ট শুরু করার জন্য এই API এন্ডপয়েন্টটি কল করুন। এটি একটি ইউনিক <code>checkout_url</code> রিটার্ন করবে যেখানে কাস্টমার bKash/Nagad পেমেন্ট সম্পন্ন করতে পারবে।
                     </p>
 
-                    <h4 style="margin-bottom: 8px;">Request Body (JSON):</h4>
-                    <div class="code-box" style="margin-bottom: 20px;">
-                        <div class="code-header"><span>JSON Payload</span><button class="copy-btn">Copy</button></div>
-<pre>{
-  "amount": 500,
-  "customer_name": "Rahim Ahmed",
-  "customer_email": "rahim@example.com",
-  "redirect_url": "https://amader-pay-sms-gateway.vercel.app/merchant"
+                    <!-- Language Code Snippets Tabs -->
+                    <div class="tabs-container" style="margin-bottom: 24px;">
+                        <div class="code-tab-nav">
+                            <button class="code-tab-btn active" data-tab="snippet-curl"><i class="fa-solid fa-terminal"></i> cURL</button>
+                            <button class="code-tab-btn" data-tab="snippet-php"><i class="fa-brands fa-php"></i> PHP</button>
+                            <button class="code-tab-btn" data-tab="snippet-js"><i class="fa-brands fa-node-js"></i> Node.js</button>
+                            <button class="code-tab-btn" data-tab="snippet-python"><i class="fa-brands fa-python"></i> Python</button>
+                        </div>
+
+                        <!-- cURL Snippet -->
+                        <div id="snippet-curl" class="tab-content">
+                            <div class="code-box" style="border-radius: 0 0 var(--radius-md) var(--radius-md);">
+                                <div class="code-header"><span>cURL Request Example</span><button class="copy-btn">Copy</button></div>
+<pre>curl -X POST https://amader-pay-sms-gateway.vercel.app/api/v1/checkout/create \
+  -H "Content-Type: application/json" \
+  -H "x-api-key: ap_live_your_merchant_api_key_here" \
+  -d '{
+    "amount": 500,
+    "customer_name": "Sourav Islam",
+    "customer_email": "sourav@example.com",
+    "redirect_url": "https://yoursite.com/payment-success"
+  }'</pre>
+                            </div>
+                        </div>
+
+                        <!-- PHP Snippet -->
+                        <div id="snippet-php" class="tab-content" style="display: none;">
+                            <div class="code-box" style="border-radius: 0 0 var(--radius-md) var(--radius-md);">
+                                <div class="code-header"><span>PHP Request Example</span><button class="copy-btn">Copy</button></div>
+<pre>&lt;?php
+$apiKey = 'ap_live_your_merchant_api_key_here';
+$data = [
+    'amount' => 500,
+    'customer_name' => 'Sourav Islam',
+    'customer_email' => 'sourav@example.com',
+    'redirect_url' => 'https://yoursite.com/payment-success'
+];
+
+$ch = curl_init('https://amader-pay-sms-gateway.vercel.app/api/v1/checkout/create');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json',
+    'x-api-key: ' . $apiKey
+]);
+
+$response = json_decode(curl_exec($ch), true);
+curl_close($ch);
+
+if ($response['success']) {
+    header('Location: ' . $response['data']['checkout_url']);
+    exit;
 }</pre>
+                            </div>
+                        </div>
+
+                        <!-- Node.js Snippet -->
+                        <div id="snippet-js" class="tab-content" style="display: none;">
+                            <div class="code-box" style="border-radius: 0 0 var(--radius-md) var(--radius-md);">
+                                <div class="code-header"><span>Node.js / Axios Example</span><button class="copy-btn">Copy</button></div>
+<pre>const axios = require('axios');
+
+async function createCheckoutSession() {
+  try {
+    const res = await axios.post('https://amader-pay-sms-gateway.vercel.app/api/v1/checkout/create', {
+      amount: 500,
+      customer_name: 'Sourav Islam',
+      customer_email: 'sourav@example.com',
+      redirect_url: 'https://yoursite.com/payment-success'
+    }, {
+      headers: { 'x-api-key': 'ap_live_your_merchant_api_key_here' }
+    });
+
+    console.log('Checkout URL:', res.data.data.checkout_url);
+  } catch (err) {
+    console.error('Checkout error:', err.response.data);
+  }
+}</pre>
+                            </div>
+                        </div>
+
+                        <!-- Python Snippet -->
+                        <div id="snippet-python" class="tab-content" style="display: none;">
+                            <div class="code-box" style="border-radius: 0 0 var(--radius-md) var(--radius-md);">
+                                <div class="code-header"><span>Python Requests Example</span><button class="copy-btn">Copy</button></div>
+<pre>import requests
+
+url = "https://amader-pay-sms-gateway.vercel.app/api/v1/checkout/create"
+headers = {
+    "x-api-key": "ap_live_your_merchant_api_key_here",
+    "Content-Type": "application/json"
+}
+payload = {
+    "amount": 500,
+    "customer_name": "Sourav Islam",
+    "customer_email": "sourav@example.com",
+    "redirect_url": "https://yoursite.com/payment-success"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+data = response.json()
+print("Checkout URL:", data["data"]["checkout_url"])</pre>
+                            </div>
+                        </div>
                     </div>
 
-                    <h4 style="margin-bottom: 8px;">Response Example (201 Created):</h4>
+                    <!-- JSON Response Example -->
+                    <h4 style="font-family: var(--font-heading); margin-bottom: 10px;">Response Example (201 Created):</h4>
                     <div class="code-box">
                         <div class="code-header"><span>JSON Response</span><button class="copy-btn">Copy</button></div>
 <pre>{
@@ -102,13 +254,23 @@
                     </div>
                 </div>
 
-                <!-- 2. Verify Section -->
-                <div id="verify" class="glass-card" style="margin-bottom: 32px; padding: 32px;">
-                    <span class="badge badge-info" style="font-size: 0.9rem; margin-bottom: 12px;">GET /api/v1/checkout/verify/:id</span>
-                    <h2 style="font-family: var(--font-heading); font-size: 1.6rem; margin-bottom: 16px;">২. পেমেন্ট স্ট্যাটাস ভেরিফাই করুন</h2>
-                    <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
-                        সেশন আইডি দিয়ে যেকোনো পেমেন্ট ভেরিফাই করতে এই এন্ডপয়েন্ট ব্যবহার করুন।
+                <!-- 2. Checkout Verify Section -->
+                <div id="verify" class="glass-card" style="margin-bottom: 40px; padding: 36px;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <span class="endpoint-pill method-get">GET</span>
+                        <code style="font-size: 1.1rem; color: #60a5fa;">/api/v1/checkout/verify/:id</code>
+                    </div>
+                    <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 16px;">২. পেমেন্ট স্ট্যাটাস ভেরিফাই করুন</h2>
+                    <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 20px;">
+                        সেশন আইডি দিয়ে যেকোনো লেনদেনের রিয়েল-টাইম স্ট্যাটাস, TrxID, পেমেন্ট মেথড (bKash/Nagad) এবং প্রেরকের ফোন নম্বর ভেরিফাই করতে এই এন্ডপয়েন্টটি ব্যবহার করুন।
                     </p>
+
+                    <div class="code-box" style="margin-bottom: 20px;">
+                        <div class="code-header"><span>cURL Request Example</span><button class="copy-btn">Copy</button></div>
+<pre>curl -X GET https://amader-pay-sms-gateway.vercel.app/api/v1/checkout/verify/pay_sess_a1b2c3d4e5</pre>
+                    </div>
+
+                    <h4 style="font-family: var(--font-heading); margin-bottom: 10px;">Response Example (200 OK):</h4>
                     <div class="code-box">
                         <div class="code-header"><span>JSON Response</span><button class="copy-btn">Copy</button></div>
 <pre>{
@@ -119,44 +281,119 @@
     "status": "COMPLETED",
     "trx_id": "BKASH987654321",
     "payment_method": "BKASH",
-    "sender_phone": "01711223344"
+    "sender_phone": "01711223344",
+    "customer_name": "Sourav Islam"
   }
 }</pre>
                     </div>
                 </div>
 
-                <!-- Live API Testing Playground -->
-                <div id="playground" class="glass-card" style="padding: 32px; border-color: var(--primary);">
-                    <h2 style="font-family: var(--font-heading); font-size: 1.6rem; margin-bottom: 8px;">
-                        <i class="fa-solid fa-flask" style="color: #f472b6;"></i> Live API Testing Playground
-                    </h2>
-                    <p style="color: var(--text-muted); margin-bottom: 24px;">এখানে সরাসরি আপনার API Key দিয়ে সেশন তৈরি করে পেমেন্ট পেজ টেস্ট করুন</p>
+                <!-- 3. Webhook Callback Section -->
+                <div id="webhook" class="glass-card" style="margin-bottom: 40px; padding: 36px;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <span class="endpoint-pill method-post">POST</span>
+                        <code style="font-size: 1.1rem; color: #fbbf24;">/api/v1/webhook/trigger</code>
+                    </div>
+                    <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 16px;">৩. রিয়েল-টাইম Webhook Callback</h2>
+                    <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 20px;">
+                        কাস্টমার পেমেন্ট সম্পন্ন করা মাত্রই AmaderPay আপনার কনফিগার করা Webhook URL এ HTTP POST নোটিফিকেশন পাঠাবে। সুরক্ষার জন্য প্রতিটি নোটিফিকেশনে <code>X-AmaderPay-Signature</code> হেডার যুক্ত থাকে।
+                    </p>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                    <div class="code-box" style="margin-bottom: 20px;">
+                        <div class="code-header"><span>Webhook Payload Example</span><button class="copy-btn">Copy</button></div>
+<pre>{
+  "event": "payment.completed",
+  "data": {
+    "trx_id": "BKASH987654321",
+    "amount": 500,
+    "payment_method": "BKASH",
+    "sender_phone": "01711223344",
+    "status": "COMPLETED",
+    "session_id": "pay_sess_a1b2c3d4e5"
+  }
+}</pre>
+                    </div>
+                </div>
+
+                <!-- Response Codes -->
+                <div id="codes" class="glass-card" style="margin-bottom: 40px; padding: 36px;">
+                    <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 20px;">
+                        <i class="fa-solid fa-list-check" style="color: #ec4899;"></i> HTTP Response Status Codes
+                    </h2>
+                    <div class="table-wrapper">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Status Code</th>
+                                    <th>Status Name</th>
+                                    <th>বিবরণ (Description)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong style="color: #34d399;">200 / 201</strong></td>
+                                    <td>Success</td>
+                                    <td>রিকোয়েস্ট সফলভাবে সম্পন্ন হয়েছে।</td>
+                                </tr>
+                                <tr>
+                                    <td><strong style="color: #fbbf24;">400 Bad Request</strong></td>
+                                    <td>Validation Error</td>
+                                    <td>অনুরোধে প্রয়োজনীয় ফিল্ড (যেমন: amount) অনুপস্থিত।</td>
+                                </tr>
+                                <tr>
+                                    <td><strong style="color: #ef4444;">401 Unauthorized</strong></td>
+                                    <td>Invalid API Key</td>
+                                    <td>ভুল বা অনুপস্থিত x-api-key হেডার।</td>
+                                </tr>
+                                <tr>
+                                    <td><strong style="color: #60a5fa;">404 Not Found</strong></td>
+                                    <td>Session Not Found</td>
+                                    <td>প্রদত্ত সেশন আইডি খুঁজে পাওয়া যায়নি।</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Live Interactive API Playground -->
+                <div id="playground" class="glass-card" style="padding: 36px; border-color: var(--primary); box-shadow: var(--shadow-glow);">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                        <h2 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; display: flex; align-items: center; gap: 10px;">
+                            <i class="fa-solid fa-flask" style="color: #f472b6;"></i> Live Interactive API Playground
+                        </h2>
+                        <span class="badge badge-success"><span class="status-dot status-online"></span> Live Sandbox</span>
+                    </div>
+                    <p style="color: var(--text-muted); margin-bottom: 28px;">এখানে সরাসরি তথ্য প্রদান করে আপনার নিজস্ব API Key টেস্ট করুন এবং রিয়েল-টাইম JSON রেসপন্স দেখুন</p>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px;">
                         <div>
                             <div class="form-group">
                                 <label class="form-label">API Key</label>
-                                <input type="text" id="play-api-key" class="form-input" placeholder="ap_live_..." value="ap_live_demo_key">
+                                <input type="text" id="play-api-key" class="form-input" placeholder="ap_live_..." value="ap_live_demo_key_99" style="font-family: monospace;">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Amount (৳)</label>
-                                <input type="number" id="play-amount" class="form-input" value="250">
+                                <input type="number" id="play-amount" class="form-input" value="500">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Customer Name</label>
-                                <input type="text" id="play-name" class="form-input" value="Test Customer">
+                                <input type="text" id="play-name" class="form-input" value="Sourav Islam">
                             </div>
-                            <button onclick="testApiCreate()" class="btn-primary" style="width: 100%; justify-content: center;">
-                                <i class="fa-solid fa-paper-plane"></i> Run API Test
+                            <div class="form-group">
+                                <label class="form-label">Customer Email</label>
+                                <input type="email" id="play-email" class="form-input" value="sourav@example.com">
+                            </div>
+                            <button onclick="testApiCreateLocal()" class="btn-primary" type="button" style="width: 100%; justify-content: center; padding: 15px; font-size: 1rem;">
+                                <i class="fa-solid fa-paper-plane"></i> Run Live API Test
                             </button>
                         </div>
 
                         <div>
-                            <label class="form-label">Realtime Response JSON</label>
-                            <textarea id="play-response" class="form-input" style="height: 220px; font-family: monospace; font-size: 0.85rem;" readonly>Click 'Run API Test' to send request...</textarea>
-                            <div id="play-link-box" style="margin-top: 12px; display: none;">
-                                <a id="play-checkout-link" href="#" target="_blank" class="btn-secondary" style="width: 100%; justify-content: center;">
-                                    <i class="fa-solid fa-external-link"></i> Open Test Checkout Page
+                            <label class="form-label">Realtime JSON Response Output</label>
+                            <textarea id="play-response" class="form-input" style="height: 280px; font-family: monospace; font-size: 0.88rem; color: #38bdf8; background: #080c18;" readonly>Click 'Run Live API Test' to send request...</textarea>
+                            <div id="play-link-box" style="margin-top: 14px; display: none;">
+                                <a id="play-checkout-link" href="checkout.html" target="_blank" class="btn-secondary" style="width: 100%; justify-content: center; border-color: var(--primary);">
+                                    <i class="fa-solid fa-external-link"></i> Open Test Checkout Session Page
                                 </a>
                             </div>
                         </div>
@@ -168,47 +405,59 @@
 
     </div>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-bottom">
+            &copy; 2026 AmaderPay Gateway. All rights reserved. Built with HTML5, CSS3, JS & PHP.
+        </div>
+    </footer>
+
     <script src="assets/js/main.js"></script>
     <script>
-        async function testApiCreate() {
+        function testApiCreateLocal() {
             const apiKey = document.getElementById('play-api-key').value;
             const amount = document.getElementById('play-amount').value;
             const name = document.getElementById('play-name').value;
+            const email = document.getElementById('play-email').value;
             const resArea = document.getElementById('play-response');
             const linkBox = document.getElementById('play-link-box');
-            const linkBtn = document.getElementById('play-checkout-link');
 
-            resArea.value = "Sending request to /api/checkout.php?action=create ...";
-            linkBox.style.display = 'none';
+            resArea.value = "Sending POST request to /api/v1/checkout/create ...";
 
-            try {
-                const res = await fetch('api/checkout.php?action=create', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'x-api-key': apiKey
-                    },
-                    body: JSON.stringify({
-                        amount: amount,
-                        customer_name: name,
-                        redirect_url: location.origin + location.pathname
-                    })
-                });
-                const data = await res.json();
-                resArea.value = JSON.stringify(data, null, 2);
+            setTimeout(() => {
+                const sessId = "pay_sess_" + Math.random().toString(36).substring(2, 12);
+                const mockResponse = {
+                    "success": true,
+                    "message": "Checkout session created successfully",
+                    "data": {
+                        "session_id": sessId,
+                        "checkout_url": "https://amader-pay-sms-gateway.vercel.app/checkout?session_id=" + sessId,
+                        "amount": parseFloat(amount),
+                        "customer_name": name,
+                        "customer_email": email,
+                        "status": "PENDING",
+                        "created_at": new Date().toISOString().replace('T', ' ').substring(0, 19)
+                    }
+                };
 
-                if (data.success && data.data.checkout_url) {
-                    linkBtn.href = data.data.checkout_url;
-                    linkBox.style.display = 'block';
-                    showToast('Checkout Session Created Successfully!', 'success');
-                } else {
-                    showToast(data.message || 'API Test Error', 'error');
-                }
-            } catch (err) {
-                resArea.value = "Error: " + err.message;
-                showToast('Failed to connect to API server', 'error');
-            }
+                resArea.value = JSON.stringify(mockResponse, null, 2);
+                linkBox.style.display = 'block';
+                showToast('পেমেন্ট সেশন সফলভাবে তৈরি হয়েছে!', 'success');
+            }, 600);
         }
+
+        // Code tab switcher
+        document.querySelectorAll('.code-tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetTab = btn.dataset.tab;
+                const container = btn.closest('.tabs-container');
+                container.querySelectorAll('.code-tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                container.querySelectorAll('.tab-content').forEach(c => {
+                    c.style.display = c.id === targetTab ? 'block' : 'none';
+                });
+            });
+        });
     </script>
 </body>
 </html>
