@@ -179,33 +179,56 @@
 
             <!-- Tab 3: Payment Numbers View -->
             <div id="tab-view-numbers" class="dash-subview" style="display: none;">
-                <div class="glass-card" style="padding: 28px; border-radius: 18px; background: rgba(10, 15, 30, 0.95);">
-                    <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800; margin-bottom: 20px; color: white; display: flex; align-items: center; gap: 10px;">
-                        <i class="fa-solid fa-phone" style="color: #ec4899;"></i> পেমেন্ট নম্বরসমূহ মেথড সেটআপ
-                    </h3>
-                    <div class="grid-3" style="gap: 20px; margin-bottom: 24px;">
-                        <div style="background: rgba(226, 19, 110, 0.08); border: 1px solid rgba(226, 19, 110, 0.3); border-radius: 14px; padding: 20px;">
-                            <div style="font-weight: 700; color: #ec4899; margin-bottom: 8px;"><i class="fa-solid fa-wallet"></i> bKash Personal Number</div>
-                            <input type="text" id="dash-num-bkash" class="form-input" placeholder="017xxxxxxxx" value="01711223344" style="height: 42px;">
+                <div class="glass-card" style="padding: 32px; border-radius: 20px; background: rgba(10, 15, 30, 0.95); border: 1px solid rgba(255, 255, 255, 0.08);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 18px;">
+                        <div>
+                            <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800; color: white; display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+                                <i class="fa-solid fa-phone" style="color: #ec4899;"></i> bKash, Nagad & Rocket পেমেন্ট নম্বরসমূহ
+                            </h3>
+                            <p style="color: var(--text-muted); font-size: 0.88rem; margin: 0;">চেকআউট পেজে প্রদর্শিত ৩টি পেমেন্ট নম্বর নিচে সরাসরি এডিট ও আপডেট করতে পারেন</p>
                         </div>
-                        <div style="background: rgba(249, 115, 22, 0.08); border: 1px solid rgba(249, 115, 22, 0.3); border-radius: 14px; padding: 20px;">
-                            <div style="font-weight: 700; color: #f97316; margin-bottom: 8px;"><i class="fa-solid fa-wallet"></i> Nagad Personal Number</div>
-                            <input type="text" id="dash-num-nagad" class="form-input" placeholder="018xxxxxxxx" value="01899887766" style="height: 42px;">
+                        <button onclick="saveNumbersLocal()" class="btn-primary" style="padding: 12px 24px; border-radius: 12px; background: linear-gradient(135deg, #e2136e 0%, #be185d 100%); border: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                            <i class="fa-regular fa-floppy-disk"></i> পরিবর্তন সংরক্ষণ করুন
+                        </button>
+                    </div>
+
+                    <div class="grid-3" style="gap: 20px;">
+                        <!-- bKash Card -->
+                        <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(236, 72, 153, 0.3); border-radius: 16px; padding: 22px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                                <div style="font-weight: 800; color: #ec4899; font-size: 1.05rem;">bKash (Main)</div>
+                                <span style="font-size: 0.72rem; padding: 3px 8px; border-radius: 6px; background: rgba(236, 72, 153, 0.15); color: #f472b6;">Personal / Merchant</span>
+                            </div>
+                            <label class="form-label" style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px;">bKash নম্বর</label>
+                            <input type="text" id="dash-num-bkash" class="form-input" placeholder="019xxxxxxxxx" value="01912345678" style="height: 46px; background: rgba(6, 9, 19, 0.9); border-radius: 10px; font-family: monospace;">
                         </div>
-                        <div style="background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 14px; padding: 20px;">
-                            <div style="font-weight: 700; color: #c084fc; margin-bottom: 8px;"><i class="fa-solid fa-wallet"></i> Rocket Personal Number</div>
-                            <input type="text" id="dash-num-rocket" class="form-input" placeholder="019xxxxxxxx" value="01911998877" style="height: 42px;">
+
+                        <!-- Nagad Card -->
+                        <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(249, 115, 22, 0.3); border-radius: 16px; padding: 22px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                                <div style="font-weight: 800; color: #f97316; font-size: 1.05rem;">Nagad (Main)</div>
+                                <span style="font-size: 0.72rem; padding: 3px 8px; border-radius: 6px; background: rgba(249, 115, 22, 0.15); color: #fb923c;">Personal / Merchant</span>
+                            </div>
+                            <label class="form-label" style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px;">Nagad নম্বর</label>
+                            <input type="text" id="dash-num-nagad" class="form-input" placeholder="019xxxxxxxxx" value="01987654321" style="height: 46px; background: rgba(6, 9, 19, 0.9); border-radius: 10px; font-family: monospace;">
+                        </div>
+
+                        <!-- Rocket Card -->
+                        <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 16px; padding: 22px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                                <div style="font-weight: 800; color: #c084fc; font-size: 1.05rem;">Rocket (Main)</div>
+                                <span style="font-size: 0.72rem; padding: 3px 8px; border-radius: 6px; background: rgba(168, 85, 247, 0.15); color: #c084fc;">Personal / Merchant</span>
+                            </div>
+                            <label class="form-label" style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px;">Rocket নম্বর</label>
+                            <input type="text" id="dash-num-rocket" class="form-input" placeholder="019xxxxxxxxx" value="01955443322" style="height: 46px; background: rgba(6, 9, 19, 0.9); border-radius: 10px; font-family: monospace;">
                         </div>
                     </div>
-                    <button onclick="showToast('পেমেন্ট নম্বরসমূহ সফলভাবে আপডেট করা হয়েছে!', 'success')" class="btn-primary" style="padding: 12px 24px; border-radius: 10px; background: linear-gradient(135deg, #e2136e 0%, #be185d 100%);">
-                        নম্বর আপডেট সেভ করুন
-                    </button>
                 </div>
             </div>
 
             <!-- Tab 4: API Keys & Phone App -->
             <div id="tab-view-apikeys" class="dash-subview" style="display: none;">
-                <div class="glass-card" style="padding: 28px; border-radius: 18px; background: rgba(10, 15, 30, 0.95); margin-bottom: 24px;">
+                <div class="glass-card" style="padding: 32px; border-radius: 20px; background: rgba(10, 15, 30, 0.95); margin-bottom: 24px; border: 1px solid rgba(255, 255, 255, 0.08);">
                     <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800; margin-bottom: 20px; color: white; display: flex; align-items: center; gap: 10px;">
                         <i class="fa-solid fa-key" style="color: #ec4899;"></i> API Keys & App Pairing Credentials
                     </h3>
@@ -213,74 +236,101 @@
                         <div>
                             <label class="form-label" style="font-size: 0.85rem; margin-bottom: 8px;">API Key (সার্ভার ব্যাকএন্ডের জন্য)</label>
                             <div style="display: flex; gap: 8px;">
-                                <input type="password" id="merchant-api-key" class="form-input" readonly value="ap_live_9f8e7d6c5b4a3f2e1d" style="font-family: monospace; height: 44px;">
-                                <button class="toggle-mask-btn copy-btn" data-target="merchant-api-key" type="button" style="padding: 0 14px;"><i class="fa-regular fa-eye"></i> Show</button>
-                                <button class="copy-btn" data-copy-target="merchant-api-key" type="button" style="padding: 0 14px;"><i class="fa-regular fa-copy"></i> Copy</button>
+                                <input type="password" id="merchant-api-key" class="form-input" readonly value="ap_live_9f8e7d6c5b4a3f2e1d" style="font-family: monospace; height: 46px; background: rgba(6, 9, 19, 0.9); border-radius: 10px;">
+                                <button class="toggle-mask-btn copy-btn" data-target="merchant-api-key" type="button" style="padding: 0 16px; border-radius: 10px;"><i class="fa-regular fa-eye"></i> Show</button>
+                                <button class="copy-btn" data-copy-target="merchant-api-key" type="button" style="padding: 0 16px; border-radius: 10px;"><i class="fa-regular fa-copy"></i> Copy</button>
                             </div>
                         </div>
                         <div>
                             <label class="form-label" style="font-size: 0.85rem; margin-bottom: 8px;">Device Key (Android App পেয়ারিং)</label>
                             <div style="display: flex; gap: 8px;">
-                                <input type="password" id="merchant-device-key" class="form-input" readonly value="pg_dev_a1b2c3d4e5f6g7h8" style="font-family: monospace; height: 44px;">
-                                <button class="toggle-mask-btn copy-btn" data-target="merchant-device-key" type="button" style="padding: 0 14px;"><i class="fa-regular fa-eye"></i> Show</button>
-                                <button class="copy-btn" data-copy-target="merchant-device-key" type="button" style="padding: 0 14px;"><i class="fa-regular fa-copy"></i> Copy</button>
+                                <input type="password" id="merchant-device-key" class="form-input" readonly value="pg_dev_a1b2c3d4e5f6g7h8" style="font-family: monospace; height: 46px; background: rgba(6, 9, 19, 0.9); border-radius: 10px;">
+                                <button class="toggle-mask-btn copy-btn" data-target="merchant-device-key" type="button" style="padding: 0 16px; border-radius: 10px;"><i class="fa-regular fa-eye"></i> Show</button>
+                                <button class="copy-btn" data-copy-target="merchant-device-key" type="button" style="padding: 0 16px; border-radius: 10px;"><i class="fa-regular fa-copy"></i> Copy</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="glass-card" style="padding: 28px; border-radius: 18px; background: rgba(10, 15, 30, 0.95); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                <div class="glass-card" style="padding: 28px; border-radius: 20px; background: rgba(10, 15, 30, 0.95); border: 1px solid rgba(255, 255, 255, 0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
                     <div>
                         <h4 style="font-size: 1.1rem; color: white; margin-bottom: 6px;"><i class="fa-brands fa-android" style="color: #34d399;"></i> NexoraPay Gateway Android App</h4>
                         <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0;">মোবাইলে ইন্সটল করে Device Key দিয়ে পেয়ার করুন যাতে SMS পেমেন্ট অটোমেটিক ডিটেক্ট হয়।</p>
                     </div>
-                    <a href="nexorapay-release.apk" class="btn-primary" download style="padding: 12px 20px; border-radius: 10px; background: #10b981; border: none;">
+                    <a href="nexorapay-release.apk" class="btn-primary" download style="padding: 12px 24px; border-radius: 12px; background: #10b981; border: none; font-weight: 700;">
                         <i class="fa-solid fa-download"></i> Android APK ডাউনলোড (v1.0)
                     </a>
                 </div>
             </div>
 
-            <!-- Tab 5: Webhook & Settings -->
+            <!-- Tab 5: Webhook & Settings Matching Image 2 -->
             <div id="tab-view-webhook" class="dash-subview" style="display: none;">
-                <div class="glass-card" style="padding: 28px; border-radius: 18px; background: rgba(10, 15, 30, 0.95);">
-                    <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800; margin-bottom: 20px; color: white; display: flex; align-items: center; gap: 10px;">
-                        <i class="fa-solid fa-paper-plane" style="color: #ec4899;"></i> Webhook URL & Callback Settings
-                    </h3>
-                    <div style="margin-bottom: 20px;">
-                        <label class="form-label" style="font-size: 0.85rem; margin-bottom: 8px;">Webhook URL (Instant Payment Callback Notification)</label>
-                        <div style="display: flex; gap: 8px; max-width: 600px;">
-                            <input type="url" id="merchant-webhook-url" class="form-input" placeholder="https://yoursite.com/api/webhook" value="https://yoursite.com/api/webhook" style="height: 44px;">
-                            <button onclick="saveWebhookLocal()" class="btn-primary" type="button" style="padding: 0 24px; border-radius: 10px; background: linear-gradient(135deg, #e2136e 0%, #be185d 100%);">Save</button>
+                <div style="max-width: 680px; margin: 0 auto;">
+                    <div class="glass-card" style="padding: 36px 32px; border-radius: 24px; background: rgba(10, 15, 30, 0.95); border: 1px solid rgba(236, 72, 153, 0.3);">
+                        <h3 style="font-family: var(--font-heading); font-size: 1.35rem; font-weight: 800; margin-bottom: 24px; color: white; display: flex; align-items: center; gap: 12px;">
+                            <i class="fa-solid fa-paper-plane" style="color: #ec4899;"></i> Webhook & Payment Numbers Configuration
+                        </h3>
+                        
+                        <div class="form-group" style="margin-bottom: 22px;">
+                            <label class="form-label" style="font-size: 0.85rem; margin-bottom: 8px;">Webhook URL (আপনার ওয়েবসাইট URL, যেখানে পেমেন্ট নোটিফিকেশন যাবে) *</label>
+                            <input type="url" id="merchant-webhook-url" class="form-input" placeholder="https://yourwebsite.com/api/payment-webhook" value="https://yourwebsite.com/api/payment-webhook" style="height: 48px; background: rgba(6, 9, 19, 0.9); border-radius: 12px;">
                         </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 28px;">
+                            <div>
+                                <label class="form-label" style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px;">bKash Number</label>
+                                <input type="text" id="setting-bkash" class="form-input" placeholder="019xxxxxxxxx" value="01912345678" style="height: 46px; background: rgba(6, 9, 19, 0.9); border-radius: 10px; font-family: monospace;">
+                            </div>
+                            <div>
+                                <label class="form-label" style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px;">Nagad Number</label>
+                                <input type="text" id="setting-nagad" class="form-input" placeholder="019xxxxxxxxx" value="01987654321" style="height: 46px; background: rgba(6, 9, 19, 0.9); border-radius: 10px; font-family: monospace;">
+                            </div>
+                            <div>
+                                <label class="form-label" style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px;">Rocket Number</label>
+                                <input type="text" id="setting-rocket" class="form-input" placeholder="019xxxxxxxxx" value="01955443322" style="height: 46px; background: rgba(6, 9, 19, 0.9); border-radius: 10px; font-family: monospace;">
+                            </div>
+                        </div>
+
+                        <button onclick="saveWebhookLocal()" class="btn-primary" style="width: 100%; justify-content: center; padding: 15px; font-size: 0.95rem; font-weight: 700; border-radius: 12px; background: linear-gradient(135deg, #e2136e 0%, #be185d 100%); border: none; box-shadow: 0 4px 20px rgba(226, 19, 110, 0.4);">
+                            <i class="fa-regular fa-floppy-disk" style="margin-right: 6px;"></i> সেটিং সংরক্ষণ করুন
+                        </button>
                     </div>
-                    <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5;">
-                        কাস্টমার সফলভাবে পেমেন্ট করার সাথে সাথে আপনার উল্লিখিত Webhook URL-এ <code>POST</code> রিকোয়েস্টের মাধ্যমে TrxID, Sender Phone ও Amount পাঠিয়ে দেওয়া হবে।
-                    </p>
                 </div>
             </div>
 
-            <!-- Tab 6: Payment Link Generator -->
+            <!-- Tab 6: Payment Link Generator Matching Image 3 -->
             <div id="tab-view-linkgen" class="dash-subview" style="display: none;">
-                <div class="glass-card" style="padding: 28px; border-radius: 18px; background: rgba(10, 15, 30, 0.95); max-width: 650px;">
-                    <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800; margin-bottom: 20px; color: white; display: flex; align-items: center; gap: 10px;">
-                        <i class="fa-solid fa-wand-magic-sparkles" style="color: #ec4899;"></i> Instant Payment Link Generator
-                    </h3>
-                    <div class="form-group" style="margin-bottom: 16px;">
-                        <label class="form-label" style="font-size: 0.85rem; margin-bottom: 6px;">পেমেন্টের পরিমাণ (টাকা) *</label>
-                        <input type="number" id="gen-amount" class="form-input" placeholder="500" value="500" style="height: 44px;">
-                    </div>
-                    <div class="form-group" style="margin-bottom: 20px;">
-                        <label class="form-label" style="font-size: 0.85rem; margin-bottom: 6px;">Order ID / বিবরণ</label>
-                        <input type="text" id="gen-order-id" class="form-input" placeholder="INV-2026-001" value="INV-2026-001" style="height: 44px;">
-                    </div>
-                    <button onclick="generatePayLink()" class="btn-primary" style="width: 100%; justify-content: center; padding: 12px; border-radius: 10px; background: linear-gradient(135deg, #e2136e 0%, #be185d 100%);">
-                        পেমেন্ট লিঙ্ক তৈরি করুন
-                    </button>
-                    <div id="generated-link-box" style="margin-top: 20px; display: none; background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(236, 72, 153, 0.3); border-radius: 12px; padding: 16px;">
-                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px;">তৈরিকৃত পেমেন্ট লিঙ্ক:</div>
-                        <div style="display: flex; gap: 8px;">
-                            <input type="text" id="created-pay-link" class="form-input" readonly style="font-family: monospace; font-size: 0.85rem; height: 40px; color: #f472b6;">
-                            <button class="copy-btn" data-copy-target="created-pay-link" style="padding: 0 16px; border-radius: 8px;">Copy</button>
+                <div style="max-width: 620px; margin: 0 auto;">
+                    <div class="glass-card" style="padding: 36px 32px; border-radius: 24px; background: rgba(10, 15, 30, 0.95); border: 1px solid rgba(236, 72, 153, 0.3);">
+                        <h3 style="font-family: var(--font-heading); font-size: 1.35rem; font-weight: 800; margin-bottom: 24px; color: white; display: flex; align-items: center; gap: 12px;">
+                            <i class="fa-solid fa-wand-magic-sparkles" style="color: #ec4899;"></i> Instant Payment Link Generator
+                        </h3>
+                        
+                        <div class="form-group" style="margin-bottom: 18px;">
+                            <label class="form-label" style="font-size: 0.85rem; margin-bottom: 6px;">পেমেন্ট পরিমাণ (৳ BDT) *</label>
+                            <input type="number" id="gen-amount" class="form-input" placeholder="500" value="500" style="height: 48px; background: rgba(6, 9, 19, 0.9); border-radius: 12px; font-size: 1rem; font-weight: 700;">
+                        </div>
+                        
+                        <div class="form-group" style="margin-bottom: 18px;">
+                            <label class="form-label" style="font-size: 0.85rem; margin-bottom: 6px;">Order ID *</label>
+                            <input type="text" id="gen-order-id" class="form-input" placeholder="ORD-231048" value="ORD-231048" style="height: 48px; background: rgba(6, 9, 19, 0.9); border-radius: 12px; font-family: monospace;">
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 28px;">
+                            <label class="form-label" style="font-size: 0.85rem; margin-bottom: 6px;">কাস্টমার নাম (Optional)</label>
+                            <input type="text" id="gen-cust-name" class="form-input" placeholder="কাস্টমারের নাম" value="" style="height: 48px; background: rgba(6, 9, 19, 0.9); border-radius: 12px;">
+                        </div>
+
+                        <button onclick="generatePayLink()" class="btn-primary" style="width: 100%; justify-content: center; padding: 15px; font-size: 0.95rem; font-weight: 700; border-radius: 12px; background: linear-gradient(135deg, #e2136e 0%, #be185d 100%); border: none; box-shadow: 0 4px 20px rgba(226, 19, 110, 0.4);">
+                            <i class="fa-solid fa-wand-magic-sparkles" style="margin-right: 6px;"></i> পেমেন্ট লিঙ্ক জেনারেট করুন
+                        </button>
+
+                        <div id="generated-link-box" style="margin-top: 24px; display: none; background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(236, 72, 153, 0.4); border-radius: 14px; padding: 18px;">
+                            <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;">তৈরিকৃত ইনস্ট্যান্ট পেমেন্ট লিঙ্ক:</div>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="text" id="created-pay-link" class="form-input" readonly style="font-family: monospace; font-size: 0.85rem; height: 42px; color: #f472b6; background: rgba(6, 9, 19, 0.9);">
+                                <button class="copy-btn" data-copy-target="created-pay-link" style="padding: 0 18px; border-radius: 10px;">Copy</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -511,6 +561,20 @@
         let livePollTimer = null;
         let activeTransactions = [];
 
+        function generateUniqueApiKey() {
+            const array = new Uint8Array(12);
+            window.crypto.getRandomValues(array);
+            const hex = Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+            return 'ap_live_' + hex;
+        }
+
+        function generateUniqueDeviceKey() {
+            const array = new Uint8Array(8);
+            window.crypto.getRandomValues(array);
+            const hex = Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+            return 'pg_dev_' + hex;
+        }
+
         function checkAuth() {
             const user = localStorage.getItem('amaderpay_merchant');
             if (user) {
@@ -531,6 +595,16 @@
 
                 if (data.api_key && document.getElementById('merchant-api-key')) document.getElementById('merchant-api-key').value = data.api_key;
                 if (data.device_key && document.getElementById('merchant-device-key')) document.getElementById('merchant-device-key').value = data.device_key;
+
+                if (data.bkash && document.getElementById('dash-num-bkash')) document.getElementById('dash-num-bkash').value = data.bkash;
+                if (data.nagad && document.getElementById('dash-num-nagad')) document.getElementById('dash-num-nagad').value = data.nagad;
+                if (data.rocket && document.getElementById('dash-num-rocket')) document.getElementById('dash-num-rocket').value = data.rocket;
+
+                if (data.bkash && document.getElementById('setting-bkash')) document.getElementById('setting-bkash').value = data.bkash;
+                if (data.nagad && document.getElementById('setting-nagad')) document.getElementById('setting-nagad').value = data.nagad;
+                if (data.rocket && document.getElementById('setting-rocket')) document.getElementById('setting-rocket').value = data.rocket;
+
+                if (data.webhook && document.getElementById('merchant-webhook-url')) document.getElementById('merchant-webhook-url').value = data.webhook;
 
                 renderTransactions();
             } else {
@@ -594,24 +668,23 @@
             e.preventDefault();
             const email = document.getElementById('login-email').value;
             const existingUser = localStorage.getItem('amaderpay_merchant');
-            let merchantName = 'Apon Enterprise';
+            let merchant = null;
             if (existingUser) {
                 const parsed = JSON.parse(existingUser);
-                if (parsed.email === email && parsed.name) {
-                    merchantName = parsed.name;
-                } else if (email) {
-                    merchantName = email.split('@')[0];
+                if (parsed.email === email) {
+                    merchant = parsed;
                 }
-            } else if (email) {
-                merchantName = email.split('@')[0];
             }
 
-            const merchant = {
-                name: merchantName,
-                email: email,
-                api_key: 'ap_live_' + Math.random().toString(36).substring(2, 18),
-                device_key: 'pg_dev_' + Math.random().toString(36).substring(2, 14)
-            };
+            if (!merchant) {
+                merchant = {
+                    name: email ? email.split('@')[0] : 'Nexora Store',
+                    email: email,
+                    api_key: generateUniqueApiKey(),
+                    device_key: generateUniqueDeviceKey()
+                };
+            }
+
             localStorage.setItem('amaderpay_merchant', JSON.stringify(merchant));
             showToast('লগইন সফল হয়েছে!', 'success');
             checkAuth();
@@ -627,13 +700,50 @@
             const merchant = {
                 name: name || 'Nexora Pay Store',
                 email: email,
-                bkash: bkash,
-                nagad: nagad,
-                api_key: 'ap_live_' + Math.random().toString(36).substring(2, 18),
-                device_key: 'pg_dev_' + Math.random().toString(36).substring(2, 14)
+                bkash: bkash || '01912345678',
+                nagad: nagad || '01987654321',
+                rocket: '01955443322',
+                api_key: generateUniqueApiKey(),
+                device_key: generateUniqueDeviceKey()
             };
             localStorage.setItem('amaderpay_merchant', JSON.stringify(merchant));
-            showToast('রেজিস্ট্রেশন সফল হয়েছে!', 'success');
+            showToast('রেজিস্ট্রেশন সফল হয়েছে! ইউনিক API Key তৈরি করা হয়েছে।', 'success');
+            checkAuth();
+        }
+
+        function saveNumbersLocal() {
+            const bkash = document.getElementById('dash-num-bkash').value;
+            const nagad = document.getElementById('dash-num-nagad').value;
+            const rocket = document.getElementById('dash-num-rocket').value;
+
+            const userStr = localStorage.getItem('amaderpay_merchant');
+            if (userStr) {
+                const data = JSON.parse(userStr);
+                data.bkash = bkash;
+                data.nagad = nagad;
+                data.rocket = rocket;
+                localStorage.setItem('amaderpay_merchant', JSON.stringify(data));
+            }
+            showToast('পেমেন্ট নম্বরসমূহ সফলভাবে সংরক্ষণ করা হয়েছে!', 'success');
+            checkAuth();
+        }
+
+        function saveWebhookLocal() {
+            const webhookUrl = document.getElementById('merchant-webhook-url').value;
+            const bkash = document.getElementById('setting-bkash') ? document.getElementById('setting-bkash').value : '';
+            const nagad = document.getElementById('setting-nagad') ? document.getElementById('setting-nagad').value : '';
+            const rocket = document.getElementById('setting-rocket') ? document.getElementById('setting-rocket').value : '';
+
+            const userStr = localStorage.getItem('amaderpay_merchant');
+            if (userStr) {
+                const data = JSON.parse(userStr);
+                data.webhook = webhookUrl;
+                if (bkash) data.bkash = bkash;
+                if (nagad) data.nagad = nagad;
+                if (rocket) data.rocket = rocket;
+                localStorage.setItem('amaderpay_merchant', JSON.stringify(data));
+            }
+            showToast('সেটিং সফলভাবে সংরক্ষণ করা হয়েছে!', 'success');
             checkAuth();
         }
 
