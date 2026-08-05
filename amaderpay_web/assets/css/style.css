@@ -672,6 +672,23 @@ a {
     display: none;
 }
 
+/* ─── Responsive Adjustments for Docs, Merchant Portal & Footer ─────────── */
+
+@media (max-width: 992px) {
+    /* Docs 2-column grid to 1-column on tablet/mobile */
+    div[style*="grid-template-columns: 280px 1fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+    }
+
+    /* Docs sticky sidebar relative on smaller screens */
+    .glass-card[style*="position: sticky"] {
+        position: relative !important;
+        top: 0 !important;
+        margin-bottom: 24px;
+    }
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 0 16px;
@@ -750,8 +767,6 @@ a {
         border-color: rgba(139, 92, 246, 0.3);
     }
 
-
-
     .hero {
         padding: 40px 0 30px;
     }
@@ -798,7 +813,28 @@ a {
     }
 
     .glass-card {
-        padding: 24px 18px;
+        padding: 20px 16px;
+    }
+
+    /* Auth card mobile padding */
+    #merchant-auth-view .tabs-container {
+        padding: 24px 16px !important;
+    }
+
+    /* Auth Tabs flex wrap and text scaling for small screens */
+    .tabs-nav {
+        flex-wrap: nowrap;
+        gap: 6px;
+        width: 100%;
+    }
+
+    .tabs-nav .tab-btn {
+        flex: 1;
+        padding: 12px 8px;
+        font-size: 0.85rem;
+        justify-content: center;
+        text-align: center;
+        white-space: nowrap;
     }
 
     #download {
@@ -810,9 +846,27 @@ a {
         width: 100% !important;
     }
 
+    /* Footer Mobile Styling */
     .footer-content {
         flex-direction: column;
-        gap: 28px;
+        gap: 32px;
+        text-align: left;
+    }
+
+    .footer-col h4 {
+        margin-bottom: 14px;
+        font-size: 1.1rem;
+    }
+
+    .footer-col ul li {
+        margin-bottom: 10px;
+    }
+
+    .footer-col ul li a, .footer-col ul li span {
+        font-size: 0.9rem !important;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
     }
 
     .code-box {
@@ -851,9 +905,20 @@ a {
     }
 
     .code-tab-btn {
-        padding: 8px 12px;
-        font-size: 0.8rem;
+        padding: 8px 10px;
+        font-size: 0.78rem;
         white-space: nowrap;
     }
+
+    .tabs-nav .tab-btn {
+        font-size: 0.8rem;
+        padding: 10px 4px;
+        gap: 4px;
+    }
+
+    .tabs-nav .tab-btn i {
+        font-size: 0.85rem;
+    }
 }
+
 
