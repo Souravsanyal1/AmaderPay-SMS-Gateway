@@ -365,7 +365,7 @@
                         <div>
                             <div class="form-group" style="margin-bottom: 14px;">
                                 <label class="form-label" style="font-size: 0.82rem; margin-bottom: 6px;">API Key *</label>
-                                <input type="text" id="dash-play-api-key" class="form-input" placeholder="ap_live_..." value="ap_live_291305c098de8d58dbd3eed4ab259691" style="font-family: monospace; height: 42px; background: rgba(6, 9, 19, 0.9); color: #f472b6; border-radius: 10px;">
+                                <input type="text" id="dash-play-api-key" class="form-input" placeholder="ap_live_963379cea4d44f5d2d440d91" value="ap_live_963379cea4d44f5d2d440d91" style="font-family: monospace; height: 42px; background: rgba(6, 9, 19, 0.9); color: #f472b6; border-radius: 10px;">
                             </div>
                             
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
@@ -381,7 +381,7 @@
 
                             <div class="form-group" style="margin-bottom: 14px;">
                                 <label class="form-label" style="font-size: 0.82rem; margin-bottom: 6px;">কাস্টমার নাম</label>
-                                <input type="text" id="dash-play-name" class="form-input" value="Rahim Ahmed" style="height: 42px; background: rgba(6, 9, 19, 0.9); border-radius: 10px;">
+                                <input type="text" id="dash-play-name" class="form-input" value="Sourav Islam" style="height: 42px; background: rgba(6, 9, 19, 0.9); border-radius: 10px;">
                             </div>
 
                             <div class="form-group" style="margin-bottom: 20px;">
@@ -430,7 +430,7 @@
   -d '{
     "amount": 500,
     "order_id": "ORD-10023",
-    "customer_name": "Rahim Ahmed",
+    "customer_name": "Sourav Islam",
     "success_url": "https://yourshop.com/success"
   }'</pre>
                     </div>
@@ -742,7 +742,7 @@
   -d '{
     "amount": 500,
     "order_id": "ORD-10023",
-    "customer_name": "Rahim Ahmed",
+    "customer_name": "Sourav Islam",
     "success_url": "https://yourshop.com/success"
   }'`,
             js: `const axios = require('axios');
@@ -751,7 +751,7 @@ async function createPayment() {
   const res = await axios.post('https://your-domain.com/api/v1/checkout/create', {
     amount: 500,
     order_id: 'ORD-10023',
-    customer_name: 'Rahim Ahmed',
+    customer_name: 'Sourav Islam',
     success_url: 'https://yourshop.com/success'
   }, {
     headers: { 'Authorization': 'Bearer YOUR_API_KEY' }
@@ -767,7 +767,7 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, [
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
     'amount' => 500,
     'order_id' => 'ORD-10023',
-    'customer_name' => 'Rahim Ahmed'
+    'customer_name' => 'Sourav Islam'
 ]));
 $res = curl_exec($ch);`,
             python: `import requests
@@ -775,7 +775,7 @@ $res = curl_exec($ch);`,
 res = requests.post('https://your-domain.com/api/v1/checkout/create', json={
     'amount': 500,
     'order_id': 'ORD-10023',
-    'customer_name': 'Rahim Ahmed'
+    'customer_name': 'Sourav Islam'
 }, headers={'Authorization': 'Bearer YOUR_API_KEY'})
 print(res.json())`,
             flutter: `import 'package:http/http me' as http;
@@ -790,7 +790,7 @@ final response = await http.post(
   body: jsonEncode({
     'amount': 500,
     'order_id': 'ORD-10023',
-    'customer_name': 'Rahim Ahmed',
+    'customer_name': 'Sourav Islam',
   }),
 );`,
             webhook: `// Webhook Handler on your server
