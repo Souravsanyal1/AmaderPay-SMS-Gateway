@@ -273,21 +273,21 @@
                         
                         <div class="form-group" style="margin-bottom: 22px;">
                             <label class="form-label" style="font-size: 0.85rem; margin-bottom: 8px;">Webhook URL (আপনার ওয়েবসাইট URL, যেখানে পেমেন্ট নোটিফিকেশন যাবে) *</label>
-                            <input type="url" id="merchant-webhook-url" class="form-input" placeholder="https://yourwebsite.com/api/payment-webhook" value="https://yourwebsite.com/api/payment-webhook" style="height: 48px; background: rgba(6, 9, 19, 0.9); border-radius: 12px;">
+                            <input type="url" id="merchant-webhook-url" class="form-input" placeholder="https://yourwebsite.com/api/payment-webhook" value="" style="height: 48px; background: rgba(6, 9, 19, 0.9); border-radius: 12px;">
                         </div>
 
                         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 28px;">
                             <div>
                                 <label class="form-label" style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px;">bKash Number</label>
-                                <input type="text" id="setting-bkash" class="form-input" placeholder="019xxxxxxxxx" value="01912345678" style="height: 46px; background: rgba(6, 9, 19, 0.9); border-radius: 10px; font-family: monospace;">
+                                <input type="text" id="setting-bkash" class="form-input" placeholder="019xxxxxxxxx" value="" style="height: 46px; background: rgba(6, 9, 19, 0.9); border-radius: 10px; font-family: monospace;">
                             </div>
                             <div>
                                 <label class="form-label" style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px;">Nagad Number</label>
-                                <input type="text" id="setting-nagad" class="form-input" placeholder="019xxxxxxxxx" value="01987654321" style="height: 46px; background: rgba(6, 9, 19, 0.9); border-radius: 10px; font-family: monospace;">
+                                <input type="text" id="setting-nagad" class="form-input" placeholder="019xxxxxxxxx" value="" style="height: 46px; background: rgba(6, 9, 19, 0.9); border-radius: 10px; font-family: monospace;">
                             </div>
                             <div>
                                 <label class="form-label" style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px;">Rocket Number</label>
-                                <input type="text" id="setting-rocket" class="form-input" placeholder="019xxxxxxxxx" value="01955443322" style="height: 46px; background: rgba(6, 9, 19, 0.9); border-radius: 10px; font-family: monospace;">
+                                <input type="text" id="setting-rocket" class="form-input" placeholder="019xxxxxxxxx" value="" style="height: 46px; background: rgba(6, 9, 19, 0.9); border-radius: 10px; font-family: monospace;">
                             </div>
                         </div>
 
@@ -550,8 +550,8 @@
                         </div>
                     </div>
 
-                    <!-- MFS Payment Numbers 2-Column Grid -->
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px;">
+                    <!-- MFS Payment Numbers 3-Column Grid -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 20px;">
                         <div>
                             <label class="form-label" style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px;">bKash Number</label>
                             <input type="tel" id="reg-bkash" class="form-input" placeholder="01xxxxxxxxx" value="" style="background: rgba(10, 15, 30, 0.95); border-radius: 12px; height: 46px; font-size: 0.9rem; border-color: rgba(255,255,255,0.12);">
@@ -559,6 +559,10 @@
                         <div>
                             <label class="form-label" style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px;">Nagad Number</label>
                             <input type="tel" id="reg-nagad" class="form-input" placeholder="01xxxxxxxxx" value="" style="background: rgba(10, 15, 30, 0.95); border-radius: 12px; height: 46px; font-size: 0.9rem; border-color: rgba(255,255,255,0.12);">
+                        </div>
+                        <div>
+                            <label class="form-label" style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px;">Rocket Number</label>
+                            <input type="tel" id="reg-rocket" class="form-input" placeholder="01xxxxxxxxx" value="" style="background: rgba(10, 15, 30, 0.95); border-radius: 12px; height: 46px; font-size: 0.9rem; border-color: rgba(255,255,255,0.12);">
                         </div>
                     </div>
 
@@ -970,13 +974,15 @@ app.post('/api/payment-webhook', (req, res) => {
             const email = document.getElementById('reg-email').value;
             const bkash = document.getElementById('reg-bkash').value;
             const nagad = document.getElementById('reg-nagad').value;
+            const rocket = document.getElementById('reg-rocket') ? document.getElementById('reg-rocket').value : '';
 
             const merchant = {
                 name: name || 'Nexora Pay Store',
                 email: email,
-                bkash: bkash || '01912345678',
-                nagad: nagad || '01987654321',
-                rocket: '01955443322',
+                bkash: bkash || '',
+                nagad: nagad || '',
+                rocket: rocket || '',
+                webhook: '',
                 api_key: generateUniqueApiKey(),
                 device_key: generateUniqueDeviceKey()
             };
