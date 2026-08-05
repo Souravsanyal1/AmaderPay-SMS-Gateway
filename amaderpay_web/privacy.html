@@ -1,73 +1,168 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>প্রাইভেসি পলিসি - NexoraPay</title>
+    <title>Privacy Policy - NexoraPay</title>
+    <meta name="description" content="NexoraPay Privacy Policy — how we collect, use and protect your merchant and payment data.">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .policy-section {
+            margin-bottom: 36px;
+            padding-bottom: 32px;
+            border-bottom: 1px dashed rgba(255,255,255,0.07);
+        }
+        .policy-section:last-child { border-bottom: none; margin-bottom: 0; }
+        .policy-section h2 {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .policy-section h2 i { color: var(--primary); width: 20px; }
+        .policy-section p, .policy-section li {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+        .policy-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .policy-section ul li::before {
+            content: "→";
+            color: var(--primary-light);
+            margin-right: 8px;
+            font-weight: 700;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="container nav-container">
-            <a href="index.html" class="logo">
-                NexoraPay <span class="logo-badge">PRIVACY</span>
-            </a>
+            <a href="index.html" class="logo">NexoraPay <span class="logo-badge">PRIVACY</span></a>
             <button class="menu-toggle-btn" id="menu-toggle-btn" aria-label="Toggle navigation menu">
                 <i class="fa-solid fa-bars"></i>
             </button>
             <ul class="nav-links" id="mobile-nav-links">
-                <li><a href="index.html" class="nav-link">হোম</a></li>
+                <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="docs.html" class="nav-link">API Docs</a></li>
-                <li><a href="merchant.html" class="nav-link">মার্চেন্ট পোর্টাল</a></li>
-                <li><a href="privacy.html" class="nav-link active">প্রাইভেসি পলিসি</a></li>
-                <li class="mobile-only-action">
-                    <a href="merchant.html" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;">
-                        <i class="fa-solid fa-user-plus"></i> সাইন ইন / রেজিস্ট্রেশন
-                    </a>
-                </li>
+                <li><a href="merchant.html" class="nav-link">Merchant Portal</a></li>
+                <li><a href="privacy.html" class="nav-link active">Privacy Policy</a></li>
             </ul>
-
             <div class="nav-actions-desktop">
-                <a href="merchant.html" class="btn-primary"><i class="fa-solid fa-user-plus"></i> সাইন ইন / রেজিস্ট্রেশন</a>
+                <a href="merchant.html" class="btn-secondary">Merchant Portal</a>
+                <a href="merchant.html" class="btn-primary"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
             </div>
         </div>
     </nav>
 
-    <div class="container" style="padding: 60px 24px; max-width: 800px;">
-        <div class="glass-card" style="padding: 40px;">
-            <h1 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 20px;">গোপনীয়তা নীতি (Privacy Policy)</h1>
-            <p style="color: var(--text-muted); margin-bottom: 24px;">সর্বশেষ আপডেট: ৫ আগস্ট, ২০২৬</p>
+    <div class="container" style="padding: 60px 24px; max-width: 860px;">
 
-            <h3 style="font-size: 1.2rem; margin-bottom: 8px;">১. আমরা কী ধরনের তথ্য সংগ্রহ করি</h3>
-            <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
-                NexoraPay শুধুমাত্র পেমেন্ট ভেরিফিকেশনের সুবিধার্থে পেমেন্ট প্রদানকারী মোবাইল ফাইন্যান্সিয়াল সার্ভিস (bKash, Nagad, Rocket) থেকে প্রাপ্ত পেমেন্ট সংক্রান্ত SMS তথ্য (যেমন: TrxID, প্রেরকের ফোন নম্বর, টাকার পরিমাণ) প্রসেস করে।
-            </p>
-
-            <h3 style="font-size: 1.2rem; margin-bottom: 8px;">২. তথ্যের ব্যবহার ও নিরাপত্তা</h3>
-            <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
-                মার্চেন্টের নিবন্ধিত Device Key এবং API Key এর মাধ্যমে সংগৃহীত তথ্য এনক্রিপ্ট অবস্থায় প্রসেস করা হয়। কোনো প্রকার ব্যক্তিগত বা সংবেদনশীল SMS তথ্য তৃতীয় পক্ষের সাথে শেয়ার করা হয় না।
-            </p>
-
-            <h3 style="font-size: 1.2rem; margin-bottom: 8px;">৩. অ্যান্ড্রয়েড পারমিশন ব্যবহার</h3>
-            <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
-                আমাদের Android SMS Gateway অ্যাপটি শুধুমাত্র <code>RECEIVE_SMS</code> ও <code>READ_SMS</code> পারমিশন নিয়ে ব্যাকগ্রাউন্ডে ইনকামিং পেমেন্ট বার্তা পর্যবেক্ষণ করে।
-            </p>
-
-            <div style="margin-top: 32px; border-top: 1px solid var(--border-glass); padding-top: 20px;">
-                <a href="index.html" class="btn-primary"><i class="fa-solid fa-arrow-left"></i> হোমপেজে ফিরে যান</a>
+        <!-- Hero Header -->
+        <div style="text-align: center; margin-bottom: 48px;">
+            <div class="hero-pill" style="margin-bottom: 16px;">
+                <i class="fa-solid fa-shield-halved" style="color: var(--primary-light);"></i> Legal Document
             </div>
+            <h1 style="font-family: var(--font-heading); font-size: 2.8rem; font-weight: 900; margin-bottom: 12px; letter-spacing: -1px;">
+                Privacy Policy
+            </h1>
+            <p style="color: var(--text-muted); font-size: 1rem;">
+                <i class="fa-regular fa-calendar" style="margin-right: 6px;"></i> Last Updated: <strong style="color: white;">August 3, 2026</strong>
+            </p>
+        </div>
+
+        <div class="glass-card" style="padding: 48px 40px; border-radius: 24px; background: rgba(10, 15, 30, 0.95);">
+
+            <p style="color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; margin-bottom: 40px; padding: 18px 22px; background: rgba(139, 92, 246, 0.07); border-left: 3px solid var(--primary); border-radius: 8px;">
+                Please read this Privacy Policy carefully before using <strong style="color: white;">NexoraPay</strong> services.
+            </p>
+
+            <!-- Section 1 -->
+            <div class="policy-section">
+                <h2><i class="fa-solid fa-circle-info"></i> 1. Introduction</h2>
+                <p>Welcome to <strong style="color: white;">NexoraPay</strong> ("we", "our", or "us"). We respect your privacy and are committed to protecting the personal and operational data of our merchants and users. This Privacy Policy explains how we collect, use, store, and safeguard your information when you access or use our payment gateway portal, API services, and Android Gateway Application.</p>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="policy-section">
+                <h2><i class="fa-solid fa-database"></i> 2. Information We Collect</h2>
+                <p>We collect necessary information to provide payment routing and automated verification services, including:</p>
+                <ul>
+                    <li><strong style="color: white;">Account Information:</strong> Email address, store name, and authentication details provided during account creation or login.</li>
+                    <li><strong style="color: white;">Merchant Configuration:</strong> Payment numbers (bKash, Nagad, Rocket), API keys, and Webhook URLs.</li>
+                    <li><strong style="color: white;">Transaction & Payment Data:</strong> Order ID, payment amount, currency, transaction ID (TrxID), customer phone numbers, and status timestamps required for processing checkout sessions.</li>
+                    <li><strong style="color: white;">Android SMS Gateway Data:</strong> Payment notification SMS messages received on your connected Android device used exclusively for automated payment verification. Personal or non-payment messages are not processed or stored.</li>
+                </ul>
+            </div>
+
+            <!-- Section 3 -->
+            <div class="policy-section">
+                <h2><i class="fa-solid fa-gears"></i> 3. How We Use Information</h2>
+                <p>We use the collected information solely for operational purposes, such as:</p>
+                <ul>
+                    <li>Creating and maintaining payment checkout sessions for your store.</li>
+                    <li>Automatically matching incoming payment SMS notifications with pending checkout orders.</li>
+                    <li>Sending real-time Webhook notifications to your specified website server.</li>
+                    <li>Ensuring platform security, authorization, and fraud prevention.</li>
+                </ul>
+            </div>
+
+            <!-- Section 4 -->
+            <div class="policy-section">
+                <h2><i class="fa-solid fa-hand-holding-heart"></i> 4. Service Availability & Free Plan</h2>
+                <p><strong style="color: white;">NexoraPay</strong> is designed to provide accessible automated local payment solutions for merchants. We intend to keep the core service free for as long as possible. In the future, we may introduce optional premium features, advanced analytics, enterprise tier options, or updated plans as the platform evolves.</p>
+            </div>
+
+            <!-- Section 5 -->
+            <div class="policy-section">
+                <h2><i class="fa-solid fa-lock"></i> 5. Data Security & Retention</h2>
+                <p>We implement standard administrative and technical safeguards to secure your credentials, API keys, and transaction logs. Data is stored securely and retained only for as long as necessary to provide service functionality and audit logs.</p>
+            </div>
+
+            <!-- Section 6 -->
+            <div class="policy-section">
+                <h2><i class="fa-solid fa-pen-to-square"></i> 6. Changes to This Privacy Policy</h2>
+                <p>We reserve the right to update or modify this Privacy Policy at any time without prior notice. Any modifications will take effect immediately upon being posted on this page. We encourage users to review this page periodically to remain informed of any updates.</p>
+            </div>
+
+            <!-- Section 7 -->
+            <div class="policy-section">
+                <h2><i class="fa-solid fa-envelope"></i> 7. Contact Information</h2>
+                <p>If you have any questions or feedback regarding this Privacy Policy or your data, please contact us via the <strong style="color: white;">NexoraPay Merchant Portal</strong> or support channels.</p>
+            </div>
+
+            <!-- Copyright & Nav Links -->
+            <div style="margin-top: 40px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                <p style="color: var(--text-dim); font-size: 0.85rem; margin: 0;">© 2026 NexoraPay. All rights reserved.</p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="index.html" class="btn-secondary" style="padding: 8px 20px; font-size: 0.88rem;"><i class="fa-solid fa-house"></i> Home</a>
+                    <a href="merchant.html" class="btn-secondary" style="padding: 8px 20px; font-size: 0.88rem;"><i class="fa-solid fa-store"></i> Merchant Portal</a>
+                    <a href="merchant.html" class="btn-primary" style="padding: 8px 20px; font-size: 0.88rem;"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="footer" style="margin-top: auto;">
+    <footer class="footer" style="margin-top: 60px;">
         <div class="container footer-bottom">
             &copy; 2026 NexoraPay Gateway. All rights reserved.
         </div>
     </footer>
 
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
