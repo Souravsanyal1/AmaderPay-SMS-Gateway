@@ -374,13 +374,13 @@
 
                     <!-- Terms & Privacy Checkbox -->
                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 24px; font-size: 0.82rem; color: var(--text-muted);">
-                        <input type="checkbox" id="reg-terms" checked required style="width: 16px; height: 16px; accent-color: #ec4899; cursor: pointer;">
+                        <input type="checkbox" id="reg-terms" onchange="toggleRegSubmitButton(this)" style="width: 16px; height: 16px; accent-color: #ec4899; cursor: pointer;">
                         <label for="reg-terms" style="cursor: pointer;">
                             আমি <a href="privacy.html" style="color: #f472b6; text-decoration: underline; font-weight: 600;">Privacy Policy</a> ও সাইটের নিরাপত্তা শর্তাবলীতে সম্মত *
                         </label>
                     </div>
 
-                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 15px; font-size: 0.95rem; font-weight: 700; border-radius: 12px; background: linear-gradient(135deg, #be123c 0%, #881337 100%); border: none; box-shadow: 0 4px 20px rgba(190, 18, 60, 0.4);">
+                    <button type="submit" id="btn-reg-submit" disabled class="btn-primary" style="width: 100%; justify-content: center; padding: 15px; font-size: 0.95rem; font-weight: 700; border-radius: 12px; background: rgba(255, 255, 255, 0.08); color: var(--text-dim); border: 1px solid rgba(255, 255, 255, 0.1); cursor: not-allowed; opacity: 0.55; transition: all 0.3s ease;">
                         অ্যাকাউন্ট ও API Key তৈরি করুন <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i>
                     </button>
                 </form>
@@ -403,6 +403,28 @@
 
     <script src="assets/js/main.js"></script>
     <script>
+        function toggleRegSubmitButton(checkboxEl) {
+            const submitBtn = document.getElementById('btn-reg-submit');
+            if (!submitBtn) return;
+            if (checkboxEl.checked) {
+                submitBtn.disabled = false;
+                submitBtn.style.background = 'linear-gradient(135deg, #be123c 0%, #881337 100%)';
+                submitBtn.style.color = 'white';
+                submitBtn.style.border = 'none';
+                submitBtn.style.boxShadow = '0 4px 20px rgba(190, 18, 60, 0.4)';
+                submitBtn.style.cursor = 'pointer';
+                submitBtn.style.opacity = '1';
+            } else {
+                submitBtn.disabled = true;
+                submitBtn.style.background = 'rgba(255, 255, 255, 0.08)';
+                submitBtn.style.color = 'var(--text-dim)';
+                submitBtn.style.border = '1px solid rgba(255, 255, 255, 0.1)';
+                submitBtn.style.boxShadow = 'none';
+                submitBtn.style.cursor = 'not-allowed';
+                submitBtn.style.opacity = '0.55';
+            }
+        }
+
         function togglePassVisibility(inputId, iconEl) {
             const input = document.getElementById(inputId);
             if (!input) return;
