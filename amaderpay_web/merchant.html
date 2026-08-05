@@ -70,9 +70,9 @@
                 <button onclick="switchDashTab('linkgen', this)" class="dash-tab-pill" style="padding: 10px 18px; border-radius: 12px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); color: var(--text-muted); font-weight: 600; font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">
                     <i class="fa-solid fa-wand-magic-sparkles"></i> Payment Link জেনারেটর
                 </button>
-                <a href="docs.html" class="dash-tab-pill" style="padding: 10px 18px; border-radius: 12px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); color: var(--text-muted); font-weight: 600; font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">
+                <button onclick="switchDashTab('apidocs', this)" class="dash-tab-pill" style="padding: 10px 18px; border-radius: 12px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); color: var(--text-muted); font-weight: 600; font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">
                     <i class="fa-solid fa-code"></i> API Docs
-                </a>
+                </button>
             </div>
 
             <!-- Tab 1: Overview View -->
@@ -334,6 +334,144 @@
                         </div>
                     </div>
                 </div>
+            <!-- Tab 7: API Docs & Playground View matching User Request Screenshot -->
+            <div id="tab-view-apidocs" class="dash-subview" style="display: none;">
+                <!-- 1. Live API Testing Playground Card -->
+                <div class="glass-card" style="padding: 28px 32px; border-radius: 20px; background: rgba(10, 15, 30, 0.95); border: 1px solid rgba(236, 72, 153, 0.3); margin-bottom: 24px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
+                        <div>
+                            <h3 style="font-family: var(--font-heading); font-size: 1.35rem; font-weight: 800; color: white; display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                                <i class="fa-solid fa-play" style="color: #ec4899; font-size: 1.1rem;"></i> Live API Testing Playground
+                            </h3>
+                            <p style="color: var(--text-muted); font-size: 0.88rem; margin: 0;">ব্রাউজার থেকেই সরাসরি যেকোনো API হিট করে টেস্ট করুন</p>
+                        </div>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap; background: rgba(15, 23, 42, 0.9); padding: 5px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08);">
+                            <button onclick="selectPlaygroundEndpoint('create', this)" class="ep-btn active" style="padding: 8px 16px; border-radius: 8px; background: linear-gradient(135deg, #e2136e 0%, #be185d 100%); color: white; border: none; font-size: 0.78rem; font-weight: 700; cursor: pointer;">
+                                POST /checkout/create
+                            </button>
+                            <button onclick="selectPlaygroundEndpoint('verify', this)" class="ep-btn" style="padding: 8px 16px; border-radius: 8px; background: transparent; color: var(--text-muted); border: none; font-size: 0.78rem; font-weight: 600; cursor: pointer;">
+                                GET /checkout/verify/:id
+                            </button>
+                            <button onclick="selectPlaygroundEndpoint('webhook', this)" class="ep-btn" style="padding: 8px 16px; border-radius: 8px; background: transparent; color: var(--text-muted); border: none; font-size: 0.78rem; font-weight: 600; cursor: pointer;">
+                                POST /webhook/trigger
+                            </button>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                        <!-- Left Form Fields -->
+                        <div>
+                            <div class="form-group" style="margin-bottom: 14px;">
+                                <label class="form-label" style="font-size: 0.82rem; margin-bottom: 6px;">API Key *</label>
+                                <input type="text" id="dash-play-api-key" class="form-input" placeholder="ap_live_..." value="ap_live_291305c098de8d58dbd3eed4ab259691" style="font-family: monospace; height: 42px; background: rgba(6, 9, 19, 0.9); color: #f472b6; border-radius: 10px;">
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+                                <div>
+                                    <label class="form-label" style="font-size: 0.82rem; margin-bottom: 6px;">পেমেন্ট পরিমাণ (৳ BDT) *</label>
+                                    <input type="number" id="dash-play-amount" class="form-input" value="500" style="height: 42px; background: rgba(6, 9, 19, 0.9); border-radius: 10px;">
+                                </div>
+                                <div>
+                                    <label class="form-label" style="font-size: 0.82rem; margin-bottom: 6px;">Order ID (Optional)</label>
+                                    <input type="text" id="dash-play-order-id" class="form-input" value="ORD-792723" style="height: 42px; background: rgba(6, 9, 19, 0.9); border-radius: 10px; font-family: monospace;">
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 14px;">
+                                <label class="form-label" style="font-size: 0.82rem; margin-bottom: 6px;">কাস্টমার নাম</label>
+                                <input type="text" id="dash-play-name" class="form-input" value="Rahim Ahmed" style="height: 42px; background: rgba(6, 9, 19, 0.9); border-radius: 10px;">
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label class="form-label" style="font-size: 0.82rem; margin-bottom: 6px;">Success Return URL</label>
+                                <input type="url" id="dash-play-url" class="form-input" value="https://yourshop.com/payment-success" style="height: 42px; background: rgba(6, 9, 19, 0.9); border-radius: 10px;">
+                            </div>
+
+                            <button onclick="runDashApiTest()" class="btn-primary" style="width: 100%; justify-content: center; padding: 13px; font-size: 0.92rem; font-weight: 700; border-radius: 12px; background: linear-gradient(135deg, #e2136e 0%, #be185d 100%); border: none; box-shadow: 0 4px 18px rgba(226, 19, 110, 0.4);">
+                                <i class="fa-solid fa-play" style="margin-right: 6px; font-size: 0.8rem;"></i> Run Checkout Create Test
+                            </button>
+                        </div>
+
+                        <!-- Right Output Console -->
+                        <div>
+                            <div style="font-weight: 700; font-size: 0.88rem; color: white; margin-bottom: 10px;">Response Output</div>
+                            <div style="background: rgba(6, 9, 19, 0.95); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; height: 310px; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--text-muted); font-size: 0.88rem;" id="dash-play-response">
+                                বাম পাশের ফর্ম পূরণ করে "Run API Test" বাটনে ক্লিক করুন।
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Integration Code Examples Card -->
+                <div class="glass-card" style="padding: 28px 32px; border-radius: 20px; background: rgba(10, 15, 30, 0.95); border: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 24px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 16px;">
+                        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800; color: white; display: flex; align-items: center; gap: 10px; margin: 0;">
+                            <i class="fa-solid fa-code" style="color: #ec4899;"></i> Integration Code Examples
+                        </h3>
+                        <div style="display: flex; gap: 6px; flex-wrap: wrap; background: rgba(15, 23, 42, 0.9); padding: 5px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08);">
+                            <button onclick="switchDashLang('curl', this)" class="lang-tab-btn active" style="padding: 6px 14px; border-radius: 8px; background: linear-gradient(135deg, #e2136e 0%, #be185d 100%); color: white; border: none; font-size: 0.78rem; font-weight: 700; cursor: pointer;">cURL</button>
+                            <button onclick="switchDashLang('js', this)" class="lang-tab-btn" style="padding: 6px 14px; border-radius: 8px; background: transparent; color: var(--text-muted); border: none; font-size: 0.78rem; font-weight: 600; cursor: pointer;">JavaScript</button>
+                            <button onclick="switchDashLang('php', this)" class="lang-tab-btn" style="padding: 6px 14px; border-radius: 8px; background: transparent; color: var(--text-muted); border: none; font-size: 0.78rem; font-weight: 600; cursor: pointer;">PHP</button>
+                            <button onclick="switchDashLang('python', this)" class="lang-tab-btn" style="padding: 6px 14px; border-radius: 8px; background: transparent; color: var(--text-muted); border: none; font-size: 0.78rem; font-weight: 600; cursor: pointer;">Python</button>
+                            <button onclick="switchDashLang('flutter', this)" class="lang-tab-btn" style="padding: 6px 14px; border-radius: 8px; background: transparent; color: var(--text-muted); border: none; font-size: 0.78rem; font-weight: 600; cursor: pointer;">Flutter (Dart)</button>
+                            <button onclick="switchDashLang('webhook', this)" class="lang-tab-btn" style="padding: 6px 14px; border-radius: 8px; background: transparent; color: var(--text-muted); border: none; font-size: 0.78rem; font-weight: 600; cursor: pointer;">Webhook Handler</button>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(6, 9, 19, 0.95); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; position: relative;">
+                        <button class="copy-btn" data-copy-target="dash-code-box" style="position: absolute; right: 16px; top: 16px; padding: 6px 14px; border-radius: 8px; font-size: 0.78rem;">
+                            <i class="fa-regular fa-copy"></i> Copy Code
+                        </button>
+                        <pre id="dash-code-box" style="margin: 0; font-family: monospace; font-size: 0.85rem; color: #ec4899; line-height: 1.6; white-space: pre-wrap; word-break: break-all;">curl -X POST https://your-domain.com/api/v1/checkout/create \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -d '{
+    "amount": 500,
+    "order_id": "ORD-10023",
+    "customer_name": "Rahim Ahmed",
+    "success_url": "https://yourshop.com/success"
+  }'</pre>
+                    </div>
+                </div>
+
+                <!-- 3. API Endpoints Reference Table Card -->
+                <div class="glass-card" style="padding: 28px 32px; border-radius: 20px; background: rgba(10, 15, 30, 0.95); border: 1px solid rgba(255, 255, 255, 0.08);">
+                    <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 800; color: white; display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                        <i class="fa-solid fa-shield-halved" style="color: #ec4899;"></i> API Endpoints Reference
+                    </h3>
+                    <div class="table-wrapper" style="border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; overflow: hidden;">
+                        <table class="table">
+                            <thead>
+                                <tr style="background: rgba(15, 23, 42, 0.9);">
+                                    <th style="color: var(--text-muted); font-size: 0.8rem;">METHOD</th>
+                                    <th style="color: var(--text-muted); font-size: 0.8rem;">ENDPOINT</th>
+                                    <th style="color: var(--text-muted); font-size: 0.8rem;">AUTH</th>
+                                    <th style="color: var(--text-muted); font-size: 0.8rem;">বিবরণ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                    <td><strong style="color: #ec4899; font-size: 0.82rem;">POST</strong></td>
+                                    <td><code style="color: white; font-family: monospace; font-size: 0.85rem;">/api/v1/checkout/create</code></td>
+                                    <td><span style="color: #fbbf24; font-size: 0.82rem; font-weight: 700;">Bearer Key</span></td>
+                                    <td style="color: var(--text-muted); font-size: 0.85rem;">পেমেন্ট সেশন তৈরি করে <code>checkout_url</code> প্রদান করে।</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                                    <td><strong style="color: #34d399; font-size: 0.82rem;">GET</strong></td>
+                                    <td><code style="color: white; font-family: monospace; font-size: 0.85rem;">/api/v1/checkout/verify/:id</code></td>
+                                    <td><span style="color: var(--text-muted); font-size: 0.82rem;">Public</span></td>
+                                    <td style="color: var(--text-muted); font-size: 0.85rem;">পেমেন্ট সেশনের ভেরিফিকেশন স্ট্যাটাস ও TrxID রিটার্ন করে।</td>
+                                </tr>
+                                <tr>
+                                    <td><strong style="color: #ec4899; font-size: 0.82rem;">POST</strong></td>
+                                    <td><code style="color: white; font-family: monospace; font-size: 0.85rem;">/api/v1/webhook/trigger</code></td>
+                                    <td><span style="color: var(--text-muted); font-size: 0.82rem;">Internal</span></td>
+                                    <td style="color: var(--text-muted); font-size: 0.85rem;">পেমেন্ট ভেরিফাই হলে মার্চেন্ট ওয়েবসাইটে Webhook নোটিফিকেশন পাঠায়।</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -545,6 +683,139 @@
                 btnEl.style.borderColor = 'rgba(236, 72, 153, 0.4)';
                 btnEl.style.color = '#f472b6';
                 btnEl.classList.add('active');
+            }
+        }
+
+        function selectPlaygroundEndpoint(epType, btnEl) {
+            document.querySelectorAll('.ep-btn').forEach(btn => {
+                btn.style.background = 'transparent';
+                btn.style.color = 'var(--text-muted)';
+                btn.classList.remove('active');
+            });
+            if (btnEl) {
+                btnEl.style.background = 'linear-gradient(135deg, #e2136e 0%, #be185d 100%)';
+                btnEl.style.color = 'white';
+                btnEl.classList.add('active');
+            }
+        }
+
+        function runDashApiTest() {
+            const apiKey = document.getElementById('dash-play-api-key').value || 'ap_live_demo_key_99';
+            const amount = document.getElementById('dash-play-amount').value || 500;
+            const orderId = document.getElementById('dash-play-order-id').value || 'ORD-792723';
+            const name = document.getElementById('dash-play-name').value || 'Rahim Ahmed';
+            const returnUrl = document.getElementById('dash-play-url').value || 'https://yourshop.com/payment-success';
+
+            const responseArea = document.getElementById('dash-play-response');
+            responseArea.style.display = 'block';
+            responseArea.style.color = '#34d399';
+            responseArea.style.fontFamily = 'monospace';
+            responseArea.style.textAlign = 'left';
+            responseArea.style.alignItems = 'flex-start';
+            responseArea.style.justifyContent = 'flex-start';
+
+            const mockResponse = {
+                "status": "SUCCESS",
+                "code": 200,
+                "message": "Payment checkout session created successfully",
+                "data": {
+                    "session_id": "sess_live_" + Math.random().toString(36).substring(2, 12),
+                    "order_id": orderId,
+                    "amount": parseFloat(amount),
+                    "currency": "BDT",
+                    "customer_name": name,
+                    "checkout_url": window.location.origin + "/checkout?sess=" + Math.random().toString(36).substring(2, 10),
+                    "expires_at": new Date(Date.now() + 15 * 60 * 1000).toISOString()
+                }
+            };
+
+            responseArea.innerText = JSON.stringify(mockResponse, null, 2);
+            showToast('API Test Successful! 200 OK', 'success');
+        }
+
+        const DASH_CODE_SNIPPETS = {
+            curl: `curl -X POST https://your-domain.com/api/v1/checkout/create \\
+  -H "Content-Type: application/json" \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -d '{
+    "amount": 500,
+    "order_id": "ORD-10023",
+    "customer_name": "Rahim Ahmed",
+    "success_url": "https://yourshop.com/success"
+  }'`,
+            js: `const axios = require('axios');
+
+async function createPayment() {
+  const res = await axios.post('https://your-domain.com/api/v1/checkout/create', {
+    amount: 500,
+    order_id: 'ORD-10023',
+    customer_name: 'Rahim Ahmed',
+    success_url: 'https://yourshop.com/success'
+  }, {
+    headers: { 'Authorization': 'Bearer YOUR_API_KEY' }
+  });
+  console.log(res.data);
+}`,
+            php: `<?php
+$ch = curl_init('https://your-domain.com/api/v1/checkout/create');
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json',
+    'Authorization: Bearer YOUR_API_KEY'
+]);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
+    'amount' => 500,
+    'order_id' => 'ORD-10023',
+    'customer_name' => 'Rahim Ahmed'
+]));
+$res = curl_exec($ch);`,
+            python: `import requests
+
+res = requests.post('https://your-domain.com/api/v1/checkout/create', json={
+    'amount': 500,
+    'order_id': 'ORD-10023',
+    'customer_name': 'Rahim Ahmed'
+}, headers={'Authorization': 'Bearer YOUR_API_KEY'})
+print(res.json())`,
+            flutter: `import 'package:http/http me' as http;
+import 'dart:convert';
+
+final response = await http.post(
+  Uri.parse('https://your-domain.com/api/v1/checkout/create'),
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer YOUR_API_KEY',
+  },
+  body: jsonEncode({
+    'amount': 500,
+    'order_id': 'ORD-10023',
+    'customer_name': 'Rahim Ahmed',
+  }),
+);`,
+            webhook: `// Webhook Handler on your server
+app.post('/api/payment-webhook', (req, res) => {
+  const { trx_id, amount, status, phone } = req.body;
+  if (status === 'COMPLETED') {
+    // Process order in database
+  }
+  res.status(200).send('OK');
+});`
+        };
+
+        function switchDashLang(langKey, btnEl) {
+            document.querySelectorAll('.lang-tab-btn').forEach(btn => {
+                btn.style.background = 'transparent';
+                btn.style.color = 'var(--text-muted)';
+                btn.classList.remove('active');
+            });
+            if (btnEl) {
+                btnEl.style.background = 'linear-gradient(135deg, #e2136e 0%, #be185d 100%)';
+                btnEl.style.color = 'white';
+                btnEl.classList.add('active');
+            }
+
+            const codeBox = document.getElementById('dash-code-box');
+            if (codeBox && DASH_CODE_SNIPPETS[langKey]) {
+                codeBox.innerText = DASH_CODE_SNIPPETS[langKey];
             }
         }
 
