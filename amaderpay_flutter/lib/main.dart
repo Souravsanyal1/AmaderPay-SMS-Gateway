@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'screens/home_screen.dart';
 import 'services/background_service.dart';
 
@@ -85,7 +86,11 @@ class _PermissionGatePageState extends State<PermissionGatePage> {
             : Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.warning_amber_rounded, size: 64, color: Colors.orange),
+                  const HugeIcon(
+                    icon: HugeIcons.strokeRoundedAlert02,
+                    size: 64.0,
+                    color: Colors.orange,
+                  ),
                   const SizedBox(height: 16),
                   const Text('SMS ও Notification Permission দরকার', textAlign: TextAlign.center),
                   const SizedBox(height: 16),

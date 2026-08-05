@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../models/transaction.dart';
 import '../services/api_service.dart';
 import 'settings_screen.dart';
@@ -55,7 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: const Color(0xFF0D0D1A),
       appBar: AppBar(
@@ -70,7 +70,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Icon(Icons.sms, color: Colors.white, size: 20),
+              child: const HugeIcon(
+                icon: HugeIcons.strokeRoundedMessage01,
+                color: Colors.white,
+                size: 20.0,
+              ),
             ),
             const SizedBox(width: 10),
             const Text('AmaderPay Gateway',
@@ -80,7 +84,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings, color: Colors.white),
+            icon: const HugeIcon(
+              icon: HugeIcons.strokeRoundedSettings01,
+              color: Colors.white,
+              size: 24.0,
+            ),
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (_) => const SettingsScreen()),
@@ -89,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: [
-        _buildDashboard(theme),
+        _buildDashboard(),
         const TransactionsScreen(),
       ][_selectedIndex],
       bottomNavigationBar: NavigationBar(
@@ -98,15 +106,37 @@ class _HomeScreenState extends State<HomeScreen> {
         onDestinationSelected: (i) => setState(() => _selectedIndex = i),
         destinations: const [
           NavigationDestination(
-              icon: Icon(Icons.dashboard), label: 'Dashboard'),
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedDashboardSquare01,
+              color: Colors.white54,
+              size: 22.0,
+            ),
+            selectedIcon: HugeIcon(
+              icon: HugeIcons.strokeRoundedDashboardSquare01,
+              color: Color(0xFF7B2FBE),
+              size: 22.0,
+            ),
+            label: 'Dashboard',
+          ),
           NavigationDestination(
-              icon: Icon(Icons.receipt_long), label: 'Transactions'),
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedInvoice01,
+              color: Colors.white54,
+              size: 22.0,
+            ),
+            selectedIcon: HugeIcon(
+              icon: HugeIcons.strokeRoundedInvoice01,
+              color: Color(0xFF7B2FBE),
+              size: 22.0,
+            ),
+            label: 'Transactions',
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildDashboard(ThemeData theme) {
+  Widget _buildDashboard() {
     return RefreshIndicator(
       onRefresh: _checkStatus,
       child: ListView(
@@ -118,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: _StatusCard(
               label: 'Service',
               value: _serviceRunning ? 'চলছে ✅' : 'বন্ধ ❌',
-              icon: Icons.cloud_sync,
+              icon: HugeIcons.strokeRoundedWifiSync,
               color: _serviceRunning ? Colors.green : Colors.red,
             )),
             const SizedBox(width: 12),
@@ -126,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: _StatusCard(
               label: 'Server',
               value: _serverOnline ? 'Online ✅' : 'Offline ❌',
-              icon: Icons.dns,
+              icon: HugeIcons.strokeRoundedServerStack01,
               color: _serverOnline ? Colors.green : Colors.orange,
             )),
           ]),
@@ -137,9 +167,12 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(children: [
             Expanded(
               child: _ActionButton(
-                label:
-                    _serviceRunning ? 'Service বন্ধ করুন' : 'Service চালু করুন',
-                icon: _serviceRunning ? Icons.stop_circle : Icons.play_circle,
+                label: _serviceRunning
+                    ? 'Service বন্ধ করুন'
+                    : 'Service চালু করুন',
+                icon: _serviceRunning
+                    ? HugeIcons.strokeRoundedStopCircle
+                    : HugeIcons.strokeRoundedPlayCircle,
                 color: _serviceRunning ? Colors.redAccent : Colors.green,
                 onTap: () async {
                   final svc = FlutterBackgroundService();
@@ -157,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(
               child: _ActionButton(
                 label: 'Server Ping করুন',
-                icon: Icons.network_ping,
+                icon: HugeIcons.strokeRoundedWifi01,
                 color: const Color(0xFF4776E6),
                 onTap: _checkStatus,
               ),
@@ -183,7 +216,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               child: const Column(
                 children: [
-                  Icon(Icons.inbox, color: Colors.white24, size: 48),
+                  HugeIcon(
+                    icon: HugeIcons.strokeRoundedInbox,
+                    color: Colors.white24,
+                    size: 48.0,
+                  ),
                   SizedBox(height: 8),
                   Text('এখনো কোনো পেমেন্ট আসেনি',
                       style: TextStyle(color: Colors.white38)),
@@ -200,7 +237,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class _StatusCard extends StatelessWidget {
   final String label, value;
-  final IconData icon;
+  final List<List<dynamic>> icon;
   final Color color;
   const _StatusCard(
       {required this.label,
@@ -217,7 +254,7 @@ class _StatusCard extends StatelessWidget {
           border: Border.all(color: color.withValues(alpha: 0.3)),
         ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Icon(icon, color: color, size: 24),
+          HugeIcon(icon: icon, color: color, size: 24.0),
           const SizedBox(height: 8),
           Text(label,
               style: const TextStyle(color: Colors.white54, fontSize: 12)),
@@ -229,7 +266,7 @@ class _StatusCard extends StatelessWidget {
 
 class _ActionButton extends StatelessWidget {
   final String label;
-  final IconData icon;
+  final List<List<dynamic>> icon;
   final Color color;
   final VoidCallback onTap;
   const _ActionButton(
@@ -249,7 +286,7 @@ class _ActionButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Icon(icon, color: Colors.white, size: 20),
+            HugeIcon(icon: icon, color: Colors.white, size: 20.0),
             const SizedBox(width: 8),
             Flexible(
                 child: Text(label,
@@ -293,8 +330,13 @@ class _TransactionTile extends StatelessWidget {
         Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
           Text(txn.trxId,
               style: const TextStyle(color: Colors.white38, fontSize: 11)),
-          Icon(txn.synced ? Icons.cloud_done : Icons.cloud_off,
-              color: txn.synced ? Colors.green : Colors.orange, size: 16),
+          HugeIcon(
+            icon: txn.synced
+                ? HugeIcons.strokeRoundedCloudUpload
+                : HugeIcons.strokeRoundedCloudOff,
+            color: txn.synced ? Colors.green : Colors.orange,
+            size: 16.0,
+          ),
         ]),
       ]),
     );

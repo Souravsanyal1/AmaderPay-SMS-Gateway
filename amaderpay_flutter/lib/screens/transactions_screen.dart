@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/transaction.dart';
 
@@ -101,8 +102,11 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               : _filtered.isEmpty
                   ? const Center(
                       child: Column(mainAxisSize: MainAxisSize.min, children: [
-                        Icon(Icons.receipt_long,
-                            color: Colors.white12, size: 64),
+                        HugeIcon(
+                          icon: HugeIcons.strokeRoundedInvoice01,
+                          color: Colors.white12,
+                          size: 64.0,
+                        ),
                         SizedBox(height: 12),
                         Text('কোনো লেনদেন নেই',
                             style: TextStyle(color: Colors.white24)),
@@ -176,14 +180,20 @@ class _TxnCard extends StatelessWidget {
         ]),
         const Divider(color: Colors.white10, height: 20),
         Row(children: [
-          const Icon(Icons.tag, size: 14, color: Colors.white38),
+          const HugeIcon(
+            icon: HugeIcons.strokeRoundedTag01,
+            size: 14.0,
+            color: Colors.white38,
+          ),
           const SizedBox(width: 4),
           Text(txn.trxId,
               style: const TextStyle(color: Colors.white38, fontSize: 12)),
           const Spacer(),
-          Icon(
-            txn.synced ? Icons.cloud_done : Icons.cloud_off,
-            size: 14,
+          HugeIcon(
+            icon: txn.synced
+                ? HugeIcons.strokeRoundedCloudUpload
+                : HugeIcons.strokeRoundedCloudOff,
+            size: 14.0,
             color: txn.synced ? Colors.green : Colors.orange,
           ),
           const SizedBox(width: 4),

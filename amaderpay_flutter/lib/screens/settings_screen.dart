@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../services/api_service.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -53,6 +54,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
         backgroundColor: const Color(0xFF0D0D1A),
         title: const Text('Settings', style: TextStyle(color: Colors.white)),
         iconTheme: const IconThemeData(color: Colors.white),
+        leading: IconButton(
+          icon: const HugeIcon(
+            icon: HugeIcons.strokeRoundedArrowLeft01,
+            color: Colors.white,
+            size: 24.0,
+          ),
+          onPressed: () => Navigator.pop(context),
+        ),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
@@ -63,14 +72,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
             controller: _urlCtrl,
             label: 'Server URL',
             hint: 'http://192.168.1.100:3000',
-            icon: Icons.dns,
+            icon: HugeIcons.strokeRoundedServerStack01,
           ),
           const SizedBox(height: 12),
           _DarkTextField(
             controller: _keyCtrl,
             label: 'API Key',
             hint: 'your-secret-api-key',
-            icon: Icons.key,
+            icon: HugeIcons.strokeRoundedKey01,
             obscure: true,
           ),
           const SizedBox(height: 12),
@@ -89,7 +98,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Expanded(
               child: OutlinedButton.icon(
                 onPressed: _ping,
-                icon: const Icon(Icons.network_ping),
+                icon: const HugeIcon(
+                  icon: HugeIcons.strokeRoundedWifi01,
+                  color: Colors.white70,
+                  size: 18.0,
+                ),
                 label: const Text('Ping Test'),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: Colors.white70,
@@ -107,7 +120,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         width: 16,
                         height: 16,
                         child: CircularProgressIndicator(strokeWidth: 2))
-                    : const Icon(Icons.save),
+                    : const HugeIcon(
+                        icon: HugeIcons.strokeRoundedFloppyDisk,
+                        color: Colors.white,
+                        size: 18.0,
+                      ),
                 label: Text(_saving ? 'সেভ হচ্ছে…' : 'সেভ করুন'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF7B2FBE),
@@ -120,10 +137,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
           const SizedBox(height: 32),
           const _SectionTitle('About'),
           const SizedBox(height: 12),
-          const _InfoTile('App Version', '2.0.0'),
-          const _InfoTile('Supported Gateways', 'bKash, Nagad, Rocket'),
-          const _InfoTile('Min Android', '7.0 (API 24)'),
-          const _InfoTile('Target Android', '16 (API 36)'),
+          const _InfoTile(
+            k: 'App Version',
+            v: '2.0.0',
+            icon: HugeIcons.strokeRoundedInformationCircle,
+          ),
+          const _InfoTile(
+            k: 'Supported Gateways',
+            v: 'bKash, Nagad, Rocket',
+            icon: HugeIcons.strokeRoundedCreditCard,
+          ),
+          const _InfoTile(
+            k: 'Min Android',
+            v: '7.0 (API 24)',
+            icon: HugeIcons.strokeRoundedAndroid,
+          ),
+          const _InfoTile(
+            k: 'Target Android',
+            v: '16 (API 36)',
+            icon: HugeIcons.strokeRoundedSmartPhone01,
+          ),
         ],
       ),
     );
@@ -147,7 +180,7 @@ class _SectionTitle extends StatelessWidget {
 class _DarkTextField extends StatelessWidget {
   final TextEditingController controller;
   final String label, hint;
-  final IconData icon;
+  final List<List<dynamic>> icon;
   final bool obscure;
   const _DarkTextField(
       {required this.controller,
@@ -163,7 +196,10 @@ class _DarkTextField extends StatelessWidget {
         decoration: InputDecoration(
           labelText: label,
           hintText: hint,
-          prefixIcon: Icon(icon, color: Colors.white54),
+          prefixIcon: Padding(
+            padding: const EdgeInsets.all(12),
+            child: HugeIcon(icon: icon, color: Colors.white54, size: 20.0),
+          ),
           labelStyle: const TextStyle(color: Colors.white54),
           hintStyle: const TextStyle(color: Colors.white24),
           filled: true,
@@ -186,7 +222,8 @@ class _DarkTextField extends StatelessWidget {
 
 class _InfoTile extends StatelessWidget {
   final String k, v;
-  const _InfoTile(this.k, this.v);
+  final List<List<dynamic>> icon;
+  const _InfoTile({required this.k, required this.v, required this.icon});
   @override
   Widget build(BuildContext context) => Container(
         margin: const EdgeInsets.only(bottom: 8),
@@ -195,9 +232,13 @@ class _InfoTile extends StatelessWidget {
           color: const Color(0xFF13131F),
           borderRadius: BorderRadius.circular(10),
         ),
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Text(k, style: const TextStyle(color: Colors.white54, fontSize: 13)),
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Row(children: [
+            HugeIcon(icon: icon, color: Colors.white38, size: 16.0),
+            const SizedBox(width: 8),
+            Text(k,
+                style: const TextStyle(color: Colors.white54, fontSize: 13)),
+          ]),
           Text(v,
               style: const TextStyle(
                   color: Colors.white,
