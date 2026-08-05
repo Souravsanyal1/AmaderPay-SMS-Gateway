@@ -38,7 +38,7 @@ if ($isLoggedIn) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merchant Portal - AmaderPay</title>
+    <title>Merchant Portal - AmaderPay Gateway</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -59,100 +59,118 @@ if ($isLoggedIn) {
         </div>
     </nav>
 
-    <div class="container" style="padding: 40px 24px;">
+    <div class="container" style="padding: 50px 24px;">
 
     <?php if ($isLoggedIn && $merchantData): ?>
         <!-- =================================================================== -->
-        <!-- LOGGED-IN MERCHANT DASHBOARD                                        -->
+        <!-- LOGGED-IN MERCHANT DASHBOARD (ULTRA PREMIUM)                        -->
         <!-- =================================================================== -->
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 36px; flex-wrap: wrap; gap: 20px;">
             <div>
-                <h1 style="font-family: var(--font-heading); font-size: 2rem;">স্বাগতম, <?php echo htmlspecialchars($merchantData['name']); ?>!</h1>
-                <p style="color: var(--text-muted); font-size: 0.95rem;">আপনার মার্চেন্ট অ্যাকাউন্ট ড্যাশবোর্ড ও API কন্ট্রোল প্যানেল</p>
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
+                    <h1 style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 900;">স্বাগতম, <?php echo htmlspecialchars($merchantData['name']); ?>!</h1>
+                    <span class="badge badge-success" style="font-size: 0.85rem;"><span class="status-dot status-online"></span> Gateway Active</span>
+                </div>
+                <p style="color: var(--text-muted); font-size: 1rem;">আপনার মার্চেন্ট অ্যাকাউন্ট ড্যাশবোর্ড ও API লাইভ স্টেটাস প্যানেল</p>
             </div>
             <button onclick="handleLogout()" class="btn-secondary"><i class="fa-solid fa-right-from-bracket"></i> লগআউট</button>
         </div>
 
-        <!-- Stats Grid -->
-        <div class="grid-3" style="margin-bottom: 36px;">
-            <div class="glass-card">
-                <div class="card-icon"><i class="fa-solid fa-money-bill-wave"></i></div>
-                <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 4px;">মোট পেমেন্ট ভলিউম</div>
-                <div style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; color: #34d399;">
+        <!-- Stats Metric Grid -->
+        <div class="grid-3" style="margin-bottom: 40px;">
+            <div class="glass-card" style="border-left: 4px solid #10b981;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">মোট পেমেন্ট ভলিউম</div>
+                    <div class="card-icon" style="margin-bottom: 0; width: 44px; height: 44px; font-size: 1.3rem;"><i class="fa-solid fa-sack-dollar"></i></div>
+                </div>
+                <div style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 900; color: #10b981;">
                     ৳ <?php echo number_format($stats['total_volume'] ?? 0, 2); ?>
                 </div>
             </div>
 
-            <div class="glass-card">
-                <div class="card-icon"><i class="fa-solid fa-circle-check"></i></div>
-                <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 4px;">সফল লেনদেন</div>
-                <div style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; color: #60a5fa;">
-                    <?php echo intval($stats['successful_count'] ?? 0); ?> টি
+            <div class="glass-card" style="border-left: 4px solid #60a5fa;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">সফল লেনদেন (Completed)</div>
+                    <div class="card-icon" style="margin-bottom: 0; width: 44px; height: 44px; font-size: 1.3rem;"><i class="fa-solid fa-circle-check"></i></div>
+                </div>
+                <div style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 900; color: #60a5fa;">
+                    <?php echo intval($stats['successful_count'] ?? 0); ?> <span style="font-size: 1.2rem; color: var(--text-muted);">টি</span>
                 </div>
             </div>
 
-            <div class="glass-card">
-                <div class="card-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
-                <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 4px;">মোট রিকোয়েস্ট</div>
-                <div style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; color: #c4b5fd;">
-                    <?php echo intval($stats['total_count'] ?? 0); ?> টি
+            <div class="glass-card" style="border-left: 4px solid #a78bfa;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">মোট API রিকোয়েস্ট</div>
+                    <div class="card-icon" style="margin-bottom: 0; width: 44px; height: 44px; font-size: 1.3rem;"><i class="fa-solid fa-server"></i></div>
                 </div>
-            </div>
-        </div>
-
-        <!-- API Keys & Device Key Configuration -->
-        <div class="glass-card" style="margin-bottom: 36px; padding: 32px;">
-            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 20px;">
-                <i class="fa-solid fa-key" style="color: var(--primary);"></i> আপনার সিকিউরিটি ও কানেক্টিভিটি ক্রেডেনশিয়াল
-            </h3>
-
-            <div class="grid-3" style="margin: 0;">
-                <div>
-                    <label class="form-label">API Key (আপনার ওয়েবসাইটের জন্য)</label>
-                    <div style="display: flex; gap: 8px;">
-                        <input type="text" id="merchant-api-key" class="form-input" readonly value="<?php echo htmlspecialchars($merchantData['api_key']); ?>">
-                        <button class="copy-btn" data-copy-target="merchant-api-key"><i class="fa-regular fa-copy"></i> Copy</button>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="form-label">Device Key (Android APK পেয়ারিং)</label>
-                    <div style="display: flex; gap: 8px;">
-                        <input type="text" id="merchant-device-key" class="form-input" readonly value="<?php echo htmlspecialchars($merchantData['device_key']); ?>">
-                        <button class="copy-btn" data-copy-target="merchant-device-key"><i class="fa-regular fa-copy"></i> Copy</button>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="form-label">Webhook URL (Callback)</label>
-                    <div style="display: flex; gap: 8px;">
-                        <input type="url" id="merchant-webhook-url" class="form-input" placeholder="https://yoursite.com/webhook" value="<?php echo htmlspecialchars($merchantData['webhook_url'] ?? ''); ?>">
-                        <button onclick="saveWebhookUrl()" class="btn-primary" style="padding: 0 16px;">Save</button>
-                    </div>
+                <div style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 900; color: #c4b5fd;">
+                    <?php echo intval($stats['total_count'] ?? 0); ?> <span style="font-size: 1.2rem; color: var(--text-muted);">টি</span>
                 </div>
             </div>
         </div>
 
-        <!-- Transaction History Table -->
-        <div class="glass-card" style="padding: 32px;">
-            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 20px;">
-                <i class="fa-solid fa-list-check" style="color: var(--primary);"></i> সাম্প্রতিক লেনদেনের তালিকা (Transactions)
+        <!-- Credentials & Device Pairing Settings -->
+        <div class="glass-card" style="margin-bottom: 40px; padding: 36px; border-color: var(--border-glow);">
+            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 24px; display: flex; align-items: center; gap: 10px;">
+                <i class="fa-solid fa-shield-halved" style="color: var(--primary);"></i> আপনার সিকিউরিটি ক্রেডেনশিয়াল ও APK পেয়ারিং
             </h3>
+
+            <div class="grid-3" style="margin: 0; gap: 24px;">
+                <div>
+                    <label class="form-label">API Key (আপনার সার্ভারের জন্য)</label>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="password" id="merchant-api-key" class="form-input" readonly value="<?php echo htmlspecialchars($merchantData['api_key']); ?>" style="font-family: monospace;">
+                        <button class="toggle-mask-btn copy-btn" data-target="merchant-api-key" type="button"><i class="fa-regular fa-eye"></i> Show</button>
+                        <button class="copy-btn" data-copy-target="merchant-api-key" type="button"><i class="fa-regular fa-copy"></i> Copy</button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="form-label">Device Key (Android App পেয়ারিং)</label>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="password" id="merchant-device-key" class="form-input" readonly value="<?php echo htmlspecialchars($merchantData['device_key']); ?>" style="font-family: monospace;">
+                        <button class="toggle-mask-btn copy-btn" data-target="merchant-device-key" type="button"><i class="fa-regular fa-eye"></i> Show</button>
+                        <button class="copy-btn" data-copy-target="merchant-device-key" type="button"><i class="fa-regular fa-copy"></i> Copy</button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="form-label">Webhook URL (Callback Notification)</label>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="url" id="merchant-webhook-url" class="form-input" placeholder="https://yoursite.com/api/webhook" value="<?php echo htmlspecialchars($merchantData['webhook_url'] ?? ''); ?>">
+                        <button onclick="saveWebhookUrl()" class="btn-primary" style="padding: 0 20px;">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transaction History Table with Realtime Filter -->
+        <div class="glass-card" style="padding: 36px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
+                <h3 style="font-family: var(--font-heading); font-size: 1.5rem; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-list-check" style="color: var(--primary);"></i> সাম্প্রতিক লেনদেন ইতিহাস (Live Transactions)
+                </h3>
+                <div style="position: relative; width: 280px;">
+                    <input type="text" id="tx-search" class="form-input" placeholder="TrxID বা নম্বর খুঁজুন..." onkeyup="filterTable('tx-search', 'tx-table')" style="padding-left: 38px;">
+                    <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-dim);"></i>
+                </div>
+            </div>
 
             <?php if (empty($transactions)): ?>
-                <div style="text-align: center; padding: 40px 0; color: var(--text-muted);">
-                    <i class="fa-solid fa-inbox" style="font-size: 3rem; margin-bottom: 12px; display: block;"></i>
-                    এখনো কোনো পেমেন্ট রেকর্ড নেই। API এর মাধ্যমে প্রথম টেস্ট পেমেন্ট করুন।
+                <div style="text-align: center; padding: 50px 0; color: var(--text-muted);">
+                    <i class="fa-solid fa-inbox" style="font-size: 3.5rem; margin-bottom: 16px; display: block; color: var(--text-dim);"></i>
+                    <h4 style="font-size: 1.2rem; color: var(--text-main); margin-bottom: 6px;">এখনো কোনো পেমেন্ট রেকর্ড পাওয়া যায়নি</h4>
+                    <p>API প্লেগ্রাউন্ড অথবা টেস্ট সেশনের মাধ্যমে আপনার প্রথম পেমেন্ট পরীক্ষা করুন।</p>
                 </div>
             <?php else: ?>
                 <div class="table-wrapper">
-                    <table class="table">
+                    <table class="table" id="tx-table">
                         <thead>
                             <tr>
                                 <th>TrxID</th>
                                 <th>Method</th>
                                 <th>Sender Phone</th>
-                                <th>Amount (৳)</th>
+                                <th>Amount</th>
                                 <th>Status</th>
                                 <th>Session ID</th>
                                 <th>Date & Time</th>
@@ -161,19 +179,19 @@ if ($isLoggedIn) {
                         <tbody>
                             <?php foreach ($transactions as $t): ?>
                                 <tr>
-                                    <td><strong style="font-family: monospace; color: #a78bfa;"><?php echo htmlspecialchars($t['trx_id']); ?></strong></td>
+                                    <td><strong style="font-family: monospace; color: #a78bfa; font-size: 1rem;"><?php echo htmlspecialchars($t['trx_id']); ?></strong></td>
                                     <td>
-                                        <span class="mfs-pill mfs-<?php echo strtolower($t['payment_method']); ?>" style="padding: 4px 8px; font-size: 0.75rem;">
+                                        <span class="mfs-pill mfs-<?php echo strtolower($t['payment_method']); ?>" style="padding: 4px 12px; font-size: 0.75rem;">
                                             <?php echo htmlspecialchars($t['payment_method']); ?>
                                         </span>
                                     </td>
-                                    <td><?php echo htmlspecialchars($t['sender_phone']); ?></td>
-                                    <td><strong>৳ <?php echo number_format($t['amount'], 2); ?></strong></td>
+                                    <td><strong style="font-family: monospace;"><?php echo htmlspecialchars($t['sender_phone']); ?></strong></td>
+                                    <td><strong style="color: #34d399;">৳ <?php echo number_format($t['amount'], 2); ?></strong></td>
                                     <td>
                                         <?php if ($t['status'] === 'COMPLETED'): ?>
-                                            <span class="badge badge-success">COMPLETED</span>
+                                            <span class="badge badge-success"><i class="fa-solid fa-circle-check"></i> COMPLETED</span>
                                         <?php else: ?>
-                                            <span class="badge badge-warning"><?php echo htmlspecialchars($t['status']); ?></span>
+                                            <span class="badge badge-warning"><i class="fa-solid fa-clock"></i> <?php echo htmlspecialchars($t['status']); ?></span>
                                         <?php endif; ?>
                                     </td>
                                     <td style="font-family: monospace; font-size: 0.85rem; color: var(--text-muted);"><?php echo htmlspecialchars($t['session_id']); ?></td>
@@ -188,20 +206,20 @@ if ($isLoggedIn) {
 
     <?php else: ?>
         <!-- =================================================================== -->
-        <!-- LOGIN & REGISTRATION FORMS (GUEST VIEW)                             -->
+        <!-- LOGIN & REGISTRATION FORM VIEW                                       -->
         <!-- =================================================================== -->
-        <div style="max-width: 480px; margin: 0 auto;">
-            <div class="tabs-container glass-card" style="padding: 36px;">
+        <div style="max-width: 500px; margin: 20px auto;">
+            <div class="tabs-container glass-card" style="padding: 40px; border-color: var(--border-glow);">
                 
-                <div class="tabs-nav" style="justify-content: center; margin-bottom: 28px;">
-                    <button class="tab-btn active" data-tab="login-tab">সাইন ইন (Login)</button>
-                    <button class="tab-btn" data-tab="register-tab">নতুন মার্চেন্ট একাউন্ট</button>
+                <div class="tabs-nav" style="justify-content: center; margin-bottom: 32px;">
+                    <button class="tab-btn active" data-tab="login-tab"><i class="fa-solid fa-right-to-bracket"></i> সাইন ইন (Login)</button>
+                    <button class="tab-btn" data-tab="register-tab"><i class="fa-solid fa-user-plus"></i> রেজিস্ট্রেশন</button>
                 </div>
 
-                <!-- Login Form -->
+                <!-- Login Tab -->
                 <div id="login-tab" class="tab-content">
-                    <h2 style="font-family: var(--font-heading); font-size: 1.5rem; text-align: center; margin-bottom: 8px;">মার্চেন্ট লগইন</h2>
-                    <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">আপনার নিবন্ধিত ইমেইল ও পাসওয়ার্ড প্রদান করুন</p>
+                    <h2 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 8px;">মার্চেন্ট লগইন</h2>
+                    <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 28px;">আপনার নিবন্ধিত ইমেইল ও পাসওয়ার্ড প্রবেশ করুন</p>
 
                     <form id="form-login" onsubmit="handleLogin(event)">
                         <div class="form-group">
@@ -212,21 +230,21 @@ if ($isLoggedIn) {
                             <label class="form-label">পাসওয়ার্ড</label>
                             <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
                         </div>
-                        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 14px;">
+                        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 15px; font-size: 1rem;">
                             <i class="fa-solid fa-right-to-bracket"></i> লগইন করুন
                         </button>
                     </form>
                 </div>
 
-                <!-- Register Form -->
+                <!-- Register Tab -->
                 <div id="register-tab" class="tab-content" style="display: none;">
-                    <h2 style="font-family: var(--font-heading); font-size: 1.5rem; text-align: center; margin-bottom: 8px;">মার্চেন্ট রেজিস্ট্রেশন</h2>
-                    <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">বিনামূল্যে নতুন মার্চেন্ট একাউন্ট তৈরি করুন</p>
+                    <h2 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 8px;">মার্চেন্ট রেজিস্ট্রেশন</h2>
+                    <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 28px;">বিনামূল্যে নতুন মার্চেন্ট অ্যাকাউন্ট তৈরি করুন</p>
 
                     <form id="form-register" onsubmit="handleRegister(event)">
                         <div class="form-group">
-                            <label class="form-label">মার্চেন্ট / ব্যবসা প্রতিষ্ঠানের নাম</label>
-                            <input type="text" id="reg-name" class="form-input" placeholder="যেমন: Apon Enterprise" required>
+                            <label class="form-label">মার্চেন্ট / প্রতিষ্ঠানের নাম</label>
+                            <input type="text" id="reg-name" class="form-input" placeholder="যেমন: Apon Pay Store" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">ইমেইল এড্রেস</label>
@@ -240,7 +258,7 @@ if ($isLoggedIn) {
                             <label class="form-label">পাসওয়ার্ড</label>
                             <input type="password" id="reg-password" class="form-input" placeholder="নূন্যতম ৬ অক্ষর" required>
                         </div>
-                        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 14px;">
+                        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 15px; font-size: 1rem;">
                             <i class="fa-solid fa-user-check"></i> অ্যাকাউন্ট তৈরি করুন
                         </button>
                     </form>
@@ -304,7 +322,7 @@ if ($isLoggedIn) {
 
         async function handleLogout() {
             await fetch('api/auth.php?action=logout');
-            showToast('লগআউট করা হয়েছে', 'info');
+            showToast('লগআউট সম্পন্ন করা হয়েছে', 'info');
             setTimeout(() => location.reload(), 600);
         }
 
@@ -318,7 +336,7 @@ if ($isLoggedIn) {
                 });
                 const data = await res.json();
                 if (data.success) {
-                    showToast('Webhook URL সফলভাবে আপডেট হয়েছে!', 'success');
+                    showToast('Webhook URL আপডেট করা হয়েছে!', 'success');
                 } else {
                     showToast(data.message, 'error');
                 }
