@@ -74,7 +74,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(width: 10),
             const Text('AmaderPay Gateway',
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                style: TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold)),
           ],
         ),
         actions: [
@@ -96,8 +97,10 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedIndex: _selectedIndex,
         onDestinationSelected: (i) => setState(() => _selectedIndex = i),
         destinations: const [
-          NavigationDestination(icon: Icon(Icons.dashboard), label: 'Dashboard'),
-          NavigationDestination(icon: Icon(Icons.receipt_long), label: 'Transactions'),
+          NavigationDestination(
+              icon: Icon(Icons.dashboard), label: 'Dashboard'),
+          NavigationDestination(
+              icon: Icon(Icons.receipt_long), label: 'Transactions'),
         ],
       ),
     );
@@ -111,14 +114,16 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           // Status cards
           Row(children: [
-            Expanded(child: _StatusCard(
+            Expanded(
+                child: _StatusCard(
               label: 'Service',
               value: _serviceRunning ? 'চলছে ✅' : 'বন্ধ ❌',
               icon: Icons.cloud_sync,
               color: _serviceRunning ? Colors.green : Colors.red,
             )),
             const SizedBox(width: 12),
-            Expanded(child: _StatusCard(
+            Expanded(
+                child: _StatusCard(
               label: 'Server',
               value: _serverOnline ? 'Online ✅' : 'Offline ❌',
               icon: Icons.dns,
@@ -132,7 +137,8 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(children: [
             Expanded(
               child: _ActionButton(
-                label: _serviceRunning ? 'Service বন্ধ করুন' : 'Service চালু করুন',
+                label:
+                    _serviceRunning ? 'Service বন্ধ করুন' : 'Service চালু করুন',
                 icon: _serviceRunning ? Icons.stop_circle : Icons.play_circle,
                 color: _serviceRunning ? Colors.redAccent : Colors.green,
                 onTap: () async {
@@ -162,7 +168,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
           // Recent transactions
           const Text('সাম্প্রতিক পেমেন্ট',
-              style: TextStyle(color: Colors.white70, fontSize: 14, fontWeight: FontWeight.w600)),
+              style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600)),
           const SizedBox(height: 10),
 
           if (_recent.isEmpty)
@@ -193,7 +202,11 @@ class _StatusCard extends StatelessWidget {
   final String label, value;
   final IconData icon;
   final Color color;
-  const _StatusCard({required this.label, required this.value, required this.icon, required this.color});
+  const _StatusCard(
+      {required this.label,
+      required this.value,
+      required this.icon,
+      required this.color});
 
   @override
   Widget build(BuildContext context) => Container(
@@ -201,13 +214,15 @@ class _StatusCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: const Color(0xFF13131F),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: color.withOpacity(0.3)),
+          border: Border.all(color: color.withValues(alpha: 0.3)),
         ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Icon(icon, color: color, size: 24),
           const SizedBox(height: 8),
-          Text(label, style: const TextStyle(color: Colors.white54, fontSize: 12)),
-          Text(value, style: TextStyle(color: color, fontWeight: FontWeight.bold)),
+          Text(label,
+              style: const TextStyle(color: Colors.white54, fontSize: 12)),
+          Text(value,
+              style: TextStyle(color: color, fontWeight: FontWeight.bold)),
         ]),
       );
 }
@@ -217,7 +232,11 @@ class _ActionButton extends StatelessWidget {
   final IconData icon;
   final Color color;
   final VoidCallback onTap;
-  const _ActionButton({required this.label, required this.icon, required this.color, required this.onTap});
+  const _ActionButton(
+      {required this.label,
+      required this.icon,
+      required this.color,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) => GestureDetector(
@@ -225,13 +244,17 @@ class _ActionButton extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 14),
           decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [color.withOpacity(0.8), color]),
+            gradient:
+                LinearGradient(colors: [color.withValues(alpha: 0.8), color]),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Icon(icon, color: Colors.white, size: 20),
             const SizedBox(width: 8),
-            Flexible(child: Text(label, style: const TextStyle(color: Colors.white, fontSize: 13), overflow: TextOverflow.ellipsis)),
+            Flexible(
+                child: Text(label,
+                    style: const TextStyle(color: Colors.white, fontSize: 13),
+                    overflow: TextOverflow.ellipsis)),
           ]),
         ),
       );
@@ -243,7 +266,8 @@ class _TransactionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final emoji = {'BKASH': '🟣', 'NAGAD': '🟠', 'ROCKET': '🔵'}[txn.method] ?? '💰';
+    final emoji =
+        {'BKASH': '🟣', 'NAGAD': '🟠', 'ROCKET': '🔵'}[txn.method] ?? '💰';
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(12),
@@ -255,15 +279,20 @@ class _TransactionTile extends StatelessWidget {
         Text(emoji, style: const TextStyle(fontSize: 24)),
         const SizedBox(width: 12),
         Expanded(
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text('৳ ${txn.amount.toStringAsFixed(2)}',
-                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16)),
             Text('${txn.method} • ${txn.senderPhone}',
                 style: const TextStyle(color: Colors.white54, fontSize: 12)),
           ]),
         ),
         Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-          Text(txn.trxId, style: const TextStyle(color: Colors.white38, fontSize: 11)),
+          Text(txn.trxId,
+              style: const TextStyle(color: Colors.white38, fontSize: 11)),
           Icon(txn.synced ? Icons.cloud_done : Icons.cloud_off,
               color: txn.synced ? Colors.green : Colors.orange, size: 16),
         ]),

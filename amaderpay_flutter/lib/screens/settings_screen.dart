@@ -31,7 +31,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     setState(() => _saving = false);
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('✅ Settings সেভ হয়েছে'), backgroundColor: Colors.green),
+        const SnackBar(
+            content: Text('✅ Settings সেভ হয়েছে'),
+            backgroundColor: Colors.green),
       );
     }
   }
@@ -39,7 +41,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> _ping() async {
     setState(() => _pingResult = 'পরীক্ষা করা হচ্ছে…');
     final ok = await _api.pingServer();
-    setState(() => _pingResult = ok ? '✅ Server Online' : '❌ Server Offline বা URL ভুল');
+    setState(() =>
+        _pingResult = ok ? '✅ Server Online' : '❌ Server Offline বা URL ভুল');
   }
 
   @override
@@ -54,7 +57,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          _SectionTitle('Server Configuration'),
+          const _SectionTitle('Server Configuration'),
           const SizedBox(height: 12),
           _DarkTextField(
             controller: _urlCtrl,
@@ -78,7 +81,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 color: const Color(0xFF13131F),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Text(_pingResult!, style: const TextStyle(color: Colors.white70)),
+              child: Text(_pingResult!,
+                  style: const TextStyle(color: Colors.white70)),
             ),
           const SizedBox(height: 16),
           Row(children: [
@@ -99,7 +103,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: ElevatedButton.icon(
                 onPressed: _saving ? null : _save,
                 icon: _saving
-                    ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
+                    ? const SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(strokeWidth: 2))
                     : const Icon(Icons.save),
                 label: Text(_saving ? 'সেভ হচ্ছে…' : 'সেভ করুন'),
                 style: ElevatedButton.styleFrom(
@@ -110,14 +117,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
           ]),
-
           const SizedBox(height: 32),
-          _SectionTitle('About'),
+          const _SectionTitle('About'),
           const SizedBox(height: 12),
-          _InfoTile('App Version', '2.0.0'),
-          _InfoTile('Supported Gateways', 'bKash, Nagad, Rocket'),
-          _InfoTile('Min Android', '7.0 (API 24)'),
-          _InfoTile('Target Android', '16 (API 36)'),
+          const _InfoTile('App Version', '2.0.0'),
+          const _InfoTile('Supported Gateways', 'bKash, Nagad, Rocket'),
+          const _InfoTile('Min Android', '7.0 (API 24)'),
+          const _InfoTile('Target Android', '16 (API 36)'),
         ],
       ),
     );
@@ -130,7 +136,11 @@ class _SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
         title,
-        style: const TextStyle(color: Colors.white54, fontSize: 12, fontWeight: FontWeight.w600, letterSpacing: 1.2),
+        style: const TextStyle(
+            color: Colors.white54,
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 1.2),
       );
 }
 
@@ -139,7 +149,12 @@ class _DarkTextField extends StatelessWidget {
   final String label, hint;
   final IconData icon;
   final bool obscure;
-  const _DarkTextField({required this.controller, required this.label, required this.hint, required this.icon, this.obscure = false});
+  const _DarkTextField(
+      {required this.controller,
+      required this.label,
+      required this.hint,
+      required this.icon,
+      this.obscure = false});
   @override
   Widget build(BuildContext context) => TextField(
         controller: controller,
@@ -180,9 +195,14 @@ class _InfoTile extends StatelessWidget {
           color: const Color(0xFF13131F),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Text(k, style: const TextStyle(color: Colors.white54, fontSize: 13)),
-          Text(v, style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500)),
+          Text(v,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500)),
         ]),
       );
 }

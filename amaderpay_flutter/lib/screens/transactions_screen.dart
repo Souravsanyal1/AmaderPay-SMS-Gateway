@@ -29,9 +29,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     });
   }
 
-  List<Transaction> get _filtered => _filter == 'ALL'
-      ? _all
-      : _all.where((t) => t.method == _filter).toList();
+  List<Transaction> get _filtered =>
+      _filter == 'ALL' ? _all : _all.where((t) => t.method == _filter).toList();
 
   @override
   Widget build(BuildContext context) {
@@ -56,16 +55,20 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                   onTap: () => setState(() => _filter = m),
                   child: Container(
                     margin: const EdgeInsets.only(right: 8),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     decoration: BoxDecoration(
                       color: active ? colors[m] : const Color(0xFF13131F),
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: active ? Colors.transparent : Colors.white12),
+                      border: Border.all(
+                          color: active ? Colors.transparent : Colors.white12),
                     ),
-                    child: Text(m, style: TextStyle(
-                      color: active ? Colors.white : Colors.white54,
-                      fontWeight: active ? FontWeight.bold : FontWeight.normal,
-                    )),
+                    child: Text(m,
+                        style: TextStyle(
+                          color: active ? Colors.white : Colors.white54,
+                          fontWeight:
+                              active ? FontWeight.bold : FontWeight.normal,
+                        )),
                   ),
                 );
               }).toList(),
@@ -83,7 +86,10 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               const Spacer(),
               Text(
                 'মোট: ৳ ${_filtered.fold(0.0, (s, t) => s + t.amount).toStringAsFixed(2)}',
-                style: const TextStyle(color: Colors.greenAccent, fontSize: 12, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    color: Colors.greenAccent,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold),
               ),
             ]),
           ),
@@ -93,11 +99,13 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
           child: _loading
               ? const Center(child: CircularProgressIndicator())
               : _filtered.isEmpty
-                  ? Center(
+                  ? const Center(
                       child: Column(mainAxisSize: MainAxisSize.min, children: [
-                        Icon(Icons.receipt_long, color: Colors.white12, size: 64),
-                        const SizedBox(height: 12),
-                        Text('কোনো লেনদেন নেই', style: TextStyle(color: Colors.white24)),
+                        Icon(Icons.receipt_long,
+                            color: Colors.white12, size: 64),
+                        SizedBox(height: 12),
+                        Text('কোনো লেনদেন নেই',
+                            style: TextStyle(color: Colors.white24)),
                       ]),
                     )
                   : RefreshIndicator(
@@ -120,12 +128,14 @@ class _TxnCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final emoji = {'BKASH': '🟣', 'NAGAD': '🟠', 'ROCKET': '🔵'}[txn.method] ?? '💰';
+    final emoji =
+        {'BKASH': '🟣', 'NAGAD': '🟠', 'ROCKET': '🔵'}[txn.method] ?? '💰';
     final methodColor = {
-      'BKASH': const Color(0xFF7B2FBE),
-      'NAGAD': const Color(0xFFE97B2B),
-      'ROCKET': const Color(0xFF1D6EFF),
-    }[txn.method] ?? Colors.grey;
+          'BKASH': const Color(0xFF7B2FBE),
+          'NAGAD': const Color(0xFFE97B2B),
+          'ROCKET': const Color(0xFF1D6EFF),
+        }[txn.method] ??
+        Colors.grey;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
@@ -133,33 +143,43 @@ class _TxnCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFF13131F),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: methodColor.withOpacity(0.15)),
+        border: Border.all(color: methodColor.withValues(alpha: 0.15)),
       ),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(children: [
           Text(emoji, style: const TextStyle(fontSize: 22)),
           const SizedBox(width: 10),
           Expanded(
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text('৳ ${txn.amount.toStringAsFixed(2)}',
-                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
-              Text(txn.senderPhone, style: const TextStyle(color: Colors.white54, fontSize: 12)),
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18)),
+              Text(txn.senderPhone,
+                  style: const TextStyle(color: Colors.white54, fontSize: 12)),
             ]),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
-              color: methodColor.withOpacity(0.2),
+              color: methodColor.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Text(txn.method, style: TextStyle(color: methodColor, fontSize: 11, fontWeight: FontWeight.bold)),
+            child: Text(txn.method,
+                style: TextStyle(
+                    color: methodColor,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold)),
           ),
         ]),
         const Divider(color: Colors.white10, height: 20),
         Row(children: [
-          Icon(Icons.tag, size: 14, color: Colors.white38),
+          const Icon(Icons.tag, size: 14, color: Colors.white38),
           const SizedBox(width: 4),
-          Text(txn.trxId, style: const TextStyle(color: Colors.white38, fontSize: 12)),
+          Text(txn.trxId,
+              style: const TextStyle(color: Colors.white38, fontSize: 12)),
           const Spacer(),
           Icon(
             txn.synced ? Icons.cloud_done : Icons.cloud_off,
