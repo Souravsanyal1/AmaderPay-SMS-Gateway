@@ -136,6 +136,7 @@
                             <button class="code-tab-btn" data-tab="snippet-php"><i class="fa-brands fa-php"></i> PHP</button>
                             <button class="code-tab-btn" data-tab="snippet-js"><i class="fa-brands fa-node-js"></i> Node.js</button>
                             <button class="code-tab-btn" data-tab="snippet-python"><i class="fa-brands fa-python"></i> Python</button>
+                            <button class="code-tab-btn" data-tab="snippet-flutter"><i class="fa-solid fa-mobile-screen"></i> Flutter</button>
                         </div>
 
                         <!-- cURL Snippet -->
@@ -234,6 +235,65 @@ data = response.json()
 print("Checkout URL:", data["data"]["checkout_url"])</pre>
                             </div>
                         </div>
+
+                        <!-- Flutter / Dart Snippet -->
+                        <div id="snippet-flutter" class="tab-content" style="display: none;">
+                            <div class="code-box" style="border-radius: 0 0 var(--radius-md) var(--radius-md);">
+                                <div class="code-header"><span>Flutter / Dart (http package)</span><button class="copy-btn">Copy</button></div>
+<pre>// pubspec.yaml dependencies তে যোগ করুন:
+// http: ^1.2.0
+
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+// ── Checkout Create ──
+Future&lt;String&gt; createCheckoutSession() async {
+  const apiKey = 'ap_live_your_merchant_api_key_here';
+
+  final response = await http.post(
+    Uri.parse(
+      'https://amader-pay-sms-gateway.vercel.app/api/v1/checkout/create',
+    ),
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+    },
+    body: jsonEncode({
+      'amount': 500,
+      'customer_name': 'Sourav Islam',
+      'customer_email': 'sourav@example.com',
+      'redirect_url': 'https://yoursite.com/payment-success',
+    }),
+  );
+
+  if (response.statusCode == 201) {
+    final data = jsonDecode(response.body) as Map&lt;String, dynamic&gt;;
+    final checkoutUrl = data['data']['checkout_url'] as String;
+    print('✅ Checkout URL: \$checkoutUrl');
+    return checkoutUrl;
+  } else {
+    throw Exception('❌ Checkout failed: \${response.body}');
+  }
+}
+
+// ── Checkout Verify ──
+Future&lt;Map&lt;String, dynamic&gt;&gt; verifyPayment(String sessionId) async {
+  final response = await http.get(
+    Uri.parse(
+      'https://amader-pay-sms-gateway.vercel.app/api/v1/checkout/verify/\$sessionId',
+    ),
+  );
+
+  final data = jsonDecode(response.body) as Map&lt;String, dynamic&gt;;
+  if (data['success'] == true) {
+    print('💳 Status: \${data['data']['status']}');
+    print('🔖 TrxID:  \${data['data']['trx_id']}');
+  }
+  return data;
+}</pre>
+                            </div>
+                        </div>
+
                     </div>
 
                     <!-- JSON Response Example -->
