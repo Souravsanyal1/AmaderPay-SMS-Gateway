@@ -166,71 +166,151 @@
         </div>
 
         <!-- Auth Form Container -->
-        <div id="merchant-auth-view" style="max-width: 500px; margin: 20px auto;">
-            <div class="tabs-container glass-card" style="padding: 40px; border-color: var(--border-glow);">
+        <div id="merchant-auth-view" style="max-width: 480px; margin: 10px auto 40px;">
+            <div class="glass-card" style="padding: 36px 28px; border-color: rgba(139, 92, 246, 0.3); background: rgba(8, 12, 26, 0.95); border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(226, 19, 110, 0.15);">
                 
-                <div class="tabs-nav" style="justify-content: center; margin-bottom: 32px;">
-                    <button class="tab-btn active" data-tab="login-tab"><i class="fa-solid fa-right-to-bracket"></i> সাইন ইন (Login)</button>
-                    <button class="tab-btn" data-tab="register-tab"><i class="fa-solid fa-user-plus"></i> রেজিস্ট্রেশন</button>
+                <!-- Store/Merchant Icon Badge -->
+                <div style="display: flex; justify-content: center; margin-bottom: 16px;">
+                    <div style="width: 64px; height: 64px; border-radius: 18px; background: rgba(226, 19, 110, 0.12); border: 1px solid rgba(226, 19, 110, 0.3); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: #ec4899; box-shadow: 0 0 20px rgba(236, 72, 153, 0.25);">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
                 </div>
 
-                <!-- Login Tab -->
-                <div id="login-tab" class="tab-content">
-                    <h2 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 8px;">মার্চেন্ট লগইন</h2>
-                    <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 28px;">আপনার নিবন্ধিত ইমেইল ও পাসওয়ার্ড প্রবেশ করুন</p>
+                <h1 style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 900; text-align: center; margin-bottom: 6px; letter-spacing: -0.5px; color: white;">Merchant Portal</h1>
+                <p style="text-align: center; color: var(--text-muted); font-size: 0.88rem; margin-bottom: 24px;">আপনার মার্চেন্ট অ্যাকাউন্টে সাইন-ইন করুন বা নতুন অ্যাকাউন্ট তৈরি করুন</p>
 
-                    <form id="form-login" onsubmit="loginMerchantLocal(event)">
-                        <div class="form-group">
-                            <label class="form-label">ইমেইল এড্রেস</label>
-                            <input type="email" id="login-email" class="form-input" placeholder="merchant@example.com" value="merchant@amaderpay.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">পাসওয়ার্ড</label>
-                            <input type="password" id="login-password" class="form-input" placeholder="••••••••" value="123456" required>
-                        </div>
-                        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 15px; font-size: 1rem;">
-                            <i class="fa-solid fa-right-to-bracket"></i> লগইন করুন
-                        </button>
-                    </form>
+                <!-- Auth Mode Switcher Pills -->
+                <div style="display: flex; background: rgba(15, 23, 42, 0.9); padding: 4px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 28px;">
+                    <button id="btn-tab-login" onclick="switchAuthTab('login')" class="tab-pill" style="flex: 1; padding: 12px 8px; border: none; border-radius: 10px; background: transparent; color: var(--text-muted); font-weight: 700; font-size: 0.88rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.25s ease;">
+                        <i class="fa-solid fa-right-to-bracket"></i> মার্চেন্ট লগইন
+                    </button>
+                    <button id="btn-tab-register" onclick="switchAuthTab('register')" class="tab-pill active" style="flex: 1; padding: 12px 8px; border: none; border-radius: 10px; background: linear-gradient(135deg, #e2136e 0%, #be185d 100%); color: white; font-weight: 700; font-size: 0.88rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 15px rgba(226, 19, 110, 0.4); transition: all 0.25s ease;">
+                        <i class="fa-solid fa-user-plus"></i> নতুন মার্চেন্ট অ্যাকাউন্ট
+                    </button>
                 </div>
 
-                <!-- Register Tab -->
-                <div id="register-tab" class="tab-content" style="display: none;">
-                    <h2 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 8px;">মার্চেন্ট রেজিস্ট্রেশন</h2>
-                    <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 28px;">বিনামূল্যে নতুন মার্চেন্ট অ্যাকাউন্ট তৈরি করুন</p>
+                <!-- Login Tab Form -->
+                <form id="form-login" onsubmit="loginMerchantLocal(event)" style="display: none;">
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label class="form-label" style="font-size: 0.85rem; margin-bottom: 8px;">ইমেইল এড্রেস *</label>
+                        <div style="position: relative;">
+                            <input type="email" id="login-email" class="form-input" placeholder="joysanyal1999@gmail.com" value="merchant@nexorapay.com" required style="padding-left: 42px; background: rgba(10, 15, 30, 0.95); border-radius: 12px; height: 48px; border-color: rgba(255,255,255,0.12);">
+                            <i class="fa-regular fa-envelope" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-dim); font-size: 1rem;"></i>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 24px;">
+                        <label class="form-label" style="font-size: 0.85rem; margin-bottom: 8px;">পাসওয়ার্ড *</label>
+                        <div style="position: relative;">
+                            <input type="password" id="login-password" class="form-input" placeholder="••••••••" value="123456" required style="padding-left: 42px; background: rgba(10, 15, 30, 0.95); border-radius: 12px; height: 48px; border-color: rgba(255,255,255,0.12);">
+                            <i class="fa-solid fa-lock" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-dim); font-size: 1rem;"></i>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 14px; font-size: 0.95rem; border-radius: 12px; background: linear-gradient(135deg, #e2136e 0%, #be185d 100%); border: none; box-shadow: 0 4px 20px rgba(226, 19, 110, 0.4);">
+                        লগইন করুন <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i>
+                    </button>
+                </form>
 
-                    <form id="form-register" onsubmit="registerMerchantLocal(event)">
-                        <div class="form-group">
-                            <label class="form-label">মার্চেন্ট / প্রতিষ্ঠানের নাম</label>
-                            <input type="text" id="reg-name" class="form-input" placeholder="যেমন: Apon Pay Store" required>
+                <!-- Register Tab Form -->
+                <form id="form-register" onsubmit="registerMerchantLocal(event)">
+                    <div class="form-group" style="margin-bottom: 18px;">
+                        <label class="form-label" style="font-size: 0.85rem; margin-bottom: 8px;">মার্চেন্ট বা স্টোরের নাম *</label>
+                        <div style="position: relative;">
+                            <input type="text" id="reg-name" class="form-input" placeholder="a" value="Apon Pay Store" required style="padding-left: 42px; background: rgba(10, 15, 30, 0.95); border-radius: 12px; height: 48px; border-color: rgba(255,255,255,0.12);">
+                            <i class="fa-solid fa-store" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-dim); font-size: 0.95rem;"></i>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">ইমেইল এড্রেস</label>
-                            <input type="email" id="reg-email" class="form-input" placeholder="merchant@example.com" required>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 18px;">
+                        <label class="form-label" style="font-size: 0.85rem; margin-bottom: 8px;">ইমেইল এড্রেস *</label>
+                        <div style="position: relative;">
+                            <input type="email" id="reg-email" class="form-input" placeholder="joysanyal1999@gmail.com" value="joysanyal1999@gmail.com" required style="padding-left: 42px; background: rgba(10, 15, 30, 0.95); border-radius: 12px; height: 48px; border-color: rgba(255,255,255,0.12);">
+                            <i class="fa-regular fa-envelope" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-dim); font-size: 1rem;"></i>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">মোবাইল নম্বর</label>
-                            <input type="tel" id="reg-phone" class="form-input" placeholder="01700000000" required>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 18px;">
+                        <label class="form-label" style="font-size: 0.85rem; margin-bottom: 8px;">পাসওয়ার্ড *</label>
+                        <div style="position: relative;">
+                            <input type="password" id="reg-password" class="form-input" placeholder="••••••••" value="12345678" required style="padding-left: 42px; background: rgba(10, 15, 30, 0.95); border-radius: 12px; height: 48px; border-color: rgba(255,255,255,0.12);">
+                            <i class="fa-solid fa-lock" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-dim); font-size: 0.95rem;"></i>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">পাসওয়ার্ড</label>
-                            <input type="password" id="reg-password" class="form-input" placeholder="নূন্যতম ৬ অক্ষর" required>
+                    </div>
+
+                    <!-- MFS Payment Numbers 2-Column Grid -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px;">
+                        <div>
+                            <label class="form-label" style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px;">bKash Number</label>
+                            <input type="tel" id="reg-bkash" class="form-input" placeholder="019xxxxxxxx" value="01711223344" style="background: rgba(10, 15, 30, 0.95); border-radius: 12px; height: 46px; font-size: 0.9rem; border-color: rgba(255,255,255,0.12);">
                         </div>
-                        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 15px; font-size: 1rem;">
-                            <i class="fa-solid fa-user-check"></i> অ্যাকাউন্ট তৈরি করুন
-                        </button>
-                    </form>
+                        <div>
+                            <label class="form-label" style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px;">Nagad Number</label>
+                            <input type="tel" id="reg-nagad" class="form-input" placeholder="019xxxxxxxx" value="01899887766" style="background: rgba(10, 15, 30, 0.95); border-radius: 12px; height: 46px; font-size: 0.9rem; border-color: rgba(255,255,255,0.12);">
+                        </div>
+                    </div>
+
+                    <!-- Terms & Privacy Checkbox -->
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 24px; font-size: 0.82rem; color: var(--text-muted);">
+                        <input type="checkbox" id="reg-terms" checked required style="width: 16px; height: 16px; accent-color: #ec4899; cursor: pointer;">
+                        <label for="reg-terms" style="cursor: pointer;">
+                            আমি <a href="privacy.html" style="color: #f472b6; text-decoration: underline; font-weight: 600;">Privacy Policy</a> ও সাইটের নিরাপত্তা শর্তাবলীতে সম্মত *
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 15px; font-size: 0.95rem; font-weight: 700; border-radius: 12px; background: linear-gradient(135deg, #be123c 0%, #881337 100%); border: none; box-shadow: 0 4px 20px rgba(190, 18, 60, 0.4);">
+                        অ্যাকাউন্ট ও API Key তৈরি করুন <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i>
+                    </button>
+                </form>
+
+                <!-- Footer Back & Privacy Links -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.85rem;">
+                    <a href="index.html" style="color: var(--text-muted); display: flex; align-items: center; gap: 6px; font-weight: 500;">
+                        মূল ওয়েবসাইটে ফিরুন
+                    </a>
+                    <a href="privacy.html" style="color: #f472b6; display: flex; align-items: center; gap: 6px; font-weight: 600;">
+                        <i class="fa-solid fa-shield-halved" style="font-size: 0.8rem;"></i> Privacy Policy
+                    </a>
                 </div>
 
             </div>
         </div>
 
+
     </div>
 
     <script src="assets/js/main.js"></script>
     <script>
+        function switchAuthTab(mode) {
+            const loginForm = document.getElementById('form-login');
+            const regForm = document.getElementById('form-register');
+            const loginBtn = document.getElementById('btn-tab-login');
+            const regBtn = document.getElementById('btn-tab-register');
+
+            if (mode === 'login') {
+                loginForm.style.display = 'block';
+                regForm.style.display = 'none';
+                loginBtn.style.background = 'linear-gradient(135deg, #e2136e 0%, #be185d 100%)';
+                loginBtn.style.color = 'white';
+                loginBtn.style.boxShadow = '0 4px 15px rgba(226, 19, 110, 0.4)';
+                
+                regBtn.style.background = 'transparent';
+                regBtn.style.color = 'var(--text-muted)';
+                regBtn.style.boxShadow = 'none';
+            } else {
+                loginForm.style.display = 'none';
+                regForm.style.display = 'block';
+                regBtn.style.background = 'linear-gradient(135deg, #e2136e 0%, #be185d 100%)';
+                regBtn.style.color = 'white';
+                regBtn.style.boxShadow = '0 4px 15px rgba(226, 19, 110, 0.4)';
+
+                loginBtn.style.background = 'transparent';
+                loginBtn.style.color = 'var(--text-muted)';
+                loginBtn.style.boxShadow = 'none';
+            }
+        }
+
         let livePollTimer = null;
         let activeTransactions = [
+
             { trxId: 'BKASH98765432', method: 'BKASH', phone: '01711223344', amount: 500.00, status: 'COMPLETED', sessId: 'pay_sess_a1b2c3d4', time: '2026-08-05 12:15:00' },
             { trxId: 'NAGAD12345678', method: 'NAGAD', phone: '01899887766', amount: 1200.00, status: 'COMPLETED', sessId: 'pay_sess_e5f6g7h8', time: '2026-08-05 11:40:22' },
             { trxId: 'ROCKET55443322', method: 'ROCKET', phone: '01911998877', amount: 750.00, status: 'COMPLETED', sessId: 'pay_sess_k9l8m7n6', time: '2026-08-05 10:25:10' }
