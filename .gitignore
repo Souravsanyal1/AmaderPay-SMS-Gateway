@@ -1,0 +1,39 @@
+# ============================================================
+#  AmaderPay SMS Gateway - .gitignore
+# ============================================================
+
+# ── Environment / Secrets ────────────────────────────────────
+.env
+.env.local
+.env.production
+
+# ── Node.js Backend ──────────────────────────────────────────
+amaderpay_flutter/backend/node_modules/
+
+# ── Flutter / Dart ───────────────────────────────────────────
+amaderpay_flutter/.dart_tool/
+amaderpay_flutter/.flutter-plugins
+amaderpay_flutter/.flutter-plugins-dependencies
+amaderpay_flutter/build/
+amaderpay_flutter/.packages
+amaderpay_flutter/pubspec.lock
+
+# ── Android Build ─────────────────────────────────────────────
+amaderpay_flutter/android/.gradle/
+amaderpay_flutter/android/local.properties
+amaderpay_flutter/android/key.properties
+*.keystore
+*.jks
+
+# ── Output / APK ─────────────────────────────────────────────
+output/
+*.apk
+
+# ── IDE ───────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.iml
+
+# ── OS ────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db

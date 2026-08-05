@@ -1,0 +1,37 @@
+name: amaderpay
+description: AmaderPay SMS Gateway - bKash/Nagad/Rocket payment SMS receiver and forwarder
+publish_to: 'none'
+version: 2.0.0+2001
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # SMS receiving
+  telephony: ^0.2.0
+  # HTTP client
+  dio: ^5.4.0
+  # Local storage / preferences
+  shared_preferences: ^2.2.2
+  # Background service
+  flutter_background_service: ^5.0.5
+  # Notifications
+  flutter_local_notifications: ^16.3.2
+  # Permission handling
+  permission_handler: ^11.3.0
+  # Icons
+  cupertino_icons: ^1.0.6
+  # State management
+  provider: ^6.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
