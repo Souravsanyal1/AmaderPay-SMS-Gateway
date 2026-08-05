@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(width: 10),
-            const Text('AmaderPay Gateway',
+            const Text('NexoraPay Gateway',
                 style: TextStyle(
                     color: Colors.white, fontWeight: FontWeight.bold)),
           ],

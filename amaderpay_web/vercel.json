@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": false,
   "rewrites": [
     { "source": "/api/v1/checkout/create", "destination": "/api/checkout.php" },
@@ -8,25 +8,26 @@
     { "source": "/api/v1/webhook/(.*)", "destination": "/api/webhook.php?action=$1" },
     { "source": "/api/v1/auth/(.*)", "destination": "/api/auth.php?action=$1" },
     { "source": "/api/v1/(.*)", "destination": "/api/$1.php" },
-    { "source": "/index.html", "destination": "/index.html" },
-    { "source": "/docs.html", "destination": "/docs.html" },
-    { "source": "/merchant.html", "destination": "/merchant.html" },
-    { "source": "/privacy.html", "destination": "/privacy.html" },
-    { "source": "/checkout.html", "destination": "/checkout.html" },
-    { "source": "/", "destination": "/index.html" },
     { "source": "/docs", "destination": "/docs.html" },
     { "source": "/merchant", "destination": "/merchant.html" },
     { "source": "/login", "destination": "/merchant.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/checkout", "destination": "/checkout.html" },
-    { "source": "/download", "destination": "/index.html" }
+    { "source": "/download", "destination": "/index.html#download" }
   ],
   "headers": [
+    {
+      "source": "/nexorapay-release.apk",
+      "headers": [
+        { "key": "Content-Type", "value": "application/vnd.android.package-archive" },
+        { "key": "Content-Disposition", "value": "attachment; filename=\"NexoraPay-v1.0.0.apk\"" }
+      ]
+    },
     {
       "source": "/amaderpay-release.apk",
       "headers": [
         { "key": "Content-Type", "value": "application/vnd.android.package-archive" },
-        { "key": "Content-Disposition", "value": "attachment; filename=\"AmaderPay-v1.0.0.apk\"" }
+        { "key": "Content-Disposition", "value": "attachment; filename=\"NexoraPay-v1.0.0.apk\"" }
       ]
     }
   ]

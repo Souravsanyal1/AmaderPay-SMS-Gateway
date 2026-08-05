@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Documentation - AmaderPay Gateway</title>
-    <meta name="description" content="AmaderPay REST API Documentation for bKash, Nagad & Rocket payment gateway integration.">
+    <title>API Documentation - NexoraPay Gateway</title>
+    <meta name="description" content="NexoraPay REST API Documentation for bKash, Nagad & Rocket payment gateway integration.">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hugeicons/core-free-icons@latest/hugeicons.css">
@@ -55,7 +55,7 @@
     <nav class="navbar">
         <div class="container nav-container">
             <a href="index.html" class="logo">
-                AmaderPay <span class="logo-badge">API DOCS</span>
+                NexoraPay <span class="logo-badge">API DOCS</span>
             </a>
             <ul class="nav-links">
                 <li><a href="index.html" class="nav-link">হোম</a></li>
@@ -74,7 +74,7 @@
                 <i class="fa-solid fa-code" style="color: var(--primary-light);"></i> Developer API Guide v1.0 • REST Standards
             </div>
             <h1 style="font-family: var(--font-heading); font-size: 3rem; font-weight: 900; margin-bottom: 16px; letter-spacing: -1px;">
-                AmaderPay REST API <span>ডকুমেন্টেশন</span>
+                NexoraPay REST API <span>ডকুমেন্টেশন</span>
             </h1>
             <p style="color: var(--text-muted); max-width: 680px; margin: 0 auto; font-size: 1.1rem; line-height: 1.6;">
                 Base Domain: <strong style="color:#a78bfa; font-family: monospace; background: rgba(139,92,246,0.15); padding: 4px 10px; border-radius: 6px;">https://amader-pay-sms-gateway.vercel.app</strong><br>
@@ -357,7 +357,7 @@ Future&lt;Map&lt;String, dynamic&gt;&gt; verifyPayment(String sessionId) async {
                     </div>
                     <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 16px;">৩. রিয়েল-টাইম Webhook Callback</h2>
                     <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 20px;">
-                        কাস্টমার পেমেন্ট সম্পন্ন করা মাত্রই AmaderPay আপনার কনফিগার করা Webhook URL এ HTTP POST নোটিফিকেশন পাঠাবে। সুরক্ষার জন্য প্রতিটি নোটিফিকেশনে <code>X-AmaderPay-Signature</code> হেডার যুক্ত থাকে।
+                        কাস্টমার পেমেন্ট সম্পন্ন করা মাত্রই NexoraPay আপনার কনফিগার করা Webhook URL এ HTTP POST নোটিফিকেশন পাঠাবে। সুরক্ষার জন্য প্রতিটি নোটিফিকেশনে <code>X-NexoraPay-Signature</code> হেডার যুক্ত থাকে।
                     </p>
 
                     <div class="code-box" style="margin-bottom: 20px;">
@@ -469,7 +469,7 @@ Future&lt;Map&lt;String, dynamic&gt;&gt; verifyPayment(String sessionId) async {
     <!-- Footer -->
     <footer class="footer">
         <div class="container footer-bottom">
-            &copy; 2026 AmaderPay Gateway. All rights reserved. Built with HTML5, CSS3, JS & PHP.
+            &copy; 2026 NexoraPay Gateway. All rights reserved. Built with HTML5, CSS3, JS & PHP.
         </div>
     </footer>
 

@@ -7,16 +7,16 @@ import 'services/background_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initBackgroundService();
-  runApp(const AmaderPayApp());
+  runApp(const NexoraPayApp());
 }
 
-class AmaderPayApp extends StatelessWidget {
-  const AmaderPayApp({super.key});
+class NexoraPayApp extends StatelessWidget {
+  const NexoraPayApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'AmaderPay SMS Gateway',
+      title: 'NexoraPay SMS Gateway',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
