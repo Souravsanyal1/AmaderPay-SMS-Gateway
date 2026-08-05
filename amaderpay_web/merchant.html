@@ -867,6 +867,7 @@ app.post('/api/payment-webhook', (req, res) => {
                 }
 
                 if (data.api_key && document.getElementById('merchant-api-key')) document.getElementById('merchant-api-key').value = data.api_key;
+                if (data.api_key && document.getElementById('dash-play-api-key')) document.getElementById('dash-play-api-key').value = data.api_key;
                 if (data.device_key && document.getElementById('merchant-device-key')) document.getElementById('merchant-device-key').value = data.device_key;
 
                 if (data.bkash && document.getElementById('dash-num-bkash')) document.getElementById('dash-num-bkash').value = data.bkash;
