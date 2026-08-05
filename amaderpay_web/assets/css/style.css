@@ -682,6 +682,10 @@ a {
     }
 }
 
+.mobile-only-action {
+    display: none !important;
+}
+
 .menu-toggle-btn {
     display: none;
     background: rgba(255, 255, 255, 0.06);
@@ -773,7 +777,7 @@ pre {
     }
 
     .mobile-only-action {
-        display: block;
+        display: block !important;
         width: 100%;
         margin-top: 6px;
     }
