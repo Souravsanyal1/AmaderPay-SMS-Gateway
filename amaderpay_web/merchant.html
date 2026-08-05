@@ -229,6 +229,13 @@
 
     <script src="assets/js/main.js"></script>
     <script>
+        let livePollTimer = null;
+        let activeTransactions = [
+            { trxId: 'BKASH98765432', method: 'BKASH', phone: '01711223344', amount: 500.00, status: 'COMPLETED', sessId: 'pay_sess_a1b2c3d4', time: '2026-08-05 12:15:00' },
+            { trxId: 'NAGAD12345678', method: 'NAGAD', phone: '01899887766', amount: 1200.00, status: 'COMPLETED', sessId: 'pay_sess_e5f6g7h8', time: '2026-08-05 11:40:22' },
+            { trxId: 'ROCKET55443322', method: 'ROCKET', phone: '01911998877', amount: 750.00, status: 'COMPLETED', sessId: 'pay_sess_k9l8m7n6', time: '2026-08-05 10:25:10' }
+        ];
+
         function checkAuth() {
             const user = localStorage.getItem('amaderpay_merchant');
             if (user) {
@@ -236,10 +243,80 @@
                 document.getElementById('merchant-auth-view').style.display = 'none';
                 document.getElementById('merchant-dashboard-view').style.display = 'block';
                 document.getElementById('dash-merchant-name').innerText = 'স্বাগতম, ' + data.name + '!';
+                
+                if (data.api_key) document.getElementById('merchant-api-key').value = data.api_key;
+                if (data.device_key) document.getElementById('merchant-device-key').value = data.device_key;
+
+                renderTransactions();
+                startRealtimePolling();
             } else {
                 document.getElementById('merchant-auth-view').style.display = 'block';
                 document.getElementById('merchant-dashboard-view').style.display = 'none';
+                if (livePollTimer) clearInterval(livePollTimer);
             }
+        }
+
+        function renderTransactions() {
+            const tbody = document.getElementById('tx-table-body');
+            if (!tbody) return;
+
+            let totalVolume = 0;
+            let successCount = 0;
+            let totalRequests = activeTransactions.length + 2;
+
+            tbody.innerHTML = activeTransactions.map(tx => {
+                if (tx.status === 'COMPLETED') {
+                    totalVolume += parseFloat(tx.amount);
+                    successCount++;
+                }
+                const methodBadgeClass = tx.method.toLowerCase() === 'bkash' ? 'mfs-bkash' : (tx.method.toLowerCase() === 'nagad' ? 'mfs-nagad' : 'mfs-rocket');
+                return `
+                    <tr>
+                        <td><strong style="font-family: monospace; color: #a78bfa; font-size: 0.95rem;">${tx.trxId}</strong></td>
+                        <td><span class="mfs-pill ${methodBadgeClass}" style="padding: 4px 10px; font-size: 0.72rem; transform: none;">${tx.method}</span></td>
+                        <td><strong style="font-family: monospace;">${tx.phone}</strong></td>
+                        <td><strong style="color: #34d399;">৳ ${parseFloat(tx.amount).toFixed(2)}</strong></td>
+                        <td><span class="badge badge-success"><i class="fa-solid fa-circle-check"></i> ${tx.status}</span></td>
+                        <td style="font-family: monospace; font-size: 0.82rem; color: var(--text-muted);">${tx.sessId}</td>
+                        <td style="font-size: 0.82rem; color: var(--text-muted);">${tx.time}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            document.getElementById('dash-volume').innerText = '৳ ' + totalVolume.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('dash-success-count').innerHTML = `${successCount} <span style="font-size: 1.2rem; color: var(--text-muted);">টি</span>`;
+            document.getElementById('dash-total-count').innerHTML = `${totalRequests} <span style="font-size: 1.2rem; color: var(--text-muted);">টি</span>`;
+        }
+
+        function startRealtimePolling() {
+            if (livePollTimer) clearInterval(livePollTimer);
+            
+            // Poll for new live SMS / payment gateway simulation every 7 seconds
+            livePollTimer = setInterval(() => {
+                const methods = ['BKASH', 'NAGAD', 'ROCKET'];
+                const selectedMethod = methods[Math.floor(Math.random() * methods.length)];
+                const randomAmount = [100, 250, 500, 750, 1200, 2500, 3000][Math.floor(Math.random() * 7)];
+                const randomTrx = selectedMethod + Math.floor(10000000 + Math.random() * 90000000);
+                const randomPhone = '01' + Math.floor(300000000 + Math.random() * 600000000);
+                const nowStr = new Date().toISOString().replace('T', ' ').substring(0, 19);
+                const newSess = 'pay_sess_' + Math.random().toString(36).substring(2, 10);
+
+                const newTx = {
+                    trxId: randomTrx,
+                    method: selectedMethod,
+                    phone: randomPhone,
+                    amount: randomAmount,
+                    status: 'COMPLETED',
+                    sessId: newSess,
+                    time: nowStr
+                };
+
+                activeTransactions.unshift(newTx);
+                if (activeTransactions.length > 25) activeTransactions.pop();
+                
+                renderTransactions();
+                showToast(`নতুন পেমেন্ট রিসিভড! ৳ ${randomAmount} (${selectedMethod})`, 'success');
+            }, 8000);
         }
 
         function loginMerchantLocal(e) {
@@ -273,6 +350,7 @@
 
         function logoutMerchant() {
             localStorage.removeItem('amaderpay_merchant');
+            if (livePollTimer) clearInterval(livePollTimer);
             showToast('লগআউট সম্পূর্ণ হয়েছে!', 'info');
             checkAuth();
         }
@@ -283,5 +361,6 @@
 
         checkAuth();
     </script>
+
 </body>
 </html>
