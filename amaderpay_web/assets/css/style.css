@@ -668,22 +668,16 @@ a {
     border-color: var(--primary);
 }
 
-.mobile-only-action {
-    display: none;
+/* ─── Global Word Wrap & Overflow Protection ───────────────────────── */
+h1, h2, h3, h4, h5, h6, p, span, code, td, th {
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
-.docs-grid-layout {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 36px;
-    width: 100%;
-}
-
-.docs-sidebar-card {
-    padding: 24px;
-    align-self: start;
-    position: sticky;
-    top: 100px;
+pre {
+    white-space: pre-wrap !important;
+    word-break: break-all !important;
+    overflow-x: auto;
 }
 
 /* ─── Responsive Adjustments for Docs, Merchant Portal & Footer ─────────── */
@@ -703,14 +697,21 @@ a {
     }
 }
 
-
 @media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+    }
+
     .container {
-        padding: 0 16px;
+        padding: 0 14px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
     
     .nav-container {
-        padding: 12px 16px;
+        padding: 12px 14px !important;
         position: relative;
         display: flex;
         align-items: center;
@@ -738,8 +739,8 @@ a {
         display: none;
         position: absolute;
         top: calc(100% + 8px);
-        left: 16px;
-        right: 16px;
+        left: 14px;
+        right: 14px;
         flex-direction: column;
         gap: 6px;
         padding: 16px;
@@ -783,17 +784,17 @@ a {
     }
 
     .hero {
-        padding: 40px 0 30px;
+        padding: 30px 0 20px;
     }
 
     .hero-title {
-        font-size: 2.2rem;
-        line-height: 1.2;
+        font-size: 1.85rem;
+        line-height: 1.25;
     }
 
     .hero-desc {
-        font-size: 0.95rem;
-        padding: 0 10px;
+        font-size: 0.9rem;
+        padding: 0 4px;
     }
 
     .hero-buttons {
@@ -806,8 +807,8 @@ a {
     .hero-buttons .btn-secondary {
         width: 100%;
         justify-content: center;
-        padding: 14px 20px;
-        font-size: 1rem;
+        padding: 14px 16px;
+        font-size: 0.95rem;
     }
 
     .mfs-badges {
@@ -828,12 +829,22 @@ a {
     }
 
     .glass-card {
-        padding: 20px 16px;
+        padding: 18px 14px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .glass-card h2 {
+        font-size: 1.35rem !important;
+    }
+
+    .glass-card h3 {
+        font-size: 1.15rem !important;
     }
 
     /* Auth card mobile padding */
     #merchant-auth-view .tabs-container {
-        padding: 24px 16px !important;
+        padding: 20px 14px !important;
     }
 
     /* Auth Tabs flex wrap and text scaling for small screens */
@@ -845,67 +856,63 @@ a {
 
     .tabs-nav .tab-btn {
         flex: 1;
-        padding: 12px 8px;
-        font-size: 0.85rem;
+        padding: 10px 6px;
+        font-size: 0.82rem;
         justify-content: center;
         text-align: center;
         white-space: nowrap;
     }
 
     #download {
-        padding: 40px 0 !important;
+        padding: 30px 0 !important;
     }
 
     #download .container > div:nth-child(3) {
-        padding: 24px 18px !important;
+        padding: 20px 14px !important;
         width: 100% !important;
     }
 
     /* Footer Mobile Styling */
     .footer-content {
         flex-direction: column;
-        gap: 32px;
+        gap: 28px;
         text-align: left;
     }
 
     .footer-col h4 {
-        margin-bottom: 14px;
-        font-size: 1.1rem;
+        margin-bottom: 12px;
+        font-size: 1.05rem;
     }
 
     .footer-col ul li {
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
 
     .footer-col ul li a, .footer-col ul li span {
-        font-size: 0.9rem !important;
+        font-size: 0.85rem !important;
         display: inline-flex;
         align-items: center;
         gap: 8px;
     }
 
     .code-box {
-        font-size: 0.8rem;
-    }
-
-    pre {
-        word-break: break-all;
-        white-space: pre-wrap;
+        font-size: 0.78rem;
+        padding: 14px !important;
     }
 }
 
 @media (max-width: 480px) {
     .hero-title {
-        font-size: 1.85rem;
+        font-size: 1.65rem;
     }
 
     .logo {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
     }
 
     .logo-badge {
-        font-size: 0.65rem;
-        padding: 2px 6px;
+        font-size: 0.6rem;
+        padding: 2px 5px;
     }
 
     .btn-primary, .btn-secondary {
@@ -920,20 +927,26 @@ a {
     }
 
     .code-tab-btn {
-        padding: 8px 10px;
-        font-size: 0.78rem;
+        padding: 6px 8px;
+        font-size: 0.75rem;
         white-space: nowrap;
     }
 
     .tabs-nav .tab-btn {
-        font-size: 0.8rem;
-        padding: 10px 4px;
+        font-size: 0.78rem;
+        padding: 8px 4px;
         gap: 4px;
     }
 
     .tabs-nav .tab-btn i {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
+    }
+
+    .endpoint-pill {
+        font-size: 0.75rem;
+        padding: 4px 10px;
     }
 }
+
 
 
