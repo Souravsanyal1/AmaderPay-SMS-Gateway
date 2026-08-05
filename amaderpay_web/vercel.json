@@ -3,6 +3,9 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
+    { "source": "/nexorapay-release.apk", "destination": "/nexorapay-release.apk" },
+    { "source": "/amaderpay-release.apk", "destination": "/amaderpay-release.apk" },
+    { "source": "/download/apk", "destination": "/nexorapay-release.apk" },
     { "source": "/api/v1/checkout/create", "destination": "/api/checkout.php" },
     { "source": "/api/v1/checkout/verify/(.*)", "destination": "/api/checkout.php?session_id=$1" },
     { "source": "/api/v1/webhook/(.*)", "destination": "/api/webhook.php?action=$1" },
