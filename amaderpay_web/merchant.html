@@ -319,12 +319,13 @@
                 document.getElementById('merchant-dashboard-view').style.display = 'block';
                 
                 if (document.getElementById('dash-merchant-name')) {
-                    document.getElementById('dash-merchant-name').innerText = 'স্বাগতম, ' + data.name + '!';
+                    document.getElementById('dash-merchant-name').innerText = 'স্বাগতম, ' + (data.name || 'মার্চেন্ট') + '!';
                 }
                 
                 if (document.getElementById('header-merchant-short')) {
-                    const emailStr = data.email || 'joysanya11999@gmail.com';
-                    document.getElementById('header-merchant-short').innerText = emailStr.charAt(0).toLowerCase();
+                    const emailStr = data.email || 'user@example.com';
+                    const nameStr = data.name || emailStr;
+                    document.getElementById('header-merchant-short').innerText = nameStr.charAt(0).toUpperCase();
                     document.getElementById('header-merchant-email').innerText = emailStr;
                 }
 
@@ -392,8 +393,21 @@
         function loginMerchantLocal(e) {
             e.preventDefault();
             const email = document.getElementById('login-email').value;
+            const existingUser = localStorage.getItem('amaderpay_merchant');
+            let merchantName = 'Apon Enterprise';
+            if (existingUser) {
+                const parsed = JSON.parse(existingUser);
+                if (parsed.email === email && parsed.name) {
+                    merchantName = parsed.name;
+                } else if (email) {
+                    merchantName = email.split('@')[0];
+                }
+            } else if (email) {
+                merchantName = email.split('@')[0];
+            }
+
             const merchant = {
-                name: 'Apon Enterprise',
+                name: merchantName,
                 email: email,
                 api_key: 'ap_live_' + Math.random().toString(36).substring(2, 18),
                 device_key: 'pg_dev_' + Math.random().toString(36).substring(2, 14)
@@ -407,9 +421,14 @@
             e.preventDefault();
             const name = document.getElementById('reg-name').value;
             const email = document.getElementById('reg-email').value;
+            const bkash = document.getElementById('reg-bkash').value;
+            const nagad = document.getElementById('reg-nagad').value;
+
             const merchant = {
-                name: name,
+                name: name || 'Nexora Pay Store',
                 email: email,
+                bkash: bkash,
+                nagad: nagad,
                 api_key: 'ap_live_' + Math.random().toString(36).substring(2, 18),
                 device_key: 'pg_dev_' + Math.random().toString(36).substring(2, 14)
             };
