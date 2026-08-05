@@ -997,3 +997,23 @@ pre {
         padding: 4px 10px;
     }
 }
+
+/* Dashboard Tab Bar Smooth Horizontal Scrollbar */
+.dash-tab-nav-container {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(236, 72, 153, 0.5) rgba(15, 23, 42, 0.6);
+}
+
+.dash-tab-nav-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.dash-tab-nav-container::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: 10px;
+}
+
+.dash-tab-nav-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #e2136e 0%, #be185d 100%);
+    border-radius: 10px;
+}
