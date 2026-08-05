@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": false,
   "rewrites": [
     { "source": "/nexorapay-release.apk", "destination": "/nexorapay-release.apk" },
@@ -24,14 +24,14 @@
       "source": "/nexorapay-release.apk",
       "headers": [
         { "key": "Content-Type", "value": "application/vnd.android.package-archive" },
-        { "key": "Content-Disposition", "value": "attachment; filename=\"NexoraPay-v1.0.0.apk\"" }
+        { "key": "Content-Disposition", "value": "attachment; filename=\"NexoraPay-v2.0.0.apk\"" }
       ]
     },
     {
       "source": "/amaderpay-release.apk",
       "headers": [
         { "key": "Content-Type", "value": "application/vnd.android.package-archive" },
-        { "key": "Content-Disposition", "value": "attachment; filename=\"NexoraPay-v1.0.0.apk\"" }
+        { "key": "Content-Disposition", "value": "attachment; filename=\"NexoraPay-v2.0.0.apk\"" }
       ]
     }
   ]
